@@ -22,7 +22,10 @@ Before drafting any requirements, use the LLM to collaboratively explore and und
 This guideline mirrors established requirements elicitation practices, where understanding the problem precedes formal specification. Starting with a high-level exploration ensures that requirements evolve cohesively from a shared understanding of goals, constraints, and context. Using an LLM at this stage helps avoid fragmented or contradictory requirements and reduces rework caused by premature specification.
 
 **Example:**  
-*You are a senior requirements engineer. Before writing any user stories, analyze the following project description:*
+Bad: *Write user stories for the login feature.*
+* No analysis of the problem
+
+Good: *You are a senior requirements engineer. Before writing any user stories, analyze the following project description:*
 * *Goal: Enable registered users to log in and access personalized content*
 * *Constraints: Web application, email/password authentication, must support 2FA in future*
 * *Known risks: Security and session management*
@@ -45,7 +48,9 @@ Identify a job title which is associated with knowledge in the field and assign 
 Role assignment anchors the LLM’s responses in domain-specific reasoning patterns and professional norms. By instructing the model to roleplay as an expert, the output reflects appropriate terminology, depth, and decision-making criteria. Improving alignment with industry standards, reducing superficial responses, and increases the usefulness of generated requirements artifacts.
 
 **Example:**  
- *You are a senior product manager with 10+ years of experience in enterprise software development and familiarity with ISO/IEC/IEEE standards. Review the following user stories and suggest improvements.*
+Bad: *Review these user stories and suggest improvements.*
+
+Good: *You are a senior product manager with 10+ years of experience in enterprise software development and familiarity with ISO/IEC/IEEE standards. Review the following user stories and suggest improvements.*
 
 *Focus on:*
 * *Clarity and comprehensive unambiguous language*
@@ -65,11 +70,13 @@ Explicitly define the structure, format, and constraints of the expected output.
 Structured outputs reduce variability in LLM responses and improve consistency across generated requirements. By enforcing a predefined format, the model produces outputs that are easier to review, validate, compare, and trace. This is especially valuable in requirements engineering, where uniformity eases communication, tooling integration, and downstream activities such as testing and design.
 
 **Example:**  
-*Generate user stories of exact format “As a [type of user], I want [an action] so that [a result].”*
+Bad: *Generate user stories for the system.*
+
+Good: *Generate user stories of exact format “As a [type of user], I want [an action] so that [a result].”*
 
 ---
 
-### Guideline 4: Maximise prompt information density [4]
+### Guideline 3: Maximise prompt information density [4]
 
 **Description:**  
 Provide sufficient and relevant context to the LLM to fully constrain the problem space. The prompt should explicitly state assumptions, scope, constraints, and expected output format, while avoiding unnecessary or unrelated information. This minimizes ambiguity and prevents the model from making implicit assumptions.
@@ -78,8 +85,13 @@ Provide sufficient and relevant context to the LLM to fully constrain the proble
 High information density prompts guide the LLM toward producing precise, domain-appropriate outputs. By clearly specifying context and constraints, the model avoids defaulting to generic or boilerplate responses and instead generates results that are aligned with stakeholder intent, system boundaries, and verification needs. This leads to higher quality, consistent, and more testable requirements artifacts.
 
 **Example:**  
+*As an expert in software testing, review the following requirements and identify any gaps, along with their potential impact, providing actionable pointers for improvement in tabular format.*
 
-*You are assisting with requirements engineering for a consumer-facing web application based on the following user story: ""As a registered user, I want to be able to log in to my account so that I can access personalized content and features". Generate clear, testable acceptance criteria using Given-When-Then format.*
+Bad: *Explain the login requirement and generate acceptance criteria*
+
+Good as an intermediary data: *As a registered user, I want to be able to log in to my account so that I can access personalized content and features*
+
+Good: *You are assisting with requirements engineering for a consumer-facing web application based on the following user story: ""As a registered user, I want to be able to log in to my account so that I can access personalized content and features". Generate clear, testable acceptance criteria using Given When Then format.*
 
 *Assumptions and constraints:*
 * *Users authenticate using email and password*
@@ -88,9 +100,8 @@ High information density prompts guide the LLM toward producing precise, domain-
 * *Include both successful and unsuccessful login scenarios*
 * *Do not invent features beyond authentication and session access*
 
+[6] Given-When-Then test case format
 ---
-
-[6] explains Given-When-Then test case format
 
 ## 4. References
 
@@ -103,5 +114,4 @@ High information density prompts guide the LLM toward producing precise, domain-
 
 
 ---
-
 
