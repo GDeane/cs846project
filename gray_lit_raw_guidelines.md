@@ -76,7 +76,7 @@ Good: *Generate user stories of exact format “As a [type of user], I want [an 
 
 ---
 
-### Guideline 3: Maximise prompt information density [4]
+### Guideline 4: Maximise prompt information density [4]
 
 **Description:**  
 Provide sufficient and relevant context to the LLM to fully constrain the problem space. The prompt should explicitly state assumptions, scope, constraints, and expected output format, while avoiding unnecessary or unrelated information. This minimizes ambiguity and prevents the model from making implicit assumptions.
@@ -100,7 +100,7 @@ Good: *You are assisting with requirements engineering for a consumer-facing web
 * *Include both successful and unsuccessful login scenarios*
 * *Do not invent features beyond authentication and session access*
 
-[6] Given-When-Then test case format
+NOTE: look at [6] for information on Given-When-Then test case format
 ---
 
 ## 4. References
