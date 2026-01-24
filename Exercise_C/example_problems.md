@@ -19,50 +19,8 @@ You are given the following requirements:
 
 **Student Tasks:**
 
-1. Manual Classification - Classify each requirement as either:
-- Functional Requirement (FR), or
-- Non-Functional Requirement (NFR).
-
-2. Prompt Design Reflection - Consider the following two prompts for using an AI tool:
-- Prompt A:
-“Classify these requirements.”
-- Prompt B:
-“Classify each of the following requirements as Functional or Non-Functional and briefly justify your answer.”
-
-3. Answer the following:
-- Which prompt is better designed for this task?
-- Provide one reason for your choice. 
-
-4. Human Oversight Reflection - explain why AI-assisted requirement classification should always include human review.
-
-**Starter Code:**
-
-```python
-requirements = [
-    "The system shall allow patients to book appointments online.",
-    "The system shall encrypt all patient data stored in the database.",
-    "The system shall send appointment reminders via email and SMS.",
-    "The system shall respond to user requests within 2 seconds.",
-    "The system shall comply with healthcare data privacy regulations.",
-    "The system shall provide a user-friendly interface for elderly patients."
-]
-
-NFR_KEYWORDS = {
-    "encrypt", "security", "privacy", "comply", "compliance",
-    "within", "seconds", "performance", "usable", "usability",
-    "user-friendly", "reliable", "availability"
-}
-
-def classify_requirement(text: str) -> str:
-    t = text.lower()
-    for kw in NFR_KEYWORDS:
-        if kw in t:
-            return "NFR"
-    return "FR"
-
-for r in requirements:
-    print(r, "->", classify_requirement(r))
-```
+1. Classify each requirement as either Functional Requirement (FR) or Non-Functional Requirement (NFR) and provide a brief justification for each classification.
+2. Human Oversight Reflection - explain why AI-assisted requirement classification should always include human review.
 
 ### Problem C_2: Requirements Satisfiability Reasoning
 
@@ -87,26 +45,6 @@ Design Description:
 
 3. Design Improvement - Suggest one design change that would improve the satisfiability of the requirement.
 
-**Starter Code:**
-
-```python
-design = {
-    "username_password_login": True,
-    "multi_factor_authentication": False
-}
-
-def check_satisfiability(design: dict):
-    if design.get("username_password_login") and not design.get("multi_factor_authentication"):
-        return (False, "Password-only login is insufficient; add MFA or RBAC.")
-
-    if design.get("username_password_login") and design.get("multi_factor_authentication"):
-        return (True, "MFA strengthens authorization.")
-
-    return (False, "No authentication mechanism defined.")
-
-print(check_satisfiability(design))
-```
-
 ### Problem C_3: Requirements Elicitation Question Generation with AI Assistance
 
 **Task Description:**
@@ -126,39 +64,6 @@ However, the usefulness of the questions depends on prompt clarity and human rev
 3. Question Quality Review - Identify one weakness in the generated questions (e.g., ambiguity, lack of scope, missing non-functional aspects). 
 
 4. Question Improvement - Rewrite one question to improve its clarity or specificity.
-
-**Starter Code:**
-
-```python
-domain = "smart parking system"
-
-survey_templates = [
-    "How often do you use a {domain}?",
-    "What feature is most important to you in a {domain}?",
-    "How satisfied are you with the performance of current {domain}s?"
-]
-
-interview_templates = [
-    "What are the main challenges you face when managing a {domain}?",
-    "What security or privacy concerns exist for a {domain}?",
-    "What system constraints must be considered for a {domain}?"
-]
-
-def fill(templates, domain):
-    return [t.format(domain=domain) for t in templates]
-
-survey_qs = fill(survey_templates, domain)[:3]
-interview_qs = fill(interview_templates, domain)[:3]
-
-print("Survey:", survey_qs)
-print("Interview:", interview_qs)
-
-weakness = "Some questions are vague and lack measurable criteria."
-improved = "How satisfied are you with the time to find parking using the smart parking system (1–5) during peak hours?"
-
-print("Weakness:", weakness)
-print("Improved:", improved)
-```
 
 ## 2. References
 

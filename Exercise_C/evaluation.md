@@ -3,7 +3,6 @@
 The following criteria apply to this topic:
 - Correct identification of Functional Requirements (FR) versus Non-Functional Requirements (NFR)
 - Clear and logical reasoning
-- Understanding of how prompt quality affects AI-assisted analysis
 - Recognition of the limitations of AI and the need for human oversight.
 
 ## 2. Evaluation Criteria
@@ -30,7 +29,7 @@ The following criteria apply to requirements elicitation problems in this topic:
 ### Problem C_1: Functional vs Non-Functional Requirement Classification with AI Awareness
 
 **Evaluation Description:**  
-This problem is evaluated across three tasks.
+This problem is evaluated across two tasks.
 
 Task 1 – Manual Requirement Classification
 
@@ -47,22 +46,7 @@ Bad Solution:
 - Misclassifies security, performance, usability, or compliance requirements as FR
 - Shows no clear reasoning or conceptual understanding
 
-Task 2 – Prompt Design Reflection
-
-Good Solution:
-- Identifies Prompt B as better designed
-- Provides a valid justification, such as:
-- clearer instructions
-- explicit output expectations
-- requirement for justification
-- reduced ambiguity for the AI
-
-Bad Solution:
-- Treats both prompts as equivalent
-- Selects Prompt A without justification
-- Provides vague or irrelevant reasoning
-
-Task 3 – Human Oversight Reflection
+Task 2 – Human Oversight Reflection
 
 Good Solution:
 - Clearly explains at least one valid reason why human review is required, such as:
@@ -74,21 +58,6 @@ Bad Solution:
 - Assumes AI output is always correct
 - States that human review is unnecessary
 - Provides overly brief or unsupported responses
-
-**Code:**  
-Not applicable (conceptual Requirements Engineering problem).
-but
-Student code should implement:
-- classify_requirement(text) -> "FR" or "NFR"
-- Good Code:
-- Case-insensitive matching (uses .lower()).
-- Returns only "FR" or "NFR".
-- Produces reasonable outputs for the list.
-
-- Bad Code:
-- Hard-codes answers by index/order.
-- Returns other labels (e.g., “functional”).
-- Case-sensitive logic that fails on capitalization.
 
 ### Problem C_2: Requirements Satisfiability Reasoning
 
@@ -127,21 +96,6 @@ Bad Solution:
 - Suggests unrelated changes
 - Proposes improvements without explanation
 - Provides no actionable design modification
-
-**Code:**  
-Not applicable (conceptual Requirements Engineering problem).but
-Student code should implement:
-- check_satisfiability(design) -> (bool, explanation)
-
-- Good Code:
-- Returns a tuple (True/False, "reason")
-- For:{"username_password_login": True, "multi_factor_authentication": False}
-it should return False with a reason mentioning MFA/RBAC or stronger authorization.
-
-    •	Bad Code:
-    •	Returns only True/False (no explanation).
-    •	Ignores the design dictionary.
-    •	Checks unrelated features.
 
 ### Problem C_3: Requirements Elicitation Question Generation with AI Assistance
 
@@ -196,21 +150,6 @@ Bad Solution:
 - Makes minimal or no meaningful changes.
 - Does not address the identified weakness.
 - Produces a less clear question than the original.
-
-**Code:**  
-Not applicable (conceptual Requirements Engineering problem).
-but
-Student code should:
-- Correctly replace {domain} with the given domain (no leftover {domain} in the output).
-- Produce exactly 3 survey questions and 3 interview questions.
-- Print or store:
-- one clear weakness statement, and
-- one improved question addressing that weakness.
-
-Bad Code:
-- Prints question templates without formatting or domain replacement.
-- Produces an incorrect number of questions.
-- Does not include a weakness statement or an improved question
 
 ## 3. References
 
