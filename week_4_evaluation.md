@@ -7,50 +7,95 @@
 
 This section defines how students can determine whether they solved the example problems correctly.
 
-Criteria should be applicable to any problem in this topic.
-
-* Criteria 1
-* Criteria 2
-* Criteria n
+Criteria vary depending on the specific problem. Each problem's evaluation criteria are detailed in Section 2.
 
 ---
 
-## 2. Evalation specifically for Example Problems
+## 2. Evaluation specifically for Example Problems
 
-### Problem A_1: [Title]
+### Problem A_1: Stakeholder Interviews Summary
 
 **Evaluation Description:**  
-Describe the evaluation criteria clearly and precisely.
+The evaluation for this task is described in Exercise_A/requirements-analysis/sample-solutions.md.
 
 **Code:**  
-// Include all necessary code here that is the correct answer.
+N/A
 
 ---
 
-### Problem A_2: [Title]
+### Problem A_2: Real-World Constraints (outside of interviews)
 
 **Evaluation Description:**  
-Describe the evaluation criteria clearly and precisely.
+The evaluation for this task is described in Exercise_A/requirements-analysis/sample-solutions.md.
 
 **Code:**  
-// Include all necessary code here that is the correct answer.
+N/A
 
 ---
 
-### Problem A_n: [Title]
+### Problem A_3: Analysis of Conflicting Requirements
 
 **Evaluation Description:**  
-Describe the evaluation criteria clearly and precisely.
+The evaluation for this task is described in Exercise_A/requirements-analysis/sample-solutions.md.
 
 **Code:**  
-// Include all necessary code here that is the correct answer.
+N/A
+
+---
+
+### Problem A_4: Proposed Solutions
+
+**Evaluation Description:**  
+The evaluation for this task is described in Exercise_A/requirements-analysis/sample-solutions.md.
+
+**Code:**  
+N/A
+
+---
+
+### Problem B: Elicitation of Requirements from Problem Domain
+
+**Evaluation Description:**  
+The evaluation for this task is described in Exercise_B/evaluation_criteria.md.
+
+**Code:**  
+N/A
+
+---
+
+### Problem C_1: Functional vs Non-Functional Requirement Classification with AI Awareness
+
+**Evaluation Description:**  
+The evaluation for this task is described in Exercise_C/evaluation.md.
+
+**Code:**  
+N/A
+
+---
+
+### Problem C_2: Requirements Satisfiability Reasoning
+
+**Evaluation Description:**  
+The evaluation for this task is described in Exercise_C/evaluation.md.
+
+**Code:**  
+N/A
+
+---
+
+### Problem C_3: Requirements Elicitation Question Generation with AI Assistance
+
+**Evaluation Description:**  
+The evaluation for this task is described in Exercise_C/evaluation.md.
+
+**Code:**  
+N/A
 
 ---
 
 ## 3. References
 
-[1]  
-[2]
+> References for the evaluation criteria are provided within the respective Exercise folders.
 
 ---
 
