@@ -33,7 +33,7 @@
 
 > **Note:** Guidelines should be actionable, specific, and usable during real coding tasks.
 
-### Guideline 1: Design a structured context prompt [1, 6, 11, 12]
+### Guideline 1: Design a structured context prompt [1, 6, 10, 11]
 
 **Description:**  
 Design a prompt that gives the "job description" to the LLM before asking it to generate requirements or questions.
@@ -68,14 +68,14 @@ Finally, critique the requirements for ambiguity and testability and revise as n
 
 ---
 
-### Guideline 2: Converse with the LLM [2, 10]
+### Guideline 2: Converse with the LLM [2, 9]
 
 **Description:**  
 Before creating requirements, talk to the LLM back and forth to refine the problem domain.
 
 **Reasoning:**  
 The process of back-and-forth conversation helps the model uncover missing constraints, assumptions, and edge cases.
-This process has been demonstrated to improve the effectiveness of LLMs for bug fixing [10], and is one of the main
+This process has been demonstrated to improve the effectiveness of LLMs for bug fixing [9], and is one of the main
 techniques used to generate specifications in SpecGen [2].
 
 **Example:**
@@ -86,7 +86,7 @@ techniques used to generate specifications in SpecGen [2].
 
 ---
 
-### Guideline 3: Assign a role/persona to the LLM [2, 3, 4, 11]
+### Guideline 3: Assign a role/persona to the LLM [2, 3, 4, 10]
 
 **Description:**  
 Tell the model what it is (e.g. "senior requirements engineer", "technical interviewer for Google", "end-user") before
@@ -102,13 +102,13 @@ tradeoffs. Do not propose solutions."
 
 ---
 
-### Guideline 4: Provide few-shot examples [2, 3, 9, 11]
+### Guideline 4: Provide few-shot examples [2, 3, 10]
 
 **Description:**  
 When attempting to describe desired behavior of a program or system, give 1-3 examples of desired output.
 
 **Reasoning:**  
-Few-shot examples have been shown to reliably improve adherence to format and improve performance in LLMs [9]. These
+Few-shot examples have been shown to reliably improve adherence to format and improve performance in LLMs [5]. These
 examples also double as tests for your requirements.
 
 **Example:**  
@@ -156,7 +156,7 @@ Express as "remember to do X" rather than "don't forget to do X".
 
 ---
 
-### Guideline 7: Treat the output as a draft, not as a final product [11, 12, 13, 14]
+### Guideline 7: Treat the output as a draft, not as a final product [10, 11, 12, 13]
 
 **Description:**
 Do not treat the output of your LLM as a finished product. Treat it like a draft given to you for review by a colleague.
@@ -164,45 +164,45 @@ Do not treat the output of your LLM as a finished product. Treat it like a draft
 **Reasoning:**  
 LLMs are powerful, but not perfect. Their outputs may contain senior engineer-level insights, but can also easily
 contain amateur-level mistakes. Many LLM researchers for RE advocate for human oversight in their
-studies of LLMs for requirements engineering, and object to LLMs as final authorities [11, 12, 13, 14].
+studies of LLMs for requirements engineering, and object to LLMs as final authorities [10, 11, 12, 13].
 
 **Example:**  
 N/A
 
 ---
 
-### Guideline 8: Base your prompting pattern on the RE task being performed [12, 13]
+### Guideline 8: Base your prompting pattern on the RE task being performed [11, 12]
 
 **Description:**  
 Select your LLM prompting pattern based on the task.
 
 **Reasoning:**  
 Different methods of prompting LLMs ('prompt patterns') have been shown to be effective in different parts of the RE
-process [12]. For instance, making the LLM ask the user questions as needed created better performance on binary
-classification compared to making the LLM act as an RE expert [12].
+process [11]. For instance, making the LLM ask the user questions as needed created better performance on binary
+classification compared to making the LLM act as an RE expert [11].
 
 **Example:**  
 Pattern 1: "Cognitive Verifier"
 
 "Classify the given list of requirements into functional (labelled as F) and non-functional requirements (labelled as
 NF). Ask me questions if needed to break the given task into smaller subtasks. All the outputs to the smaller subtasks
-must be combined before you generate the final output." [12]
+must be combined before you generate the final output." [11]
 
 Pattern 2: "Persona"
 
 "Act as a requirements engineering domain expert and classify the given list of requirements into functional (labelled
-as F) and non-functional requirements (labelled as NF)." [12]
+as F) and non-functional requirements (labelled as NF)." [11]
 
 ---
 
-### Guideline 9: Use multiple runs and majority vote for robustness [13]
+### Guideline 9: Use multiple runs and majority vote for robustness [12]
 
 **Description:**  
 For important decisions, try running the LLM on the same prompt several times and taking the majority vote.
 
 **Reasoning:**  
 LLMs outputs are stochastic (assuming temperature != 0). This means that they can go either way when asked to decide yes
-or no on something. Taking several runs gives both an idea of the uncertainty and a more robust answer [13].
+or no on something. Taking several runs gives both an idea of the uncertainty and a more robust answer [12].
 
 **Example:**  
 "Classify this sample as category A or category B. Explain your reasoning."
@@ -212,20 +212,19 @@ Think
 
 ---
 
-### Guideline 10: Avoid yes/no without explanation [13]
+### Guideline 10: Avoid yes/no without explanation [12]
 
 **Description:**  
 Do not ask a LLM to give binary responses without explanation.
 
 **Reasoning:**  
 Reasoning given by LLMs can often be fuzzy or based on hallucinations. If you ask for a decision without explanation,
-you may receive a result based on broken logic, but you can no longer verify the deranged reasoning [13].
+you may receive a result based on broken logic, but you can no longer verify the deranged reasoning [12].
 
 **Example:**  
 "Classify these samples into category A or category B. For each categorization, explain your reasoning"
 
 ---
-
 
 ## 2. Guidelines from any related research/grey literature like practitioner or developer tool blogs
 
@@ -309,27 +308,26 @@ Pattern Catalog to Enhance Prompt Engineering with ChatGPT”, arXiv preprint ar
 [7] M. Sclar, Y. Choi, Y. Tsvetkov, and A. Suhr. “Quantifying language models’ sensitivity to spurious features in
 prompt design or: How I learned to start worrying about prompt formatting.” In arXiv preprint arXiv:2310.11324, 2023.
 
-[8] N. Kassner and H. Sch ̈utze. “Negated and Misprimed Probes for Pretrained Language Models: Birds Can Talk, But
+[8] N. Kassner and H. Schütze. “Negated and Misprimed Probes for Pretrained Language Models: Birds Can Talk, But
 Cannot Fly.” In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages
 7811–7818, Online. Association for Computational Linguistics, 2020.
 
-[9] T. Brown, B. Mann, N. Ryder, M. Subbiah, J.D. Kaplan, P. Dhariwal, A. Neelakantan et al. “Language models are
-few-shot learners.” Advances in neural information processing systems 33: 1877-1901, 2020.
+[9] C. S. Xia and L. Zhang, “Conversational automated program repair,” arXiv preprint arXiv:2301.13246, 2023.
 
-[10] C. S. Xia and L. Zhang, “Conversational automated program repair,” arXiv preprint arXiv:2301.13246, 2023.
-
-[11] Arora, C., Grundy, J., Abdelrazek, M. (2024). Advancing Requirements Engineering Through Generative AI: Assessing
+[10] Arora, C., Grundy, J., Abdelrazek, M. (2024). Advancing Requirements Engineering Through Generative AI: Assessing
 the Role of LLMs. In: Nguyen-Duc, A., Abrahamsson, P., Khomh, F. (eds) Generative AI for Effective Software Development.
 Springer, Cham. https://doi.org/10.1007/978-3-031-55642-5_6
 
-[12] K. Ronanki, B. Cabrero-Daniel, J. Horkoff, and C. Berger, “Requirements Engineering using Generative AI: Prompts
+[11] K. Ronanki, B. Cabrero-Daniel, J. Horkoff, and C. Berger, “Requirements Engineering using Generative AI: Prompts
 and Prompting Patterns,” arXiv preprint arXiv:2311.03832, Nov. 2023. doi: 10.48550/arXiv.2311.03832.
 
-[13] M. Borg, K. Wnuk, and A. Ferrari, “Requirements Satisfiability with In-Context Learning,” arXiv preprint arXiv:
+[12] M. Borg, K. Wnuk, and A. Ferrari, “Requirements Satisfiability with In-Context Learning,” arXiv preprint arXiv:
 2404.12576, Apr. 2024. doi: 10.48550/arXiv.2404.12576.
 
-[14] A. M. Author et al., “An Automated Model of Software Requirement Engineering Using GPT-3.5,” 2023.
+[13] J. S. Yeow, M. E. Rana, and N. A. Abdul Majid, “An Automated Model of Software Requirement Engineering Using
+GPT-3.5,” in 2024 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (
+ICETSIS), Jan. 2024, pp. 1746–1755. doi: 10.1109/ICETSIS61505.2024.10459458.
+
 
 
 ---
-
