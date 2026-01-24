@@ -13,6 +13,9 @@ You would want to feel comfortable:
 - 2: presenting this list of requirements to a group of stakeholders in order to elicit preferences.
 - 3: Agreeing to implement this set of requirements in a contract if the client agreed to them.
 
+**There is no particular submission template for this question. You may structure your requirements as you wish, so long
+as it is clear and easy to parse.**
+
 This problem takes heavy inspiration from the study conducted by Ronaki et al. (2023) [1].
 
 ### 2. Problem domain
