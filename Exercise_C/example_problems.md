@@ -29,13 +29,11 @@ You are given the following requirements:
 - Prompt B:
 “Classify each of the following requirements as Functional or Non-Functional and briefly justify your answer.”
 
-Answer the following:
+3. Answer the following:
 - Which prompt is better designed for this task?
 - Provide one reason for your choice. 
 
-3. Human Oversight Reflection
-
-explain why AI-assisted requirement classification should always include human review.
+4. Human Oversight Reflection - explain why AI-assisted requirement classification should always include human review.
 
 **Starter Code:**
 
