@@ -1,6 +1,7 @@
 # Week 4 Raw Guidelines: Requirements
 
 **Authors:** [Gavin Deane, Artemiy Vishnyakov, Savira Umar]
+
 **Readings Assigned:**
 
 - Advancing Requirements Engineering through Generative AI: Assessing the Role of
@@ -16,7 +17,7 @@
 - An Automated Model of Software Requirement Engineering Using
   GPT-3.5 — [IEEE](https://ieeexplore.ieee.org/document/10459458)
 
-**Additional sources explored beyond assigned readings**
+**Additional (academic) sources explored beyond assigned readings**
 
 - A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT — [arXiv](https://arxiv.org/abs/2302.11382)
 - Conversational Automated Program Repair — [arXiv](https://arxiv.org/abs/2301.13246)
@@ -30,8 +31,6 @@
   Fly — [arXiv](https://arxiv.org/abs/1911.03343)
 
 ## 1. Guidelines from Readings
-
-> **Note:** Guidelines should be actionable, specific, and usable during real coding tasks.
 
 ### Guideline 1: Design a structured context prompt [1, 6, 10, 11]
 
@@ -228,36 +227,135 @@ you may receive a result based on broken logic, but you can no longer verify the
 
 ## 2. Guidelines from any related research/grey literature like practitioner or developer tool blogs
 
-> **Note:** Guidelines should be actionable, specific, and usable during real coding tasks.
-
-### Guideline 1: [Short, Actionable Title]
+### Guideline 1: Analyze the problem before writing the requirements documentation [14, 15, 16]
 
 **Description:**  
-State the guideline clearly and concretely.
+Before drafting any requirements, use the LLM to collaboratively explore and understand the problem space. This
+includes:
+
+* Analyzing the underlying business or user problem
+* Summarizing and synthesizing existing documentation
+* Identifying and fleshing out candidate requirements
+* Detecting contradictions or inconsistencies
+* Clarifying ambiguities, assumptions, and open questions
 
 **Reasoning:**  
-Explain *why* this guideline is important, referencing readings and external sources where relevant.
+This guideline mirrors established requirements elicitation practices, where understanding the problem precedes formal
+specification. Starting with a high-level exploration ensures that requirements evolve cohesively from a shared
+understanding of goals, constraints, and context. Using an LLM at this stage helps avoid fragmented or contradictory
+requirements and reduces rework caused by premature specification.
 
 **Example:**  
-Provide a brief illustrative example (code or pseudo-code if helpful).
+Bad: *Write user stories for the login feature.*
+
+* No analysis of the problem
+
+Good: *You are a senior requirements engineer. Before writing any user stories, analyze the following project
+description:*
+
+* *Goal: Enable registered users to log in and access personalized content*
+* *Constraints: Web application, email/password authentication, must support 2FA in future*
+* *Known risks: Security and session management*
+
+Task:
+
+* *Identify the core problem and main user goals*
+* *Summarize existing documentation and assumptions*
+* *List ambiguities, contradictions, and open questions*
+* *Suggest a structured set of clarifying questions to resolve them*
+  *Do not write user stories or acceptance criteria yet.*
 
 ---
 
-### Guideline 2: [Short, Actionable Title]
+### Guideline 2: Roleplaying [17]
 
-(Repeat the same structure for each guideline.)
+**Description:**  
+Identify a job title which is associated with knowledge in the field and assign it to the LLM to "roleplay" as. This
+guides the model to reason, prioritize, and communicate from a specific expert viewpoint rather than a generic assistant
+perspective. The role can be switched between chats to get differing perspectives for a broader and more thorough
+process.
+
+**Reasoning:**  
+Role assignment anchors the LLM’s responses in domain-specific reasoning patterns and professional norms. By instructing
+the model to roleplay as an expert, the output reflects appropriate terminology, depth, and decision-making criteria.
+Improving alignment with industry standards, reducing superficial responses, and increases the usefulness of generated
+requirements artifacts.
+
+**Example:**  
+Bad: *Review these user stories and suggest improvements.*
+
+Good: *You are a senior product manager with 10+ years of experience in enterprise software development and familiarity
+with ISO/IEC/IEEE standards. Review the following user stories and suggest improvements.*
+
+*Focus on:*
+
+* *Clarity and comprehensive unambiguous language*
+* *Testability and verifiability*
+* *Alignment with requirements engineering best practices*
+* *Avoiding scope creep or solution bias*
+  *Do not introduce new features beyond what is implied.*
 
 ---
 
-### Guideline N: [Short, Actionable Title]
+### Guideline 3: Structured Outputs [16]
 
-(Repeat the same structure for each guideline.)
+**Description:**  
+Explicitly define the structure, format, and constraints of the expected output. This may include templates, schemas,
+fixed phrasing, ordering rules, or formatting standards that the AI must follow. The goal is to ensure the generated
+content is consistent, predictable, and directly usable in requirements artifacts.
+
+**Reasoning:**  
+Structured outputs reduce variability in LLM responses and improve consistency across generated requirements. By
+enforcing a predefined format, the model produces outputs that are easier to review, validate, compare, and trace. This
+is especially valuable in requirements engineering, where uniformity eases communication, tooling integration, and
+downstream activities such as testing and design.
+
+**Example:**  
+Bad: *Generate user stories for the system.*
+
+Good: *Generate user stories of exact format “As a [type of user], I want [an action] so that [a result].”*
+
+---
+
+### Guideline 4: Maximise prompt information density [17]
+
+**Description:**  
+Provide sufficient and relevant context to the LLM to fully constrain the problem space. The prompt should explicitly
+state assumptions, scope, constraints, and expected output format, while avoiding unnecessary or unrelated information.
+This minimizes ambiguity and prevents the model from making implicit assumptions.
+
+**Reasoning:**  
+High information density prompts guide the LLM toward producing precise, domain-appropriate outputs. By clearly
+specifying context and constraints, the model avoids defaulting to generic or boilerplate responses and instead
+generates results that are aligned with stakeholder intent, system boundaries, and verification needs. This leads to
+higher quality, consistent, and more testable requirements artifacts.
+
+**Example:**  
+*As an expert in software testing, review the following requirements and identify any gaps, along with their potential
+impact, providing actionable pointers for improvement in tabular format.*
+
+Bad: *Explain the login requirement and generate acceptance criteria*
+
+Good as an intermediary data: *As a registered user, I want to be able to log in to my account so that I can access
+personalized content and features*
+
+Good: *You are assisting with requirements engineering for a consumer-facing web application based on the following user
+story: ""As a registered user, I want to be able to log in to my account so that I can access personalized content and
+features". Generate clear, testable acceptance criteria using Given When Then format.*
+
+*Assumptions and constraints:*
+
+* *Users authenticate using email and password*
+* *The system must comply with basic security best practices (password hashing, failed login handling)*
+* *Login is performed via a web browser*
+* *Include both successful and unsuccessful login scenarios*
+* *Do not invent features beyond authentication and session access*
+
+> NOTE: look at [19] for information on Given-When-Then test case format
 
 ---
 
 ## 3. Guidelines from LLMs
-
-> **Note:** Guidelines should be actionable, specific, and usable during real coding tasks.
 
 ### Guideline 1: [Short, Actionable Title]
 
@@ -328,6 +426,25 @@ and Prompting Patterns,” arXiv preprint arXiv:2311.03832, Nov. 2023. doi: 10.4
 GPT-3.5,” in 2024 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (
 ICETSIS), Jan. 2024, pp. 1746–1755. doi: 10.1109/ICETSIS61505.2024.10459458.
 
+[14] F. Sosa, “Transforming Specifications into Requirements: Leveraging Copilot for Optimal Results,” LinkedIn, Apr.
+23, 2025. [Online].
+Available: https://www.linkedin.com/pulse/transforming-specifications-requirements-leveraging-copilot-sosa-7ze2e.
 
+[15] S. U. Shah, “Revolutionizing Software Requirements Engineering with LLMs,” Medium, Jun. 23, 2024. [Online].
+Available: https://medium.com/@samiullah6799/revolutionizing-software-requirements-engineering-with-llms-db90551a3965
+
+[16] “A Developer’s Guide to Leveraging LLMs in the Software Development Lifecycle,” Apecton, May 2025. [Online].
+Available: https://apecton.com/ai/a-developers-guide-to-leveraging-llms-in-the-software-development-lifecycle/
+
+[17] D. Divekar, “How to use ChatGPT for Requirement Analysis?” LinkedIn, Apr. 20, 2024. [Online].
+Available: https://www.linkedin.com/pulse/how-use-chatgpt-requirement-analysis-dnyaneshwar-divekar-qvzjf.
+
+[18] B. Böckeler, A. K. P., S. Mukhopadhyay, R. Sivadass, and J. B., “Using AI for requirements analysis: A case study,”
+Thoughtworks, Sept. 17, 2024. [Online].
+Available: https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-ai-requirements-analysis-case-study.
+
+[19] E. Gottesdiener, “Using ‘Given-When-Then’ to Discover and Validate Requirements,” EBG Consulting. Accessed: Jan.
+24, 2026. [Online].
+Available: https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/
 
 ---
