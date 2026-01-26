@@ -29,6 +29,21 @@
 - Negated and Misprimed Probes for Pretrained Language Models: Birds Can Talk, But Cannot
   Fly — [arXiv](https://arxiv.org/abs/1911.03343)
 
+**Additional (non-academic) sources explored beyond assigned readings**
+
+- Transforming Specifications into Requirements: Leveraging Copilot for Optimal
+  Results — [LinkedIn](https://www.linkedin.com/pulse/transforming-specifications-requirements-leveraging-copilot-sosa-7ze2e)
+- Revolutionizing Software Requirements Engineering with
+  LLMs — [Medium](https://medium.com/@samiullah6799/revolutionizing-software-requirements-engineering-with-llms-db90551a3965)
+- A Developer’s Guide to Leveraging LLMs in the Software Development
+  Lifecycle — [Apecton](https://apecton.com/ai/a-developers-guide-to-leveraging-llms-in-the-software-development-lifecycle/)
+- How to use ChatGPT for Requirement
+  Analysis? — [LinkedIn](https://www.linkedin.com/pulse/how-use-chatgpt-requirement-analysis-dnyaneshwar-divekar-qvzjf)
+- Using AI for requirements analysis: A case
+  study — [Thoughtworks](https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-ai-requirements-analysis-case-study)
+- Using ‘Given-When-Then’ to Discover and Validate
+  Requirements — [EBG Consulting](https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/)
+
 ## 1. Guidelines
 
 ### Guideline 1: Design a structured context prompt [1, 6, 10, 11, 17]
