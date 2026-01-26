@@ -6,27 +6,26 @@ Additional Materials in Repository: https://github.com/GDeane/cs846project
 
 ## 1. Example Problems
 
-### Problem A_1: Stakeholder Interviews Summary
-
 For consistency and comparison use the Copilot GPT 5 mini model for all parts of exercise A.
 
+### Problem A_1: Stakeholder Interviews Summary
+
 **Task Description:**  
-The task is described at Exercise_A/requirements-analysis/submission_template.md.
+Follow instruction found in Exercise_A/submission_template.md to fill out the file.
 
 Find the related files in the Exercise_A/transcripts folder.
 
+The problem involves analysis of transcripts to summarize requirements.
+
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/docs/transcripts
-folder.
+There is no starter code for this task. Related files are in the Exercise_A/docs folder.
 
 ---
 
 ### Problem A_2: Real-World Constraints (outside of interviews)
 
 **Task Description:**  
-The task is described at Exercise_A/requirements-analysis/submission_template.md.
-
-Find the related files in the Exercise_A/transcripts folder.
+The task is described at Exercise_A/submission_template.md. It involves domain analysis.
 
 **Starter Code:**  
 There is no starter code for this task. Related files are in the Exercise_A/transcripts
@@ -37,9 +36,7 @@ folder.
 ### Problem A_3: Analysis of Conflicting Requirements
 
 **Task Description:**  
-The task is described at Exercise_A/requirements-analysis/submission_template.md.
-
-Find the related files in the Exercise_A/transcripts folder.
+The task is described at Exercise_A/submission_template.md. It involves intra-requirement analysis.
 
 **Starter Code:**  
 There is no starter code for this task. Related files are in the Exercise_A/transcripts
@@ -50,9 +47,8 @@ folder.
 ### Problem A_4: Proposed Solutions
 
 **Task Description:**  
-The task is described at Exercise_A/requirements-analysis/submission_template.md.
+The task is described at Exercise_A/submission_template.md. It involves drafting a solution.
 
-Find the related files in the Exercise_A/transcripts folder.
 
 **Starter Code:**  
 There is no starter code for this task. Related files are in the Exercise_A/transcripts
