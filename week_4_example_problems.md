@@ -2,6 +2,8 @@
 
 **Authors:** [Gavin Deane, Artemiy Vishnyakov, Savira Umar]
 
+Additional Materials in Repository: https://github.com/GDeane/cs846project
+
 ## 1. Example Problems
 
 ### Problem A_1: Stakeholder Interviews Summary
