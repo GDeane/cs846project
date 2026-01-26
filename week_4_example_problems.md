@@ -10,10 +10,10 @@ For consistency and comarison use the Copilot GPT 5 mini model for all parts of 
 **Task Description:**  
 The task is described at Exercise_A/requirements-analysis/submission_template.md.
 
-Find the related files in the Exercise_A/requirements-analysis/docs/transcripts folder.
+Find the related files in the Exercise_A/transcripts folder.
 
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/requirements-analysis/docs/transcripts
+There is no starter code for this task. Related files are in the Exercise_A/docs/transcripts
 folder.
 
 ---
@@ -23,10 +23,10 @@ folder.
 **Task Description:**  
 The task is described at Exercise_A/requirements-analysis/submission_template.md.
 
-Find the related files in the Exercise_A/requirements-analysis/docs/transcripts folder.
+Find the related files in the Exercise_A/transcripts folder.
 
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/requirements-analysis/docs/transcripts
+There is no starter code for this task. Related files are in the Exercise_A/transcripts
 folder.
 
 ---
@@ -36,10 +36,10 @@ folder.
 **Task Description:**  
 The task is described at Exercise_A/requirements-analysis/submission_template.md.
 
-Find the related files in the Exercise_A/requirements-analysis/docs/transcripts folder.
+Find the related files in the Exercise_A/transcripts folder.
 
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/requirements-analysis/docs/transcripts
+There is no starter code for this task. Related files are in the Exercise_A/transcripts
 folder.
 
 ---
@@ -49,10 +49,10 @@ folder.
 **Task Description:**  
 The task is described at Exercise_A/requirements-analysis/submission_template.md.
 
-Find the related files in the Exercise_A/requirements-analysis/docs/transcripts folder.
+Find the related files in the Exercise_A/transcripts folder.
 
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/requirements-analysis/docs/transcripts
+There is no starter code for this task. Related files are in the Exercise_A/transcripts
 folder.
 
 ---
