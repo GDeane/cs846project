@@ -4,30 +4,47 @@
 **Readings Assigned:**
 
 - Advancing Requirements Engineering through Generative AI: Assessing the Role of
-  LLMs — [PDF](https://arxiv.org/pdf/2310.13976)
+  LLMs — [PDF](https://arxiv.org/pdf/2310.13976) [10]
 - Investigating ChatGPT’s Potential to Assist in Requirements Elicitation
-  Processes — [arXiv](https://arxiv.org/abs/2307.07381)
+  Processes — [arXiv](https://arxiv.org/abs/2307.07381) [1]
 - SpecGen: Automated Generation of Formal Program Specifications via Large Language
-  Models — [arXiv](https://arxiv.org/abs/2401.08807)
-- Requirements Elicitation Follow-Up Question Generation — [arXiv](https://arxiv.org/abs/2507.02858)
+  Models — [arXiv](https://arxiv.org/abs/2401.08807) [2]
+- Requirements Elicitation Follow-Up Question Generation — [arXiv](https://arxiv.org/abs/2507.02858) [3]
 - Requirements Engineering using Generative AI: Prompts and Prompting
-  Patterns — [arXiv](https://arxiv.org/abs/2311.03832)
-- Requirements Satisfiability with In-Context Learning — [arXiv](https://arxiv.org/abs/2404.12576)
+  Patterns — [arXiv](https://arxiv.org/abs/2311.03832) [11]
+- Requirements Satisfiability with In-Context Learning — [arXiv](https://arxiv.org/abs/2404.12576) [12]
 - An Automated Model of Software Requirement Engineering Using
-  GPT-3.5 — [IEEE](https://ieeexplore.ieee.org/document/10459458)
+  GPT-3.5 — [IEEE](https://ieeexplore.ieee.org/document/10459458) [13]
 
 **Additional (academic) sources explored beyond assigned readings**
 
-- A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT — [arXiv](https://arxiv.org/abs/2302.11382)
-- Conversational Automated Program Repair — [arXiv](https://arxiv.org/abs/2301.13246)
+- A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT — [arXiv](https://arxiv.org/abs/2302.11382) [6]
+- Conversational Automated Program Repair — [arXiv](https://arxiv.org/abs/2301.13246) [9]
 - Keep the conversation going: Fixing 162 out of 337 bugs for $0.42 each using
-  chatgpt — [arXiv](https://arxiv.org/abs/2304.00385)
+  chatgpt — [arXiv](https://arxiv.org/abs/2304.00385) [4]
 - Language models are few-shot
-  learners — [NeurIPS](https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf)
+  learners — [NeurIPS](https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf) [5]
 - Quantifying language models’ sensitivity to spurious features in prompt design or: How I learned to start worrying
-  about prompt formatting — [arXiv](https://arxiv.org/abs/2310.11324)
+  about prompt formatting — [arXiv](https://arxiv.org/abs/2310.11324) [7]
 - Negated and Misprimed Probes for Pretrained Language Models: Birds Can Talk, But Cannot
-  Fly — [arXiv](https://arxiv.org/abs/1911.03343)
+  Fly — [arXiv](https://arxiv.org/abs/1911.03343) [8]
+
+**Additional (non-academic) sources explored beyond assigned readings**
+
+- Transforming Specifications into Requirements: Leveraging Copilot for Optimal
+  Results — [LinkedIn](https://www.linkedin.com/pulse/transforming-specifications-requirements-leveraging-copilot-sosa-7ze2e) [14]
+- Revolutionizing Software Requirements Engineering with
+  LLMs — [Medium](https://medium.com/@samiullah6799/revolutionizing-software-requirements-engineering-with-llms-db90551a3965) [15]
+- A Developer’s Guide to Leveraging LLMs in the Software Development
+  Lifecycle — [Apecton](https://apecton.com/ai/a-developers-guide-to-leveraging-llms-in-the-software-development-lifecycle/) [16]
+- How to use ChatGPT for Requirement
+  Analysis? — [LinkedIn](https://www.linkedin.com/pulse/how-use-chatgpt-requirement-analysis-dnyaneshwar-divekar-qvzjf) [17]
+- Using AI for requirements analysis: A case
+  study — [Thoughtworks](https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-ai-requirements-analysis-case-study) [18]
+- Using ‘Given-When-Then’ to Discover and Validate
+  Requirements — [EBG Consulting](https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/) [19]
+- Key words for use in RFCs to Indicate Requirement Levels - [datatracker](https://datatracker.ietf.org/doc/html/rfc2119) [20]
+- Zhang v Chen - [CanLII](https://canlii.ca/t/k314g) [21]
 
 ## 1. Guidelines
 
@@ -201,27 +218,7 @@ features". Generate clear, testable acceptance criteria using Given When Then fo
 
 ---
 
-### Guideline 6: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
-
-**Description:**
-
-Do not treat the output of your LLM as a finished product. Treat it like a draft given to you for review by a colleague.
-
-**Reasoning:**
-
-LLMs are powerful, but not perfect. Their outputs may contain senior engineer-level insights, but can also easily
-contain amateur-level mistakes. Many LLM researchers for RE advocate for human oversight in their
-studies of LLMs for requirements engineering, and object to LLMs as final authorities [10, 11, 12, 13].
-
-Also, all sorts of accountability problems arise when the LLM is treated as a trusted authority, and things go wrong.
-
-**Example:**
-
-N/A
-
----
-
-### Guideline 7: Capitalize role identifiers [3, 7]
+### Guideline 6: Capitalize role identifiers [3, 7]
 
 **Description:**
 
@@ -249,7 +246,7 @@ _After_
 
 ---
 
-### Guideline 8: Base your prompting pattern on the RE task being performed [11, 12]
+### Guideline 7: Base your prompting pattern on the RE task being performed [11, 12]
 
 **Description:**
 
@@ -276,7 +273,7 @@ as F) and non-functional requirements (labelled as NF)." [11]
 
 ---
 
-### Guideline 9: Reduce usage of Negation [3, 8]
+### Guideline 8: Reduce usage of Negation [3, 8]
 
 **Description:**
 
@@ -293,7 +290,7 @@ Express as "remember to do X" rather than "don't forget to do X".
 
 ---
 
-### Guideline 10: Avoid yes/no without explanation [12]
+### Guideline 9: Avoid yes/no without explanation [12]
 
 **Description:**
 
@@ -310,7 +307,7 @@ you may receive a result based on broken logic, but you can no longer verify the
 
 ---
 
-### Guideline 11: Separate Problem Space from Solution Space
+### Guideline 10: Separate Problem Space from Solution Space
 
 **Description:**
 
@@ -331,7 +328,7 @@ ChatGPT
 
 ---
 
-### Guideline 12: Ban Vague Words Unless Quantified
+### Guideline 11: Ban Vague Words Unless Quantified
 
 **Description:**
 
@@ -352,12 +349,12 @@ ChatGPT, Claude
 
 ---
 
-### Guideline 13: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
+### Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) [20]
 
 **Description:**
 
 Require SHALL for mandatory requirements; SHOULD for recommended; MAY for optional—and flag anything that can’t be
-stated clearly.
+stated clearly [20].
 
 **Reasoning:**
 
@@ -373,7 +370,7 @@ ChatGPT
 
 ---
 
-### Guideline 14: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+### Guideline 13: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
 
 **Description:**
 
@@ -391,6 +388,30 @@ Pre-mortems and misuse cases create realistic, safety/security-focused requireme
 **Suggested by:**
 
 Copilot, Gemini
+
+---
+
+### Guideline 14: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
+
+**Description:**
+
+Do not treat the output of your LLM as a finished product. Treat it like a draft given to you for review by a colleague.
+
+**Reasoning:**
+
+LLMs are powerful, but not perfect. Their outputs may contain senior engineer-level insights, but can also easily
+contain amateur-level mistakes. Many LLM researchers for RE advocate for human oversight in their
+studies of LLMs for requirements engineering, and object to LLMs as final authorities [10, 11, 12, 13].
+
+Also, all sorts of accountability problems arise when the LLM is treated as a trusted authority, and things go wrong.
+
+**Example:**
+
+There is a famous case of a Lawyer in the Supreme Court of British Columbia attempting to cite two non-existent cases as
+support for her argument. The cases were discovered by the opposition to be non-existent and hallucinated by
+ChatGPT [21].
+
+The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke" [21].
 
 ---
 
@@ -459,5 +480,15 @@ Available: https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-
 24, 2026. [Online].
 Available: https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/
 
+[20] S. O. Bradner, “Key words for use in RFCs to Indicate Requirement Levels,” Internet Engineering Task Force, Request
+for Comments RFC 2119, Mar. 1997. doi: 10.17487/RFC2119. Available: https://datatracker.ietf.org/doc/html/rfc2119
+
+[21] Zhang v Chen. Accessed: Jan. 26, 2026. [Online]. Available: https://canlii.ca/t/k314g
+
+
 ---
+
+
+
+
 
