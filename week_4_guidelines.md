@@ -43,7 +43,8 @@
   study — [Thoughtworks](https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-ai-requirements-analysis-case-study) [18]
 - Using ‘Given-When-Then’ to Discover and Validate
   Requirements — [EBG Consulting](https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/) [19]
-- Zhang v Chen - [CanLII](https://canlii.ca/t/k314g) [20]
+- Key words for use in RFCs to Indicate Requirement Levels - [datatracker](https://datatracker.ietf.org/doc/html/rfc2119) [20]
+- Zhang v Chen - [CanLII](https://canlii.ca/t/k314g) [21]
 
 ## 1. Guidelines
 
@@ -348,12 +349,12 @@ ChatGPT, Claude
 
 ---
 
-### Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
+### Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) [20]
 
 **Description:**
 
 Require SHALL for mandatory requirements; SHOULD for recommended; MAY for optional—and flag anything that can’t be
-stated clearly.
+stated clearly [20].
 
 **Reasoning:**
 
@@ -407,9 +408,10 @@ Also, all sorts of accountability problems arise when the LLM is treated as a tr
 **Example:**
 
 There is a famous case of a Lawyer in the Supreme Court of British Columbia attempting to cite two non-existent cases as
-support for her argument. The cases were discovered by the opposition to be non-existent and hallucinated by ChatGPT [20].
+support for her argument. The cases were discovered by the opposition to be non-existent and hallucinated by
+ChatGPT [21].
 
-The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke" [20].
+The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke" [21].
 
 ---
 
@@ -478,7 +480,10 @@ Available: https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-
 24, 2026. [Online].
 Available: https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/
 
-[20] Zhang v Chen. Accessed: Jan. 26, 2026. [Online]. Available: https://canlii.ca/t/k314g
+[20] S. O. Bradner, “Key words for use in RFCs to Indicate Requirement Levels,” Internet Engineering Task Force, Request
+for Comments RFC 2119, Mar. 1997. doi: 10.17487/RFC2119. Available: https://datatracker.ietf.org/doc/html/rfc2119
+
+[21] Zhang v Chen. Accessed: Jan. 26, 2026. [Online]. Available: https://canlii.ca/t/k314g
 
 
 ---
