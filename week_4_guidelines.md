@@ -43,6 +43,7 @@
   study — [Thoughtworks](https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-ai-requirements-analysis-case-study) [18]
 - Using ‘Given-When-Then’ to Discover and Validate
   Requirements — [EBG Consulting](https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/) [19]
+- Zhang v Chen - [CanLII](https://canlii.ca/t/k314g) [20]
 
 ## 1. Guidelines
 
@@ -216,27 +217,7 @@ features". Generate clear, testable acceptance criteria using Given When Then fo
 
 ---
 
-### Guideline 6: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
-
-**Description:**
-
-Do not treat the output of your LLM as a finished product. Treat it like a draft given to you for review by a colleague.
-
-**Reasoning:**
-
-LLMs are powerful, but not perfect. Their outputs may contain senior engineer-level insights, but can also easily
-contain amateur-level mistakes. Many LLM researchers for RE advocate for human oversight in their
-studies of LLMs for requirements engineering, and object to LLMs as final authorities [10, 11, 12, 13].
-
-Also, all sorts of accountability problems arise when the LLM is treated as a trusted authority, and things go wrong.
-
-**Example:**
-
-N/A
-
----
-
-### Guideline 7: Capitalize role identifiers [3, 7]
+### Guideline 6: Capitalize role identifiers [3, 7]
 
 **Description:**
 
@@ -264,7 +245,7 @@ _After_
 
 ---
 
-### Guideline 8: Base your prompting pattern on the RE task being performed [11, 12]
+### Guideline 7: Base your prompting pattern on the RE task being performed [11, 12]
 
 **Description:**
 
@@ -291,7 +272,7 @@ as F) and non-functional requirements (labelled as NF)." [11]
 
 ---
 
-### Guideline 9: Reduce usage of Negation [3, 8]
+### Guideline 8: Reduce usage of Negation [3, 8]
 
 **Description:**
 
@@ -308,7 +289,7 @@ Express as "remember to do X" rather than "don't forget to do X".
 
 ---
 
-### Guideline 10: Avoid yes/no without explanation [12]
+### Guideline 9: Avoid yes/no without explanation [12]
 
 **Description:**
 
@@ -325,7 +306,7 @@ you may receive a result based on broken logic, but you can no longer verify the
 
 ---
 
-### Guideline 11: Separate Problem Space from Solution Space
+### Guideline 10: Separate Problem Space from Solution Space
 
 **Description:**
 
@@ -346,7 +327,7 @@ ChatGPT
 
 ---
 
-### Guideline 12: Ban Vague Words Unless Quantified
+### Guideline 11: Ban Vague Words Unless Quantified
 
 **Description:**
 
@@ -367,7 +348,7 @@ ChatGPT, Claude
 
 ---
 
-### Guideline 13: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
+### Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 
 **Description:**
 
@@ -388,7 +369,7 @@ ChatGPT
 
 ---
 
-### Guideline 14: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+### Guideline 13: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
 
 **Description:**
 
@@ -406,6 +387,29 @@ Pre-mortems and misuse cases create realistic, safety/security-focused requireme
 **Suggested by:**
 
 Copilot, Gemini
+
+---
+
+### Guideline 14: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
+
+**Description:**
+
+Do not treat the output of your LLM as a finished product. Treat it like a draft given to you for review by a colleague.
+
+**Reasoning:**
+
+LLMs are powerful, but not perfect. Their outputs may contain senior engineer-level insights, but can also easily
+contain amateur-level mistakes. Many LLM researchers for RE advocate for human oversight in their
+studies of LLMs for requirements engineering, and object to LLMs as final authorities [10, 11, 12, 13].
+
+Also, all sorts of accountability problems arise when the LLM is treated as a trusted authority, and things go wrong.
+
+**Example:**
+
+There is a famous case of a Lawyer in the Supreme Court of British Columbia attempting to cite two non-existent cases as
+support for her argument. The cases were discovered by the opposition to be non-existent and hallucinated by ChatGPT [20].
+
+The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke" [20].
 
 ---
 
@@ -473,6 +477,9 @@ Available: https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-
 [19] E. Gottesdiener, “Using ‘Given-When-Then’ to Discover and Validate Requirements,” EBG Consulting. Accessed: Jan.
 24, 2026. [Online].
 Available: https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/
+
+[20] Zhang v Chen. Accessed: Jan. 26, 2026. [Online]. Available: https://canlii.ca/t/k314g
+
 
 ---
 
