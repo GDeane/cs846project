@@ -1,3 +1,0 @@
-The problem_description and evaluation_criteria were both written by me (Gavin), with contributions from GPT-5.2 as follows:
-- Correctness and reliability guarantees question for example problem questionnaire
-- Good and bad examples were written by GPT-5.2 for evaluation criteria
