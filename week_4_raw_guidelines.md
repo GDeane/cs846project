@@ -5,30 +5,45 @@
 **Readings Assigned:**
 
 - Advancing Requirements Engineering through Generative AI: Assessing the Role of
-  LLMs — [PDF](https://arxiv.org/pdf/2310.13976)
+  LLMs — [PDF](https://arxiv.org/pdf/2310.13976) [10]
 - Investigating ChatGPT’s Potential to Assist in Requirements Elicitation
-  Processes — [arXiv](https://arxiv.org/abs/2307.07381)
+  Processes — [arXiv](https://arxiv.org/abs/2307.07381) [1]
 - SpecGen: Automated Generation of Formal Program Specifications via Large Language
-  Models — [arXiv](https://arxiv.org/abs/2401.08807)
-- Requirements Elicitation Follow-Up Question Generation — [arXiv](https://arxiv.org/abs/2507.02858)
+  Models — [arXiv](https://arxiv.org/abs/2401.08807) [2]
+- Requirements Elicitation Follow-Up Question Generation — [arXiv](https://arxiv.org/abs/2507.02858) [3]
 - Requirements Engineering using Generative AI: Prompts and Prompting
-  Patterns — [arXiv](https://arxiv.org/abs/2311.03832)
-- Requirements Satisfiability with In-Context Learning — [arXiv](https://arxiv.org/abs/2404.12576)
+  Patterns — [arXiv](https://arxiv.org/abs/2311.03832) [11]
+- Requirements Satisfiability with In-Context Learning — [arXiv](https://arxiv.org/abs/2404.12576) [12]
 - An Automated Model of Software Requirement Engineering Using
-  GPT-3.5 — [IEEE](https://ieeexplore.ieee.org/document/10459458)
+  GPT-3.5 — [IEEE](https://ieeexplore.ieee.org/document/10459458) [13]
 
 **Additional (academic) sources explored beyond assigned readings**
 
-- A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT — [arXiv](https://arxiv.org/abs/2302.11382)
-- Conversational Automated Program Repair — [arXiv](https://arxiv.org/abs/2301.13246)
+- A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT — [arXiv](https://arxiv.org/abs/2302.11382) [6]
+- Conversational Automated Program Repair — [arXiv](https://arxiv.org/abs/2301.13246) [9]
 - Keep the conversation going: Fixing 162 out of 337 bugs for $0.42 each using
-  chatgpt — [arXiv](https://arxiv.org/abs/2304.00385)
+  chatgpt — [arXiv](https://arxiv.org/abs/2304.00385) [4]
 - Language models are few-shot
-  learners — [NeurIPS](https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf)
+  learners — [NeurIPS](https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf) [5]
 - Quantifying language models’ sensitivity to spurious features in prompt design or: How I learned to start worrying
-  about prompt formatting — [arXiv](https://arxiv.org/abs/2310.11324)
+  about prompt formatting — [arXiv](https://arxiv.org/abs/2310.11324) [7]
 - Negated and Misprimed Probes for Pretrained Language Models: Birds Can Talk, But Cannot
-  Fly — [arXiv](https://arxiv.org/abs/1911.03343)
+  Fly — [arXiv](https://arxiv.org/abs/1911.03343) [8]
+
+**Additional (non-academic) sources explored beyond assigned readings**
+
+- Transforming Specifications into Requirements: Leveraging Copilot for Optimal
+  Results — [LinkedIn](https://www.linkedin.com/pulse/transforming-specifications-requirements-leveraging-copilot-sosa-7ze2e) [14]
+- Revolutionizing Software Requirements Engineering with
+  LLMs — [Medium](https://medium.com/@samiullah6799/revolutionizing-software-requirements-engineering-with-llms-db90551a3965) [15]
+- A Developer’s Guide to Leveraging LLMs in the Software Development
+  Lifecycle — [Apecton](https://apecton.com/ai/a-developers-guide-to-leveraging-llms-in-the-software-development-lifecycle/) [16]
+- How to use ChatGPT for Requirement
+  Analysis? — [LinkedIn](https://www.linkedin.com/pulse/how-use-chatgpt-requirement-analysis-dnyaneshwar-divekar-qvzjf) [17]
+- Using AI for requirements analysis: A case
+  study — [Thoughtworks](https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-ai-requirements-analysis-case-study) [18]
+- Using ‘Given-When-Then’ to Discover and Validate
+  Requirements — [EBG Consulting](https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/) [19]
 
 ## 1. Guidelines from Readings
 
@@ -365,7 +380,8 @@ Tell the LLM what expert role to take and what standards to follow (e.g., ISO 29
 
 **Reasoning:**
 
-Role + standards anchors vocabulary, rigor, and requirement quality expectations so outputs are more consistent and professional.
+Role + standards anchors vocabulary, rigor, and requirement quality expectations so outputs are more consistent and
+professional.
 
 **Example:**
 
@@ -385,11 +401,13 @@ Before asking for requirements, provide scope, stakeholders, goals, constraints,
 
 **Reasoning:**
 
-Missing context causes generic requirements and wrong assumptions. Context helps the model tailor requirements to the real situation.
+Missing context causes generic requirements and wrong assumptions. Context helps the model tailor requirements to the
+real situation.
 
 **Example:**
 
-“Goal: reduce customer support calls 40%. Users: customers + agents. Constraints: must integrate with CRM; PII data; budget limit.”
+“Goal: reduce customer support calls 40%. Users: customers + agents. Constraints: must integrate with CRM; PII data;
+budget limit.”
 
 **Suggested by:**
 
@@ -405,7 +423,8 @@ First elicit goals/needs; only later discuss design/implementation.
 
 **Reasoning:**
 
-LLMs tend to jump to solutions; separating spaces prevents premature design decisions and keeps requirements focused on needs.
+LLMs tend to jump to solutions; separating spaces prevents premature design decisions and keeps requirements focused on
+needs.
 
 **Example:**
 
@@ -443,7 +462,8 @@ Artemiy (Copilot)
 
 **Description:**
 
-Require outputs to follow a fixed template: ID, Type, SHALL statement, Rationale, Acceptance Criteria, Priority (and optional Verification Method).
+Require outputs to follow a fixed template: ID, Type, SHALL statement, Rationale, Acceptance Criteria, Priority (and
+optional Verification Method).
 
 **Reasoning:**
 
@@ -451,7 +471,8 @@ Templates force completeness and produce requirements that are easier to test, t
 
 **Example (template row):**
 
-ID: NFR-01 | Type: Security | SHALL: “The system SHALL encrypt PII at rest using AES-256.” | AC: “Verify encryption enabled in DB config.”
+ID: NFR-01 | Type: Security | SHALL: “The system SHALL encrypt PII at rest using AES-256.” | AC: “Verify encryption
+enabled in DB config.”
 
 **Suggested by:**
 
@@ -484,7 +505,8 @@ Savira (GPT), Savira (Claude)
 
 **Description:**
 
-Require SHALL for mandatory requirements; SHOULD for recommended; MAY for optional—and flag anything that can’t be stated clearly.
+Require SHALL for mandatory requirements; SHOULD for recommended; MAY for optional—and flag anything that can’t be
+stated clearly.
 
 **Reasoning:**
 
