@@ -8,7 +8,7 @@ Additional Materials in Repository: https://github.com/GDeane/cs846project
 
 ### Problem A_1: Stakeholder Interviews Summary
 
-For consistency and comarison use the Copilot GPT 5 mini model for all parts of exercise A.
+For consistency and comparison use the Copilot GPT 5 mini model for all parts of exercise A.
 
 **Task Description:**  
 The task is described at Exercise_A/requirements-analysis/submission_template.md.
@@ -65,6 +65,8 @@ folder.
 > A note on GenAI contribution: Problem B was written by me (Gavin), with
 > contribution from GPT-5.2 as follows:
 > - Correctness and reliability guarantees question for example problem questionnaire
+
+For consistency and comparison use the Copilot GPT-5 mini model for all parts of exercise B.
 
 #### 1. Problem description
 
@@ -123,6 +125,8 @@ Processes,” Jul. 14, 2023, arXiv: arXiv:2307.07381. doi: 10.48550/arXiv.2307.0
 ---
 
 ### Problem C_1: Functional vs Non-Functional Requirement Classification with AI Awareness
+
+For consistency and comparison use the Copilot GPT-5 mini model for all parts of exercise C.
 
 **Task Description:**  
 The task is described in Exercise_C/example_problems.md.
