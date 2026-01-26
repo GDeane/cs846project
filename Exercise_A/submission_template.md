@@ -5,12 +5,12 @@
 ### 1. Stakeholder Interviews Summary
 Summarize the key points from each stakeholder interview. Include their main concerns, requirements, and any conflicting interests.
 
-3. **Customer Support**
+1. **Customer Support**
 	- **Concern**: 
 	- **Request**:
 	- **Implication**:
 
-3. **Financial Stakeholder**
+2. **Financial Stakeholder**
 	- **Concern**: 
 	- **Request**:
 	- **Implication**:

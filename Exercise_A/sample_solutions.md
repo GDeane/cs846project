@@ -1,7 +1,7 @@
 # Sample Solutions for Requirements Analysis Exercise
 
 ### 1. Stakeholder Interviews Summary
-
+## Example Good Solution"
 1. **Customer Support Representative**
 	- **Concern**: The chatbot is forgetting context from earlier in the chat.
 	- **Request**: Improve context retention and response generation speed.
@@ -17,6 +17,21 @@
 	- **Request**: Advocate for the adoption of the Claude API over other models.
 	- **Implication**: Technical feasibility and future-proofing the solution are essential for long-term success.
 
+## Example Bad Solution
+1. **Customer Support** (Lack of details)
+    - **Concern**: Customers are unsatisfied with the current chatbot
+    - **Request**: Improve chatbot
+    - **Implication**: A better chatbot will make customers happy
+
+2. **Financial Stakeholder** (Excessive details prevent broad implications from being drawn)
+    - **Concern**: API/token spend is material; target ~40% cost reduction in 3–6 months; migration cap ~$60k if justified.
+    - **Request**: Demonstrable cost reductions, phased progress, and ROI for any migration spend.
+    - **Implication**: (Irrelevant information here)
+
+3. **Software Engineer** (Excessive technical jargon & creation of a solution when only analysis is requestedx)
+    - **Concern**: High session context volatility — the agent exhibits poor stateful retention and low contextual coherence across turns, causing frequent conversational resets and generic, low-utility outputs; also perceptible latency spikes affecting UX.
+    - **Request**: Implement robust session-state management (e.g., turn-level embeddings, incremental summarization, or context-window orchestration), optimize inference latency (caching, batching, and model selection), and add telemetry for turn-wise relevance and intent drift.
+    - **Implication**: Requires a stateful session store or vector DB, summarization pipeline and context-truncation strategy, additional engineering for caching/throughput and instrumentation, and trade-offs against token budget and API spend that must be managed to avoid increased support ticket volume.
 
 **Evaluation**
 - **Good**: Demonstrates a deep understanding of the conflicting needs of all stakeholders. Clearly articulates how these needs impact the requirements.
@@ -24,6 +39,7 @@
 - **Bad**: Fails to adequately identify or analyze stakeholder needs.
 
 ### 2. Real-World Constraints (outside of interviews)
+## Example Good Solution:
 **Budget**: target 40% recurring cost reduction with one‑time migration budget of $60k limits scope and tools/consultants.
 
 **Procurement & legal**: vendor contracts, data‑privacy reviews, and approvals can add weeks or months of delay cutting into the 6-month timeframe.
@@ -35,6 +51,18 @@
 **Team/time**: limited engineering capacity and competing priorities lengthen delivery. There is a need staged work and clear milestones.
 
 **Operations**: monitoring, cost telemetry, rate limits, and fallback strategies required to avoid UX regressions.
+
+## Example Bad Solution (Nonsensical, confabulated requirements, excessive technical details)
+- Require on-prem GPU cluster with 512 GB GPU memory per node to run the model locally; no cloud allowed.
+- Mandate support for legacy browsers including Internet Explorer 8 and custom internal kiosks with obsolete TLS stacks.
+- Target 10 million concurrent active users at launch with single-region deployment and no autoscaling plan.
+- Preserve full raw conversation logs indefinitely (permanent storage), with expected storage growth of multiple petabytes per year.
+- Require human moderation for every message in real time before any chatbot reply reaches users.
+- Enforce strict on-prem data residency in a non-existent “EU-Mars” jurisdiction and quarterly notarized paper audits.
+- Assume vendor pricing is fixed and non-negotiable at $1M/month for model access — budget accordingly with no procurement process.
+- Plan for zero downtime with a single server design and no redundancy or failover testing.
+- Require cryptographic hardware tokens for every user session, replacing existing passwordless flows.
+- Expect the engineering team to deliver full integration, QA, and rollout in a single two-week sprint with no additional headcount.
 
 **Evaluation: with part 3**
 

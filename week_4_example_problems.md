@@ -5,6 +5,7 @@
 ## 1. Example Problems
 
 ### Problem A_1: Stakeholder Interviews Summary
+For consistency and comarison use the Copilot GPT 5 mini model for all parts of exercise A.
 
 **Task Description:**  
 The task is described at Exercise_A/requirements-analysis/submission_template.md.
