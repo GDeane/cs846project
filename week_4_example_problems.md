@@ -13,7 +13,7 @@ For consistency and comparison use the Copilot GPT 5 mini model for all parts of
 **Task Description:**  
 Summarize the key points from each stakeholder interview. Include their main concerns, requirements, and any conflicting interests.
 
-Find the related files in the Exercise_A/transcripts folder.
+Find the related files in the Exercise_A/docs/transcripts folder.
 
 **Starter Code:**  
 
@@ -40,7 +40,7 @@ Find the related files in the Exercise_A/transcripts folder.
 List and describe the real-world constraints that may impact the project, including budget, technical feasibility, and time limitations outside of what was stated in the interviews.
 
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/transcripts
+There is no starter code for this task. Related files are in the Exercise_A/docs/transcripts
 folder.
 
 ---
@@ -51,7 +51,7 @@ folder.
 Analyze the conflicting requirements from the stakeholders and any conflicts that arise with real-world constraints. Discuss the implications of these conflicts and potential ways to address them.
 
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/transcripts
+There is no starter code for this task. Related files are in the Exercise_A/docs/transcripts
 folder.
 
 ---
@@ -63,7 +63,7 @@ Outline your proposed solutions to reconcile the conflicting requirements. Inclu
 
 
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/transcripts
+There is no starter code for this task. Related files are in the Exercise_A/docs/transcripts
 folder.
 
 ---
