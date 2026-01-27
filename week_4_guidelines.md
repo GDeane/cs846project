@@ -468,6 +468,25 @@ Then:
 - Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 - Guideline 14: Treat LLM output as a draft, not as a final product
 
+
+### Problem C:
+
+## Problem 1:
+ - Guideline 1: Design a structured context prompt 
+ - Guideline 7: Base your prompting pattern on the RE task being performed
+ - Guideline 9: Avoid yes/no without explanation
+
+ ## Problem 2:
+ - Guideline 9: Avoid yes/no without explanation
+ - Guideline 13: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+
+ ## Problem 3:
+ - Guideline 1: Design a structured context prompt
+ - Guideline 2: Converse with the LLM to analyze the problem
+ - Guideline 6: Capitalize role identifiers
+ - Guideline 14: Treat LLM output as a draft, not as a final product
+
+
 ## 3. References
 
 [1] K. Ronanki, C. Berger, and J. Horkoff, “Investigating ChatGPT’s Potential to Assist in Requirements Elicitation
