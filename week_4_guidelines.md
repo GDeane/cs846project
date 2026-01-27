@@ -43,7 +43,8 @@
   study — [Thoughtworks](https://www.thoughtworks.com/en-us/insights/blog/generative-ai/using-ai-requirements-analysis-case-study) [18]
 - Using ‘Given-When-Then’ to Discover and Validate
   Requirements — [EBG Consulting](https://ebgconsulting.com/blog/using-given-when-then-to-discover-and-validate-requirements-2/) [19]
-- Key words for use in RFCs to Indicate Requirement Levels - [datatracker](https://datatracker.ietf.org/doc/html/rfc2119) [20]
+- Key words for use in RFCs to Indicate Requirement
+  Levels - [datatracker](https://datatracker.ietf.org/doc/html/rfc2119) [20]
 - Zhang v Chen - [CanLII](https://canlii.ca/t/k314g) [21]
 
 ## 1. Guidelines
@@ -417,40 +418,41 @@ The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke
 
 ### Problem A: Requirement Analysis
 
-You may find the following guidelines more useful for each problem of exercise A. Not all of them should be used simultaneously but due to the open-ended nature of the problem there are multiple correct approaches and solutions.
+You may find the following guidelines more useful for each problem of exercise A. Not all of them should be used
+simultaneously but due to the open-ended nature of the problem there are multiple correct approaches and solutions.
 
 #### Problem 1:
-- Guideline 6: Treat LLM output as a draft, not as a final product 
+
+- Guideline 6: Treat LLM output as a draft, not as a final product
 - Guideline 7: Capitalize role identifiers
 - Guideline 11: Separate Problem Space from Solution Space
 - Guideline 13: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 
-
 #### Problem 2:
-- Guideline 1: Design a structured context prompt 
+
+- Guideline 1: Design a structured context prompt
 - Guideline 2: Converse with the LLM to analyze the problem
 - Guideline 4: Provide few-shot examples
 - Guideline 11: Separate Problem Space from Solution Space
 - Guideline 13: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 
-
 #### Problem 3:
-- Guideline 1: Design a structured context prompt 
+
+- Guideline 1: Design a structured context prompt
 - Guideline 2: Converse with the LLM to analyze the problem
 - Guideline 3: Assign a role/persona to the LLM
 - Guideline 5: Maximise prompt information density
 - Guideline 6: Treat LLM output as a draft, not as a final product
 - Guideline 11: Separate Problem Space from Solution Space
 
-
 #### Problem 4:
-- Guideline 1: Design a structured context prompt 
+
+- Guideline 1: Design a structured context prompt
 - Guideline 2: Converse with the LLM to analyze the problem
 - Guideline 3: Assign a role/persona to the LLM
 - Guideline 5: Maximise prompt information density
 - Guideline 6: Treat LLM output as a draft, not as a final product
 - Guideline 14: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
-
 
 ### Problem B: Elicitation of Requirements from Problem Domain
 
@@ -458,9 +460,11 @@ You may find varying success with different combinations of guidelines for this 
 problem and the desire for clear and unambiguous requirements, I would recommend:
 
 First:
+
 - Guideline 2: Converse with the LLM to analyze the problem
 
 Then:
+
 - Guideline 3: Assign a role/persona to the LLM
 - Guideline 1: Design a structured context prompt
 - Guideline 10: Separate Problem Space from Solution Space
@@ -468,24 +472,25 @@ Then:
 - Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 - Guideline 14: Treat LLM output as a draft, not as a final product
 
-
 ### Problem C:
 
 ## Problem 1:
- - Guideline 1: Design a structured context prompt 
- - Guideline 7: Base your prompting pattern on the RE task being performed
- - Guideline 9: Avoid yes/no without explanation
 
- ## Problem 2:
- - Guideline 9: Avoid yes/no without explanation
- - Guideline 13: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+- Guideline 1: Design a structured context prompt
+- Guideline 7: Base your prompting pattern on the RE task being performed
+- Guideline 9: Avoid yes/no without explanation
 
- ## Problem 3:
- - Guideline 1: Design a structured context prompt
- - Guideline 2: Converse with the LLM to analyze the problem
- - Guideline 6: Capitalize role identifiers
- - Guideline 14: Treat LLM output as a draft, not as a final product
+## Problem 2:
 
+- Guideline 9: Avoid yes/no without explanation
+- Guideline 13: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+
+## Problem 3:
+
+- Guideline 1: Design a structured context prompt
+- Guideline 2: Converse with the LLM to analyze the problem
+- Guideline 6: Capitalize role identifiers
+- Guideline 14: Treat LLM output as a draft, not as a final product
 
 ## 3. References
 
@@ -521,8 +526,8 @@ Cannot Fly.” In Proceedings of the 58th Annual Meeting of the Association for 
 the Role of LLMs. In: Nguyen-Duc, A., Abrahamsson, P., Khomh, F. (eds) Generative AI for Effective Software Development.
 Springer, Cham. https://doi.org/10.1007/978-3-031-55642-5_6
 
-[11] K. Ronanki, B. Cabrero-Daniel, J. Horkoff, and C. Berger, “Requirements Engineering using Generative AI: Prompts and
-Prompting Patterns,” Nov. 07, 2023, arXiv: arXiv:2311.03832. doi: 10.48550/arXiv.2311.03832.
+[11] K. Ronanki, B. Cabrero-Daniel, J. Horkoff, and C. Berger, “Requirements Engineering using Generative AI: Prompts
+and Prompting Patterns,” Nov. 07, 2023, arXiv: arXiv:2311.03832. doi: 10.48550/arXiv.2311.03832.
 
 [12] S. Santos, T. Breaux, T. Norton, S. Haghighi, and S. Ghanavati, “Requirements Satisfiability with In-Context
 Learning,” Apr. 19, 2024, arXiv: arXiv:2404.12576. doi: 10.48550/arXiv.2404.12576.
