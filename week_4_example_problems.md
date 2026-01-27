@@ -11,21 +11,33 @@ For consistency and comparison use the Copilot GPT 5 mini model for all parts of
 ### Problem A_1: Stakeholder Interviews Summary
 
 **Task Description:**  
-Follow instruction found in Exercise_A/submission_template.md to fill out the file.
+Summarize the key points from each stakeholder interview. Include their main concerns, requirements, and any conflicting interests.
 
 Find the related files in the Exercise_A/transcripts folder.
 
-The problem involves analysis of transcripts to summarize requirements.
-
 **Starter Code:**  
-There is no starter code for this task. Related files are in the Exercise_A/docs folder.
+
+1. **Customer Support**
+	- **Concern**: 
+	- **Request**:
+	- **Implication**:
+
+2. **Financial Stakeholder**
+	- **Concern**: 
+	- **Request**:
+	- **Implication**:
+
+3. **Software Engineer**
+	- **Concern**: 
+	- **Request**:
+	- **Implication**:
 
 ---
 
 ### Problem A_2: Real-World Constraints (outside of interviews)
 
 **Task Description:**  
-The task is described at Exercise_A/submission_template.md. It involves domain analysis.
+List and describe the real-world constraints that may impact the project, including budget, technical feasibility, and time limitations outside of what was stated in the interviews.
 
 **Starter Code:**  
 There is no starter code for this task. Related files are in the Exercise_A/transcripts
@@ -36,7 +48,7 @@ folder.
 ### Problem A_3: Analysis of Conflicting Requirements
 
 **Task Description:**  
-The task is described at Exercise_A/submission_template.md. It involves intra-requirement analysis.
+Analyze the conflicting requirements from the stakeholders and any conflicts that arise with real-world constraints. Discuss the implications of these conflicts and potential ways to address them.
 
 **Starter Code:**  
 There is no starter code for this task. Related files are in the Exercise_A/transcripts
@@ -47,7 +59,7 @@ folder.
 ### Problem A_4: Proposed Solutions
 
 **Task Description:**  
-The task is described at Exercise_A/submission_template.md. It involves drafting a solution.
+Outline your proposed solutions to reconcile the conflicting requirements. Include any recommendations, patterns, strategies based on stakeholder needs.
 
 
 **Starter Code:**  
