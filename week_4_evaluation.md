@@ -14,8 +14,7 @@ Criteria vary depending on the specific problem. Each problem's evaluation crite
 
 ### Problem A_1: Stakeholder Interviews Summary
 
-### 1. Stakeholder Interviews Summary
-## Example Good Solution"
+#### Example Good Solution"
 1. **Customer Support Representative**
 	- **Concern**: The chatbot is forgetting context from earlier in the chat.
 	- **Request**: Improve context retention and response generation speed.
@@ -31,7 +30,7 @@ Criteria vary depending on the specific problem. Each problem's evaluation crite
 	- **Request**: Advocate for the adoption of the Claude API over other models.
 	- **Implication**: Technical feasibility and future-proofing the solution are essential for long-term success.
 
-## Example Bad Solution
+#### Example Bad Solution
 1. **Customer Support** (Lack of details)
     - **Concern**: Customers are unsatisfied with the current chatbot
     - **Request**: Improve chatbot
@@ -55,7 +54,7 @@ Criteria vary depending on the specific problem. Each problem's evaluation crite
 
 ### Problem A_2: Real-World Constraints (outside of interviews)
 
-## Example Good Solution:
+#### Example Good Solution:
 **Budget**: target 40% recurring cost reduction with one‑time migration budget of $60k limits scope and tools/consultants.
 
 **Procurement & legal**: vendor contracts, data‑privacy reviews, and approvals can add weeks or months of delay cutting into the 6-month timeframe.
@@ -68,7 +67,7 @@ Criteria vary depending on the specific problem. Each problem's evaluation crite
 
 **Operations**: monitoring, cost telemetry, rate limits, and fallback strategies required to avoid UX regressions.
 
-## Example Bad Solution (Nonsensical, confabulated requirements, excessive technical details)
+#### Example Bad Solution (Nonsensical, confabulated requirements, excessive technical details)
 - Require on-prem GPU cluster with 512 GB GPU memory per node to run the model locally; no cloud allowed.
 - Mandate support for legacy browsers including Internet Explorer 8 and custom internal kiosks with obsolete TLS stacks.
 - Target 10 million concurrent active users at launch with single-region deployment and no autoscaling plan.
@@ -86,7 +85,6 @@ Criteria vary depending on the specific problem. Each problem's evaluation crite
 
 ### Problem A_3: Analysis of Conflicting Requirements
 
-### 3. Analysis of Conflicting Requirements
 **List of requirements**:
 Functional
 - Improved context retention within a user session (Customer Support, Engineering).
@@ -119,9 +117,7 @@ Non‑functional
 - **Satisfactory**: Provides a basic analysis of conflicting requirements but lacks depth or clarity.
 - **Needs Improvement**: Fails to adequately analyze conflicting requirements.
 
-### Problem A_4: Proposed Solutions
-
-### 4. Proposed Solutions (non-exhaustive list of examples)
+### Problem A_4: Proposed Solutions (non-exhaustive list of examples)
 
 1. **Balancing Context Retention and Cost**
 	- Implement a hybrid approach where the chatbot uses a cheaper model for general inquiries but switches to a more advanced model (like Claude) for complex interactions requiring context retention.
@@ -415,7 +411,214 @@ Revisions summary (applied in requirements above)
 
 ---
 
-#### 2. References
+### Problem C_1: Functional vs Non-Functional Requirement Classification with AI Awareness
+
+The following criteria apply to this question:
+
+- Correct identification of Functional Requirements (FR) versus Non-Functional Requirements (NFR)
+- Clear and logical reasoning
+- Recognition of the limitations of AI and the need for human oversight.
+
+**Evaluation Description:**  
+This problem is evaluated across two tasks.
+
+Task 1 – Manual Requirement Classification
+
+Good Solution:
+
+- Correctly classifies:
+    - FR:
+        - appointment booking - (describes an action the user can do with the system),
+        - reminders - (describes a behavior the system performs for the users)
+    - NFR:
+        - encryption - (not something the user can do with the system. Not an action or behavior),
+        - 2 seconds - (this is a performance constraint on how something is done, not an action or behavior),
+        - compliance - (regulatory compliance is a constraint. Not an action or behavior),
+        - usability - (this is a quality constraint, not an action or behavior).
+- Demonstrates understanding of the difference between:
+    - what the system does (FR) and
+    - how well or under what constraints it operates (NFR)
+
+Bad Solution:
+
+- Random or inconsistent classification
+- Misclassifies security, performance, usability, or compliance requirements as FR
+- Shows no clear reasoning or conceptual understanding
+
+Task 2 – Human Oversight Reflection
+
+Good Solution:
+
+- Clearly explains at least one valid reason why human review is required, such as:
+    - AI may misinterpret requirements
+    - AI lacks full domain context
+    - AI can produce inconsistent or incorrect classifications
+    - AI cannot be held responsible for harm caused
+
+Bad Solution:
+
+- Assumes AI output is always correct
+- States that human review is unnecessary
+- Provides overly brief or unsupported responses
+
+---
+
+### Problem C_2: Requirements Satisfiability Reasoning
+
+The following criteria apply to this question:
+
+- Correct reasoning about requirements satisfiability
+- Clear justification based on the provided design
+- Ability to propose a practical design improvement
+- Awareness of the role of human judgment in evaluating system designs
+
+**Evaluation Description:**  
+This problem is evaluated across three tasks.
+
+Task 1 – Satisfiability Decision
+
+Good Solution:
+
+- Correctly answers No, recognizing that username/password authentication alone does not fully ensure that only
+  authorized users can access sensitive records.
+
+Bad Solution:
+
+- Answers Yes without qualification
+- Assumes basic authentication is sufficient without considering security risks
+
+Task 2 – Reasoning
+
+Good Solution:
+
+- Clearly explains why the design is insufficient (e.g., weak authentication, lack of additional verification, higher
+  risk of unauthorized access).
+- Reasoning is directly tied to the stated requirement.
+
+Bad Solution:
+
+- Provides vague or generic security statements
+- Does not connect the explanation to the requirement or design details
+
+Task 3 – Design Improvement
+
+Good Solution:
+
+- Proposes a reasonable improvement, such as:
+    - multi-factor authentication
+    - role-based access control
+    - stronger authentication mechanisms
+    - Explains how the change improves satisfiability.
+
+Bad Solution:
+
+- Suggests unrelated changes
+- Proposes improvements without explanation
+- Provides no actionable design modification
+
+---
+
+### Problem C_3: Requirements Elicitation Question Generation with AI Assistance
+
+> A note on GenAI contribution:
+> - Example solutions were written by GPT-5.2, with edits when the context didn't make sense
+
+The following criteria apply to requirements elicitation problems in this question:
+
+- Ability to design relevant and well-scoped elicitation questions
+- Clear distinction between survey and interview questions
+- Awareness of question quality attributes (clarity, specificity, relevance)
+- Ability to critically review and improve AI-assisted outputs
+- Recognition of the need for human judgment in requirements elicitation
+
+**Evaluation Description:**  
+This problem is evaluated across four tasks.
+
+Task 1 – Survey Question Design
+
+Good Solution:
+
+- Provides three survey questions appropriate for general users (drivers).
+- Questions are concise and easy to answer.
+- Questions relate to usage patterns, feature importance, performance, or satisfaction.
+
+Example:
+
+1) "How often do you use parking apps per week?"
+2) "How important is knowing space availability in real-time when choosing parking?" (scale: extremely important - not
+   important at all)
+3) "How satisfied are you with the current time it takes you to find parking downtown?" (scale: extremely satisfied -
+   not satisfied at all)
+
+Bad Solution:
+
+- Provides fewer than three questions.
+- Questions are vague, overly technical, or irrelevant to end users.
+- Questions are written as interview-style open discussions instead of surveys.
+
+Task 2 – Interview Question Design
+
+Good Solution:
+
+- Provides three interview questions suitable for a city transportation administrator.
+- Questions address system management, constraints, policy, security, or scalability.
+- Questions are open-ended and encourage detailed responses.
+
+Example:
+
+1) "What policies or constraints govern data sharing and privacy for parking usage analytics?"
+2) "How do you prioritize enforcement, revenue, and congestion goals when managing parking zones?"
+3) "What scalability or uptime requirements do you have for a citywide parking system during the busiest times?"
+
+Bad Solution:
+
+- Questions are too generic or user-focused.
+- Questions lack relevance to administrative or organizational concerns.
+- Questions are phrased as simple yes/no questions.
+
+Task 3 – Question Quality Review
+
+Good Solution:
+
+- Correctly identifies a meaningful weakness, such as:
+    - ambiguity
+    - lack of scope
+    - missing non-functional considerations
+    - Demonstrates awareness of requirement quality attributes.
+
+Example:
+"The initial survey questions might miss non-functional aspects, like acceptable false positive (app says parking when
+no parking) or false negative (app says no parking when there is parking)"
+
+Bad Solution:
+
+- Identifies a trivial or unrelated issue.
+- Fails to explain why the issue is a weakness.
+- States that no improvement is needed.
+
+Task 4 – Question Improvement
+
+Good Solution:
+
+- Rewrites one question to improve clarity, scope, or specificity.
+- The revised question clearly addresses the identified weakness.
+
+Example:
+(replace question 2)
+"Which one would bother you more?
+
+- An app saying there is no available parking when really there is, or
+- an app saying there is available parking when really there isn't?"
+
+Bad Solution:
+
+- Makes minimal or no meaningful changes.
+- Does not address the identified weakness.
+- Produces a less clear question than the original.
+
+---
+
+## 3. References
 
 [1] K. Ronanki, C. Berger, and J. Horkoff, “Investigating ChatGPT’s Potential to Assist in Requirements Elicitation
 Processes,” Jul. 14, 2023, arXiv: arXiv:2307.07381. doi: 10.48550/arXiv.2307.07381.
@@ -426,41 +629,15 @@ Software Requirements, pages 163–185. Springer, 2005.
 [3] Génova, Gonzalo and Fuentes, José M and Llorens, Juan and Hurtado, Omar and Moreno, Valentín. A framework to
 Measure and Improve the Quality of Textual Requirements. Requirements engineering, 18(1):2541, 2013.
 
----
+[4] K. Ronanki, B. Cabrero-Daniel, J. Horkoff, and C. Berger, “Requirements Engineering using Generative AI: Prompts and
+Prompting Patterns,” Nov. 07, 2023, arXiv: arXiv:2311.03832. doi: 10.48550/arXiv.2311.03832.
 
-### Problem C_1: Functional vs Non-Functional Requirement Classification with AI Awareness
+[5] S. Santos, T. Breaux, T. Norton, S. Haghighi, and S. Ghanavati, “Requirements Satisfiability with In-Context
+Learning,” Apr. 19, 2024, arXiv: arXiv:2404.12576. doi: 10.48550/arXiv.2404.12576.
 
-**Evaluation Description:**  
-The evaluation for this task is described in Exercise_C/evaluation.md.
-
-**Code:**  
-N/A
-
----
-
-### Problem C_2: Requirements Satisfiability Reasoning
-
-**Evaluation Description:**  
-The evaluation for this task is described in Exercise_C/evaluation.md.
-
-**Code:**  
-N/A
-
----
-
-### Problem C_3: Requirements Elicitation Question Generation with AI Assistance
-
-**Evaluation Description:**  
-The evaluation for this task is described in Exercise_C/evaluation.md.
-
-**Code:**  
-N/A
-
----
-
-## 3. References
-
-> References for the evaluation criteria are provided within the respective Exercise folders.
+[6] J. S. Yeow, M. E. Rana, and N. A. Abdul Majid, “An Automated Model of Software Requirement Engineering Using
+GPT-3.5,” in 2024 ASU International Conference in Emerging Technologies for Sustainability and Intelligent Systems (
+ICETSIS), Jan. 2024, pp. 1746–1755. doi: 10.1109/ICETSIS61505.2024.10459458.
 
 ---
 
