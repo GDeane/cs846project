@@ -1,32 +1,11 @@
-## 1. Evaluation Criteria
+## 1. Evaluation specifically for Example Problems
+
+### Problem C_1: Functional vs Non-Functional Requirement Classification with AI Awareness
 
 The following criteria apply to this topic:
 - Correct identification of Functional Requirements (FR) versus Non-Functional Requirements (NFR)
 - Clear and logical reasoning
 - Recognition of the limitations of AI and the need for human oversight.
-
-## 2. Evaluation Criteria
-
-The following criteria apply to this topic:
-- Correct reasoning about requirements satisfiability
-- Clear justification based on the provided design
-- Ability to propose a practical design improvement
-- Awareness of the role of human judgment in evaluating system designs
-
-## 3. Evaluation Criteria
-
-The following criteria apply to requirements elicitation problems in this topic:
-- Ability to design relevant and well-scoped elicitation questions
-- Clear distinction between survey and interview questions
-- Awareness of question quality attributes (clarity, specificity, relevance)
-- Ability to critically review and improve AI-assisted outputs
-- Recognition of the need for human judgment in requirements elicitation
-
----
-
-## 2. Evalation specifically for Example Problems
-
-### Problem C_1: Functional vs Non-Functional Requirement Classification with AI Awareness
 
 **Evaluation Description:**  
 This problem is evaluated across two tasks.
@@ -60,6 +39,12 @@ Bad Solution:
 - Provides overly brief or unsupported responses
 
 ### Problem C_2: Requirements Satisfiability Reasoning
+
+The following criteria apply to this topic:
+- Correct reasoning about requirements satisfiability
+- Clear justification based on the provided design
+- Ability to propose a practical design improvement
+- Awareness of the role of human judgment in evaluating system designs
 
 **Evaluation Description:**  
 This problem is evaluated across three tasks.
@@ -98,6 +83,13 @@ Bad Solution:
 - Provides no actionable design modification
 
 ### Problem C_3: Requirements Elicitation Question Generation with AI Assistance
+
+The following criteria apply to requirements elicitation problems in this topic:
+- Ability to design relevant and well-scoped elicitation questions
+- Clear distinction between survey and interview questions
+- Awareness of question quality attributes (clarity, specificity, relevance)
+- Ability to critically review and improve AI-assisted outputs
+- Recognition of the need for human judgment in requirements elicitation
 
 **Evaluation Description:**  
 This problem is evaluated across four tasks.
@@ -151,12 +143,14 @@ Bad Solution:
 - Does not address the identified weakness.
 - Produces a less clear question than the original.
 
-## 3. References
+## 2. References
 
 [1] K. Ronanki, B. Cabrero-Daniel, J. Horkoff, and C. Berger,
 “Requirements Engineering using Generative AI: Prompts and Prompting Patterns,”
 arXiv:2311.03832, 2023.
+
 [2] M. Borg, K. Wnuk, and A. Ferrari,
 “Requirements Satisfiability with In-Context Learning,” arXiv:2404.12576, 2024.
+
 [3] A. M. Author et al.,
 “An Automated Model of Software Requirement Engineering Using GPT-3.5,” 2023.
