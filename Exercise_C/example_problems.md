@@ -10,6 +10,7 @@ An AI assistant (e.g., GitHub Copilot Chat or ChatGPT) is available to assist wi
 however, human judgment is still required.
 
 You are given the following requirements:
+
 - R1. The system shall allow patients to book appointments online.
 - R2. The system shall encrypt all patient data stored in the database.
 - R3. The system shall send appointment reminders via email and SMS.
@@ -19,7 +20,8 @@ You are given the following requirements:
 
 **Student Tasks:**
 
-1. Classify each requirement as either Functional Requirement (FR) or Non-Functional Requirement (NFR) and provide a brief justification for each classification.
+1. Classify each requirement as either Functional Requirement (FR) or Non-Functional Requirement (NFR) and provide a
+   brief justification for each classification.
 2. Human Oversight Reflection - explain why AI-assisted requirement classification should always include human review.
 
 ### Problem C_2: Requirements Satisfiability Reasoning
@@ -35,11 +37,13 @@ Requirement:
 “The system shall ensure that only authorized users can access patient records.”
 
 Design Description:
+
 - Users log in with a username and password.
 - No multi-factor authentication is used.
 
-**_Student Tasks:_** 
-1. Satisfiability Decision - Does the given design satisfy the requirement? Answer Yes or No. 
+**_Student Tasks:_**
+
+1. Satisfiability Decision - Does the given design satisfy the requirement? Answer Yes or No.
 
 2. Reasoning - Explain your decision in 2–3 sentences.
 
@@ -56,12 +60,16 @@ resources.
 An AI assistant (e.g., GitHub Copilot Chat or ChatGPT) can be used to help generate requirements elicitation questions.
 However, the usefulness of the questions depends on prompt clarity and human review.
 
-**_Student Tasks:_** 
-1. Survey Question Design - Write three survey questions intended for general users (drivers) of the smart parking system. 
+**_Student Tasks:_**
 
-2. Interview Question Design - Write three interview questions intended for a city transportation administrator. 
- 
-3. Question Quality Review - Identify one weakness in the generated questions (e.g., ambiguity, lack of scope, missing non-functional aspects). 
+1. Survey Question Design - Write three survey questions intended to be answered by general users (drivers) of the smart
+   parking system.
+
+2. Interview Question Design - Write three interview questions intended to be answered by a city transportation
+   administrator.
+
+3. Question Quality Review - Identify one weakness in the generated questions (e.g., ambiguity, lack of scope, missing
+   non-functional aspects).
 
 4. Question Improvement - Rewrite one question to improve its clarity or specificity.
 
