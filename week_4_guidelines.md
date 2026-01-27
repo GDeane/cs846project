@@ -415,7 +415,25 @@ The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke
 
 ---
 
-## 2. References
+## 2. Recommended Guidelines by Example Problem
+
+### Problem B: Elicitation of Requirements from Problem Domain
+
+You may find varying success with different combinations of guidelines for this problem. Given the open-endedness of the
+problem and the desire for clear and unambiguous requirements, I would recommend:
+
+First:
+- Guideline 2: Converse with the LLM to analyze the problem
+
+Then:
+- Guideline 3: Assign a role/persona to the LLM
+- Guideline 1: Design a structured context prompt
+- Guideline 10: Separate Problem Space from Solution Space
+- Guideline 11: Ban Vague Words Unless Quantified
+- Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
+- Guideline 14: Treat LLM output as a draft, not as a final product
+
+## 3. References
 
 [1] K. Ronanki, C. Berger, and J. Horkoff, “Investigating ChatGPT’s Potential to Assist in Requirements Elicitation
 Processes,” Jul. 14, 2023, arXiv: arXiv:2307.07381. doi: 10.48550/arXiv.2307.07381.
