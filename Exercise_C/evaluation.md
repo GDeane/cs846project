@@ -14,11 +14,11 @@ Task 1 – Manual Requirement Classification
 
 Good Solution:
 - Correctly classifies:
-- FR: appointment booking, reminders
-- NFR: security (encryption), performance (2 seconds), compliance, usability
+  - FR: appointment booking, reminders
+  - NFR: security (encryption), performance (2 seconds), compliance, usability
 - Demonstrates understanding of the difference between:
-- what the system does (FR) and
-- how well or under what constraints it operates (NFR)
+  - what the system does (FR) and
+  - how well or under what constraints it operates (NFR)
 
 Bad Solution:
 - Random or inconsistent classification
@@ -29,9 +29,9 @@ Task 2 – Human Oversight Reflection
 
 Good Solution:
 - Clearly explains at least one valid reason why human review is required, such as:
-- AI may misinterpret requirements
-- AI lacks full domain context
-- AI can produce inconsistent or incorrect classifications
+  - AI may misinterpret requirements
+  - AI lacks full domain context
+  - AI can produce inconsistent or incorrect classifications
 
 Bad Solution:
 - Assumes AI output is always correct
@@ -72,10 +72,10 @@ Task 3 – Design Improvement
 
 Good Solution:
 - Proposes a reasonable improvement, such as:
-- multi-factor authentication
-- role-based access control
-- stronger authentication mechanisms
-- Explains how the change improves satisfiability.
+  - multi-factor authentication
+  - role-based access control
+  - stronger authentication mechanisms
+  - Explains how the change improves satisfiability.
 
 Bad Solution:
 - Suggests unrelated changes
@@ -122,10 +122,10 @@ Task 3 – Question Quality Review
 
 Good Solution:
 - Correctly identifies a meaningful weakness, such as:
-- ambiguity
-- lack of scope
-- missing non-functional considerations
-- Demonstrates awareness of requirement quality attributes.
+  - ambiguity
+  - lack of scope
+  - missing non-functional considerations
+  - Demonstrates awareness of requirement quality attributes.
 
 Bad Solution:
 - Identifies a trivial or unrelated issue.
