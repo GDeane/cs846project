@@ -371,7 +371,32 @@ ChatGPT
 
 ---
 
-### Guideline 13: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+### Guideline 13: Label user stories and requirements following the RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) standard before giving them to the LLM.
+
+**Description:**
+
+To proritize key requirements above desirable features label each user story or requirement with how necessary it is so the LLMfocuses on creating the MVP before adding extra features.
+
+**Reasoning:**
+
+The Requirements Engineering process tends to be a non-linear, waterfall-like process. Client needs, available resources, and domain specific factors change, get misinterpreted, and are clarified. Thus, it is important to synchronize the software development teams' perception of the Minimum Viable Product with the client.
+
+**Example:**
+
+You are an experienced Software Requirement Engineer determining the Minimum Viable Product (MVP) for {Project Name/Description}. To ensure full alignment between the development team and stakeholders and to avoid an expectation gap at delivery, I need to categorize our User Stories using the MoSCoW method.
+Please analyze the following requirements and generate a structured list. For every item, assign a priority label (M, S, C, or W) and provide a brief 'Reasoning' to justify its placement based on {Time/Budget/Technical} constraints.
+Categorization Rules:
+- M (Must Have): Non-negotiable core functionality. Without these, the product is not viable.
+- S (Should Have): Important but not vital for the initial launch.
+- C (Could Have): Desirable 'bonus' features that will be included only if resources permit.
+- W (Won't Have): Explicitly excluded from this release to protect the project scope.
+Input Requirements / User Stories:
+{user stories}
+
+---
+
+
+### Guideline 14: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
 
 **Description:**
 
@@ -392,7 +417,7 @@ Copilot, Gemini
 
 ---
 
-### Guideline 14: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
+### Guideline 15: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
 
 **Description:**
 
@@ -415,6 +440,7 @@ ChatGPT [21].
 The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke" [21].
 
 ---
+
 
 ### Problem A: Requirement Analysis
 
