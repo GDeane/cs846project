@@ -53,7 +53,7 @@
 
 **Description:**
 
-Design a prompt that gives the "job description" to the LLM before asking it to generate requirements or questions.
+Create a compact, high-information "job brief" that tells the LLM its role in a requirements engineering task, the artifact you expect, and the constraints to follow before asking it to generate requirements or questions.
 Provide sufficient and relevant context to the LLM to constrain the problem space it is working in.
 
 **Reasoning:**
@@ -134,7 +134,7 @@ Ask individual questions in a back-and-forth manner to refine.
 
 ---
 
-### Guideline 3: Assign a role/persona to the LLM [2, 3, 4, 10, 17]
+### Guideline 3: Assign a stakeholder or expert role/persona to the LLM [2, 3, 4, 10, 17]
 
 **Description:**
 
@@ -144,8 +144,7 @@ asking it to do something. You can also create separate chats with separate pers
 **Reasoning:**
 
 The language used and professionalism of the LLM will vary based on the role it has to play [2, 4, 17]. Explicitly
-defined
-roles will also give additional context about the problem domain [2].
+defined roles will also give additional context about the problem domain [2].
 
 **Example:**
 
@@ -156,7 +155,7 @@ with ISO/IEC/IEEE standards. Review the following user stories and suggest impro
 
 ---
 
-### Guideline 4: Provide few-shot examples [2, 3, 10, 16]
+### Guideline 4: Provide few-shot examples of good requirements or user stories [2, 3, 10, 16]
 
 **Description:**
 
@@ -219,7 +218,7 @@ features". Generate clear, testable acceptance criteria using Given When Then fo
 
 ---
 
-### Guideline 6: Capitalize role identifiers [3, 7]
+### Guideline 6: Capitalize role identifiers in transcripts and interviews [3, 7]
 
 **Description:**
 
@@ -274,11 +273,11 @@ as F) and non-functional requirements (labelled as NF)." [11]
 
 ---
 
-### Guideline 8: Reduce usage of Negation [3, 8]
+### Guideline 8: Reduce usage of Negation when providing requirements [3, 8]
 
 **Description:**
 
-Avoid the use of double-negatives when expressing ideas in prompts.
+Avoid the use of negation or double-negatives when expressing ideas in prompts.
 
 **Reasoning:**
 
@@ -289,9 +288,13 @@ have had trouble distinguishing between terms like "can" and "cannot" in text [8
 
 Express as "remember to do X" rather than "don't forget to do X".
 
+Or
+
+"Express each idea on a separate line" instead of "Don't combine all the ideas"
+
 ---
 
-### Guideline 9: Avoid yes/no without explanation [12]
+### Guideline 9: Avoid classification classification or yes/no answers without explanation [12]
 
 **Description:**
 
@@ -312,16 +315,22 @@ you may receive a result based on broken logic, but you can no longer verify the
 
 **Description:**
 
-First elicit goals/needs; only later discuss design/implementation.
+First elicit and validate stakeholder goals, needs, success metrics, constraints, and assumptions. Delay design/implementation discussion until the problem space is well understood and agreed.
 
 **Reasoning:**
 
 LLMs tend to jump to solutions; separating spaces prevents premature design decisions and keeps requirements focused on
 needs.
+This prevents premature commitment to architectures or features that don't meet real needs, produces verifiable acceptance criteria and traceability from goals → requirements → design, and reduces rework, scope creep, and hidden assumptions that lead to failed deliveries.
 
 **Example:**
 
-“Phase 1: ask clarifying questions only. Do NOT propose architecture or tools yet.”
+“ask clarifying questions only. Do NOT propose architecture or tools yet.”
+
+Good (problem-focused): "What outcome should this deliver for your team? How will you measure success?"
+Good (analysis): "Describe the job to be done in one sentence"
+Bad (solution-focused): "Should we add a dashboard showing X charts?"
+Follow-ups: "Why is that outcome important?" / "What prevents achieving it today?" / "What would fail our success metric?"
 
 **Suggested by:**
 
@@ -371,11 +380,11 @@ ChatGPT
 
 ---
 
-### Guideline 13: Label user stories and requirements following the RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) standard before giving them to the LLM.
+### Guideline 13: Assign priorities to user stories and requirements using the MoSCoW method or following the RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) standard before giving them to the LLM.
 
 **Description:**
 
-To proritize key requirements above desirable features label each user story or requirement with how necessary it is so the LLMfocuses on creating the MVP before adding extra features.
+To prioritize key requirements above desirable features label each user story or requirement with how necessary it is so the LLMfocuses on creating the MVP before adding extra features.
 
 **Reasoning:**
 
@@ -421,15 +430,12 @@ Copilot, Gemini
 
 **Description:**
 
-Do not treat the output of your LLM as a finished product. Treat it like a draft given to you for review by a colleague.
+Treat any LLM-generated requirements text as a starting draft that must be reviewed, validated, and approved by humans before becoming part of the requirements baseline.
 
 **Reasoning:**
 
-LLMs are powerful, but not perfect. Their outputs may contain senior engineer-level insights, but can also easily
-contain amateur-level mistakes. Many LLM researchers for RE advocate for human oversight in their
-studies of LLMs for requirements engineering, and object to LLMs as final authorities [10, 11, 12, 13].
-
-Also, all sorts of accountability problems arise when the LLM is treated as a trusted authority, and things go wrong.
+LLMs can surface useful wording and structure but may introduce ambiguity, incorrect domain assumptions, missing constraints, or implementation bias.
+Accepting LLM output unreviewed creates traceability, accountability, and compliance risks and can hide unstated assumptions that break downstream design, testing, and delivery.
 
 **Example:**
 
