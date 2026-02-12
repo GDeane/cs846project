@@ -380,150 +380,96 @@ laws (e.g. the right to be forgotten under the GDPR in the EU).
 
 Requirements (12 total)
 
-Req-01 — Function (Must)
-
-Statement: The system shall authenticate and authorize users using OAuth 2.0 (or equivalent) for each calendar provider
-before reading or writing calendar data.
-
-Rationale: Secure, least-privilege access to user calendars and clear consent flow required by providers and regulators.
-
-Acceptance criteria: OAuth flow works for Google Calendar and Microsoft Outlook in tests; unauthorized calls return 401;
-consent screen shows requested scopes.
-
-Inputs / Outputs: Input: user-initiated connect request; Output: access token + refresh token (stored per privacy
-policy).
-
-Error modes: Missing/expired tokens produce a clear UI error and re-authentication prompt.
-
-Req-02 — Function (Must)
-
-Statement: The system shall read calendar events (start, end, title, location, attendees, timezone) and maintain a
-local, minimal event index for scheduling decisions.
-
-Rationale: Accurate scheduling decisions require event metadata and time zone awareness.
-
-Acceptance criteria: For a linked calendar, 99% of events fetched include a parsable start/end/timezone and location if
-present; indexing completes within a reasonable time for 1 year of events (e.g., <30s for 10k events).
-
-Inputs / Outputs: Input: calendar API responses; Output: normalized events in local index.
-
-Error modes: Unparseable events flagged and surfaced to user for fix.
-
-Req-03 — Function (Must)
-Statement: The system shall consider event location and compute travel-time estimates between locations and the user's
-current (or home/office) location using a configurable travel-time provider (e.g., map API) and user-selected transport
-modes.
-Rationale: Travel-aware scheduling needs reliable travel-time estimates to detect tight or infeasible bookings.
-Acceptance criteria: For 95% of test routes, predicted travel time is within ±15% of the provider’s baseline estimate or
-within ±10 minutes, whichever is larger; travel-time provider failures fall back to conservative default heuristics.
-Inputs / Outputs: Input: event locations, user transport mode, departure time; Output: travel time estimate, route
-confidence score.
-Error modes: If location missing or provider fails, system marks route as "unknown" and asks user for confirmation.
-Req-04 — Function (Must)
-Statement: The assistant shall, on user request (e.g., "Can I book at 3pm?"), determine whether a proposed event fits
-the calendar and provide a clear recommendation: Fit / Tight / Does not fit.
-Rationale: Primary user need is to get a simple, actionable answer about whether a meeting can be scheduled.
-Acceptance criteria: Recommendation produced for 100% of queries within SLA (see Req-09). Labeling is consistent with
-configured thresholds and accompanied by confidence.
-Inputs / Outputs: Input: proposed event time, duration, location; Output: recommendation with reasoning summary and
-confidence score.
-Error modes: Low-confidence results produce an explicit “uncertain” outcome and suggested follow-up questions.
-Req-05 — Function (Should)
-Statement: The system shall present a short, human-readable explanation for each decision that includes (a) key criteria
-used (conflicting events, travel time, user preferences), (b) estimated travel time and margin, and (c) a numeric
-confidence score.
-Rationale: Stakeholders need explainability to trust the assistant and to adjudicate edge cases.
-Acceptance criteria: Explanations are generated for 100% of decisions; user testing shows ≥80% of users find
-explanations "sufficient to act" in a usability sample.
-Inputs / Outputs: Input: decision context; Output: 1–3 sentence explanation + confidence score + link to "details".
-Error modes: If the model cannot explain, show a fallback structured rationale (e.g., checklist of failed/passing
-checks).
-Req-06 — Nonfunctional – Accuracy / Reliability (Must)
-Statement: For scheduling decisions, the system shall achieve a decision accuracy (match to ground-truth acceptability
-in evaluation dataset) of at least 95% under normal conditions; travel-time predictions should meet Req-03.
-Rationale: Stakeholders require strong correctness guarantees before relying on automated scheduling advice.
-Acceptance criteria: Test suite evaluation demonstrates ≥95% decision accuracy on representative dataset; continuous
-monitoring alerts if rolling 7-day accuracy drops below 92%.
-Inputs / Outputs: Input: evaluation dataset; Output: metrics and alerts.
-Error modes: Degradation triggers restricted-mode recommendations (e.g., require manual confirmation).
-Req-07 — Nonfunctional – Latency (Should)
-Statement: The system shall provide an initial response to user scheduling queries within 3 seconds 90% of the time and
-within 5 seconds 99% of the time when no heavy external API (e.g., route calculation) is required.
-Rationale: Fast responses improve usability and adoption.
-Acceptance criteria: Load testing shows the latency targets met at expected per-user load (specify in SLO).
-Inputs / Outputs: N/A (performance metric).
-Error modes: If external API calls prolong response, show progress indicator and allow "get best-effort recommendation
-later".
-Req-08 — Nonfunctional – Privacy & Data Minimization (Must)
-Statement: The system shall only store the minimal data needed for operation (event metadata, user preferences, model
-personalization vectors) and shall provide user controls to opt-out of personalization and to delete stored data;
-sensitive event content (notes) must be redacted by default unless explicitly permitted by user.
-Rationale: Minimize privacy risk and comply with regulatory concerns.
-Acceptance criteria: UI provides explicit toggle for personalization and a "delete all data" button; deletion completes
-and an audit log confirms removal within 24 hours.
-Inputs / Outputs: Input: user toggles, delete requests; Output: confirmation + audit record.
-Error modes: Failed deletion produces retry and admin flagging.
-Req-09 — Nonfunctional – Regional Data Compliance & Residency (Must)
-Statement: The system shall support region-specific data handling: configurable data residency targets and compliance
-measures for GDPR, CCPA, and other applicable laws; users shall be able to request data export or erasure per region
-rules.
-Rationale: Different jurisdictions require different controls (e.g., right to be forgotten).
-Acceptance criteria: Export and deletion workflows comply with regional timelines (e.g., GDPR: deletion within 30 days),
-and region flags are enforced for storage and processing.
-Inputs / Outputs: Input: user region; Output: data stored/processed in region-specific stores or pseudonymized
-pipelines.
-Error modes: Cross-border transfer attempts are blocked or logged until consent obtained.
-Req-10 — Function – Learning & Personalization (Should)
-Statement: The system shall learn user scheduling preferences over time (e.g., preferred buffer times before/after
-meetings, no-booking windows) using on-device or privacy-preserving federated learning; the user must be able to review
-and opt-out.
-Rationale: Personalization improves recommendation relevance while addressing privacy concerns.
-Acceptance criteria: After 30 days of opt-in usage, personalized recommendations increase acceptance rate by measurable
-amount (e.g., +10% relative to baseline) in pilot; opt-out immediately freezes personalization updates.
-Inputs / Outputs: Input: user confirmations, historical event patterns; Output: preference model and effect on
-recommendations.
-Error modes: If model updates degrade performance, rollback to previous model.
-Req-11 — Privacy Safeguard — Training Data Exclusions (Must)
-Statement: The system shall not use specified categories of data for training/personalization unless explicitly
-permitted by the user (e.g., shared calendars flagged as "business-shared", unusually busy weeks flagged by user).
-Rationale: Users may not want shared or anomalous periods influencing personalization.
-Acceptance criteria: UI and API allow users to tag calendars or date ranges as excluded; training pipeline respects
-exclusion flags and includes tests to verify.
-Inputs / Outputs: Input: exclusion flags; Output: filtered training examples.
-Error modes: If exclusions are ignored, produce audit failure alarm.
-Req-12 — Security — Data Protection (Must)
-Statement: The system shall encrypt all user data at rest (AES-256 or equivalent) and in transit (TLS 1.2+/HTTPS).
-Access to production secrets must be role-based and logged.
-Rationale: Protect user data and meet enterprise security expectations.
-Acceptance criteria: Penetration test finds no plaintext storage of private calendar content; all endpoints use TLS;
-audit logs show role-based access records.
-Inputs / Outputs: N/A (security controls).
-Error modes: Key rollover or encryption failure triggers fail-closed (no data exposure).
-Req-13 — Function – Integration & Write Safety (Should)
-Statement: When the assistant writes changes (creates/updates events), it shall require explicit user confirmation and
-show the exact calendar and scope being modified; an "undo" action for 10 minutes shall be available.
-Rationale: Prevent accidental or incorrect modifications to user calendars.
-Acceptance criteria: Write actions present a confirmation UI; undo restores prior state consistently in tests.
-Inputs / Outputs: Input: user confirmation; Output: calendar API write + undo token.
-Error modes: Failed undo logs the issue and alerts support.
-Req-14 — Nonfunctional – Deployment Form Factor (Should)
-Statement: The system shall be delivered as a software application with web and mobile clients and an API for enterprise
-integration; optional edge/hardware integration (e.g., device with local assistant) may be supported via a separate
-deployment profile but is out-of-scope for initial release.
-Rationale: Applications maximize reach and meet typical user expectations; hardware adds complexity and regulatory
-concerns.
-Acceptance criteria: Web and mobile clients available, documented API; hardware integration documented as "future work".
-Inputs / Outputs: N/A.
-Error modes: N/A.
-Req-15 — Nonfunctional – Auditing & Transparency (Should)
-Statement: The system shall keep an auditable log of scheduling decisions (what inputs produced a decision, timestamp,
-model version, and whether personalization was applied) accessible to the user and to authorized admins for debugging
-and compliance.
-Rationale: Auditing supports explainability, debugging, and compliance investigations.
-Acceptance criteria: Logs are available in user settings (last 90 days) and admin interface; exportable JSON for
-compliance requests.
-Inputs / Outputs: Input: decision events; Output: tamper-evident logs with metadata.
-Error modes: Log retention and tamper controls must be enforced; loss triggers alert.
+- Req-01 — Function (Must)
+  - Statement: The system shall authenticate and authorize users using OAuth 2.0 (or equivalent) for each calendar provider before reading or writing calendar data.
+  - Rationale: Secure, least-privilege access to user calendars and clear consent flow required by providers and regulators.
+  - Acceptance criteria: OAuth flow works for Google Calendar and Microsoft Outlook in tests; unauthorized calls return 401; consent screen shows requested scopes.
+  - Inputs / Outputs: Input: user-initiated connect request; Output: access token + refresh token (stored per privacy policy).
+  - Error modes: Missing/expired tokens produce a clear UI error and re-authentication prompt.
+- Req-02 — Function (Must)
+  - Statement: The system shall read calendar events (start, end, title, location, attendees, timezone) and maintain a local, minimal event index for scheduling decisions.
+  - Rationale: Accurate scheduling decisions require event metadata and time zone awareness.
+  - Acceptance criteria: For a linked calendar, 99% of events fetched include a parsable start/end/timezone and location if present; indexing completes within a reasonable time for 1 year of events (e.g., <30s for 10k events).
+  - Inputs / Outputs: Input: calendar API responses; Output: normalized events in local index.
+  - Error modes: Unparseable events flagged and surfaced to user for fix.
+- Req-03 — Function (Must)
+  - Statement: The system shall consider event location and compute travel-time estimates between locations and the user's current (or home/office) location using a configurable travel-time provider (e.g., map API) and user-selected transport modes.
+  - Rationale: Travel-aware scheduling needs reliable travel-time estimates to detect tight or infeasible bookings.
+  - Acceptance criteria: For 95% of test routes, predicted travel time is within ±15% of the provider’s baseline estimate or within ±10 minutes, whichever is larger; travel-time provider failures fall back to conservative default heuristics.
+  - Inputs / Outputs: Input: event locations, user transport mode, departure time; Output: travel time estimate, route confidence score.
+  - Error modes: If location missing or provider fails, system marks route as "unknown" and asks user for confirmation.
+- Req-04 — Function (Must)
+  - Statement: The assistant shall, on user request (e.g., "Can I book at 3pm?"), determine whether a proposed event fits the calendar and provide a clear recommendation: Fit / Tight / Does not fit.
+  - Rationale: Primary user need is to get a simple, actionable answer about whether a meeting can be scheduled.
+  - Acceptance criteria: Recommendation produced for 100% of queries within SLA (see Req-09). Labeling is consistent with configured thresholds and accompanied by confidence.
+  - Inputs / Outputs: Input: proposed event time, duration, location; Output: recommendation with reasoning summary and confidence score.
+  - Error modes: Low-confidence results produce an explicit “uncertain” outcome and suggested follow-up questions.
+- Req-05 — Function (Should)
+  - Statement: The system shall present a short, human-readable explanation for each decision that includes (a) key criteria used (conflicting events, travel time, user preferences), (b) estimated travel time and margin, and (c) a numeric confidence score.
+  - Rationale: Stakeholders need explainability to trust the assistant and to adjudicate edge cases.
+  - Acceptance criteria: Explanations are generated for 100% of decisions; user testing shows ≥80% of users find explanations "sufficient to act" in a usability sample.
+  - Inputs / Outputs: Input: decision context; Output: 1–3 sentence explanation + confidence score + link to "details".
+  - Error modes: If the model cannot explain, show a fallback structured rationale (e.g., checklist of failed/passing checks).
+- Req-06 — Nonfunctional – Accuracy / Reliability (Must)
+  - Statement: For scheduling decisions, the system shall achieve a decision accuracy (match to ground-truth acceptability in evaluation dataset) of at least 95% under normal conditions; travel-time predictions should meet Req-03.
+  - Rationale: Stakeholders require strong correctness guarantees before relying on automated scheduling advice.
+  - Acceptance criteria: Test suite evaluation demonstrates ≥95% decision accuracy on representative dataset; continuous monitoring alerts if rolling 7-day accuracy drops below 92%.
+  - Inputs / Outputs: Input: evaluation dataset; Output: metrics and alerts.
+  - Error modes: Degradation triggers restricted-mode recommendations (e.g., require manual confirmation).
+- Req-07 — Nonfunctional – Latency (Should)
+  - Statement: The system shall provide an initial response to user scheduling queries within 3 seconds 90% of the time and within 5 seconds 99% of the time when no heavy external API (e.g., route calculation) is required.
+  - Rationale: Fast responses improve usability and adoption.
+  - Acceptance criteria: Load testing shows the latency targets met at expected per-user load (specify in SLO).
+  - Inputs / Outputs: N/A (performance metric).
+  - Error modes: If external API calls prolong response, show progress indicator and allow "get best-effort recommendation later".
+- Req-08 — Nonfunctional – Privacy & Data Minimization (Must)
+  - Statement: The system shall only store the minimal data needed for operation (event metadata, user preferences, model personalization vectors) and shall provide user controls to opt-out of personalization and to delete stored data; sensitive event content (notes) must be redacted by default unless explicitly permitted by user.
+  - Rationale: Minimize privacy risk and comply with regulatory concerns.
+  - Acceptance criteria: UI provides explicit toggle for personalization and a "delete all data" button; deletion completes and an audit log confirms removal within 24 hours.
+  - Inputs / Outputs: Input: user toggles, delete requests; Output: confirmation + audit record.
+  - Error modes: Failed deletion produces retry and admin flagging.
+- Req-09 — Nonfunctional – Regional Data Compliance & Residency (Must)
+  - Statement: The system shall support region-specific data handling: configurable data residency targets and compliance measures for GDPR, CCPA, and other applicable laws; users shall be able to request data export or erasure per region rules.
+  - Rationale: Different jurisdictions require different controls (e.g., right to be forgotten).
+  - Acceptance criteria: Export and deletion workflows comply with regional timelines (e.g., GDPR: deletion within 30 days), and region flags are enforced for storage and processing.
+  - Inputs / Outputs: Input: user region; Output: data stored/processed in region-specific stores or pseudonymized pipelines.
+  - Error modes: Cross-border transfer attempts are blocked or logged until consent obtained.
+- Req-10 — Function – Learning & Personalization (Should)
+  - Statement: The system shall learn user scheduling preferences over time (e.g., preferred buffer times before/after meetings, no-booking windows) using on-device or privacy-preserving federated learning; the user must be able to review and opt-out.
+  - Rationale: Personalization improves recommendation relevance while addressing privacy concerns.
+  - Acceptance criteria: After 30 days of opt-in usage, personalized recommendations increase acceptance rate by measurable amount (e.g., +10% relative to baseline) in pilot; opt-out immediately freezes personalization updates.
+  - Inputs / Outputs: Input: user confirmations, historical event patterns; Output: preference model and effect on recommendations.
+  - Error modes: If model updates degrade performance, rollback to previous model.
+- Req-11 — Privacy Safeguard — Training Data Exclusions (Must)
+  - Statement: The system shall not use specified categories of data for training/personalization unless explicitly permitted by the user (e.g., shared calendars flagged as "business-shared", unusually busy weeks flagged by user).
+  - Rationale: Users may not want shared or anomalous periods influencing personalization.
+  - Acceptance criteria: UI and API allow users to tag calendars or date ranges as excluded; training pipeline respects exclusion flags and includes tests to verify.
+  - Inputs / Outputs: Input: exclusion flags; Output: filtered training examples.
+  - Error modes: If exclusions are ignored, produce audit failure alarm.
+- Req-12 — Security — Data Protection (Must)
+  - Statement: The system shall encrypt all user data at rest (AES-256 or equivalent) and in transit (TLS 1.2+/HTTPS). Access to production secrets must be role-based and logged.
+  - Rationale: Protect user data and meet enterprise security expectations.
+  - Acceptance criteria: Penetration test finds no plaintext storage of private calendar content; all endpoints use TLS; audit logs show role-based access records.
+  - Inputs / Outputs: N/A (security controls).
+  - Error modes: Key rollover or encryption failure triggers fail-closed (no data exposure).
+- Req-13 — Function – Integration & Write Safety (Should)
+  - Statement: When the assistant writes changes (creates/updates events), it shall require explicit user confirmation and show the exact calendar and scope being modified; an "undo" action for 10 minutes shall be available.
+  - Rationale: Prevent accidental or incorrect modifications to user calendars.
+  - Acceptance criteria: Write actions present a confirmation UI; undo restores prior state consistently in tests.
+  - Inputs / Outputs: Input: user confirmation; Output: calendar API write + undo token.
+  - Error modes: Failed undo logs the issue and alerts support.
+- Req-14 — Nonfunctional – Deployment Form Factor (Should)
+  - Statement: The system shall be delivered as a software application with web and mobile clients and an API for enterprise integration; optional edge/hardware integration (e.g., device with local assistant) may be supported via a separate deployment profile but is out-of-scope for initial release.
+  - Rationale: Applications maximize reach and meet typical user expectations; hardware adds complexity and regulatory concerns.
+  - Acceptance criteria: Web and mobile clients available, documented API; hardware integration documented as "future work".
+  - Inputs / Outputs: N/A.
+  - Error modes: N/A.
+- Req-15 — Nonfunctional – Auditing & Transparency (Should)
+  - Statement: The system shall keep an auditable log of scheduling decisions (what inputs produced a decision, timestamp, model version, and whether personalization was applied) accessible to the user and to authorized admins for debugging and compliance.
+  - Rationale: Auditing supports explainability, debugging, and compliance investigations.
+  - Acceptance criteria: Logs are available in user settings (last 90 days) and admin interface; exportable JSON for compliance requests.
+  - Inputs / Outputs: Input: decision events; Output: tamper-evident logs with metadata.
+  - Error modes: Log retention and tamper controls must be enforced; loss triggers alert.
 
 ##### Context Prompt (With Guidelines)
 
@@ -594,107 +540,92 @@ laws (e.g. the right to be forgotten under the GDPR in the EU).
 ##### GitHub Copilot Output:
 
 Requirements (IDs Req-01 .. Req-14)
-Functional requirements
-Req-01 — Authentication & Authorization (Functional, Must)
-Statement: The system SHALL authenticate and authorize a user before reading or writing that user's calendar data.
-Acceptance criteria: Any request to read or write calendar data without a valid authenticated session is rejected with
-an HTTP 401/403-equivalent error; login flow completes successfully for supported providers.
-Verification method: Automated integration tests that attempt calendar access with and without valid credentials;
-penetration test to confirm unauthorized access is denied.
-Req-02 — Calendar Fetch & Normalization (Functional, Must)
-Statement: The system SHALL fetch a user's calendar events (start time, end time, title, attendees, timezone, and
-location if present) and normalize them into a local minimal index for scheduling decisions.
-Acceptance criteria: For a representative test calendar set (1 year, up to 10k events), normalization succeeds within a
-defined processing window (e.g., initial sync ≤ 30s for 10k events) and at least 99% of events include parsable
-start/end/timezone fields.
-Verification method: End-to-end integration tests using synthetic provider data and a perf test to measure sync time and
-parsing success rate.
-Req-03 — Travel-Time Estimation (Functional, Must)
-Statement: The system SHALL compute an estimated travel time between two event locations (or between a user location and
-an event) given a user-selected transport mode and scheduled departure time.
-Acceptance criteria: For 95% of test routes in the evaluation set, estimated travel time is within ±15% of the baseline
-route-provider estimate or within ±10 minutes (whichever is larger); when location is missing, result is flagged as "
-unknown."
-Verification method: Automated route test harness comparing system estimates to a ground-truth route provider across
-representative city/route samples.
-Req-04 — Fit/Tight/Does-not-fit Recommendation (Functional, Must)
-Statement: On user request with a proposed event (time, duration, optional location), the system SHALL return one of
-three recommendations: "Fits", "Tight", or "Does not fit", and include a confidence score.
-Acceptance criteria: Recommendation produced for 100% of valid queries within SLA; labels follow configured thresholds
-and confidence ∈ [0,1] is returned.
-Verification method: Functional tests with representative scenarios verifying expected label output and confidence
-presence; unit tests for threshold logic.
-Req-05 — Short Human-Readable Explanation (Functional, Should)
-Statement: For each scheduling recommendation, the system SHALL provide a concise (1–3 sentence) human-readable
-explanation listing the primary factors that led to the recommendation (conflicting events, travel time, user
-preferences).
-Acceptance criteria: Explanations are returned for 100% of recommendations and include at least the top two contributing
-factors; user study (pilot sample) shows ≥80% of users find explanation sufficient to act.
-Verification method: Automated checks ensure explanation field is non-empty and contains expected keys; small user trial
-for subjective acceptance.
-Req-06 — Write Safety for Calendar Changes (Functional, Should)
-Statement: When the system writes (creates/updates/deletes) calendar events, the system SHALL require explicit user
-confirmation and present the exact calendar and change details before performing the write; an undo action SHALL be
-available for at least 10 minutes.
-Acceptance criteria: Any write request without prior explicit confirmation is rejected; undo restore succeeds in tests
-for standard cases within 10 minutes.
-Verification method: Integration tests validating confirmation flow and undo behavior; instrumentation logs verifying UI
-prompts.
-Non‑functional requirements
-Req-07 — Decision Accuracy (Non‑functional, Must)
-Statement: The system SHALL achieve at least 95% decision accuracy against a specified evaluation dataset for
-determining whether a proposed event "fits" under normal conditions.
-Acceptance criteria: Continuous evaluation shows ≥95% accuracy on the approved evaluation dataset; rolling 7‑day
-accuracy does not fall below 92% without triggering alerts.
-Verification method: Offline evaluation pipeline that scores decisions against labeled dataset and a monitoring alert if
-rolling accuracy drops below threshold.
-Req-08 — Latency (Non‑functional, Should)
-Statement: The system SHALL respond to scheduling queries (excluding heavy external route calculations) within 3 seconds
-for 90% of requests and within 5 seconds for 99% of requests under expected load.
-Acceptance criteria: Load testing demonstrates the stated latency percentiles for the projected per-user load.
-Verification method: Performance tests (load/perf harness) and production telemetry measuring p90 and p99 latencies.
-Req-09 — Privacy & Data Minimization (Non‑functional, Must)
-Statement: The system SHALL store only the minimal data required for operation (event metadata, preferences, and any
-opt‑in personalization vectors), provide user controls to opt out of personalization, and redact sensitive event
-content (notes) by default unless explicitly permitted by the user.
-Acceptance criteria: UI provides explicit opt-out toggle and delete/export options; storage audits verify no plaintext
-retention of redacted fields; data deletion completes within 24 hours for user-initiated delete requests.
-Verification method: Security audit, periodic storage scans, and functional tests for opt-out and deletion flows.
-Req-10 — Training & Personalization Opt‑In/Exclusion Controls (Non‑functional, Must)
-Statement: The system SHALL allow the user to opt‑in to personalization and to mark calendars or date ranges as excluded
-from personalization/training; excluded data SHALL not be used for model training or personalization.
-Acceptance criteria: Exclusion flags are persisted and honored by training/personalization pipelines verified by unit
-tests and a training-data audit.
-Verification method: Test pipeline filters that assert excluded samples are not present in training batches; audit log
-demonstrating filter enforcement.
-Req-11 — Data Residency and Compliance (Non‑functional, Must)
-Statement: The system SHALL support region-specific data handling including export and erasure workflows that meet
-applicable regulations (e.g., GDPR, CCPA) for the regions the customer requests support for.
-Acceptance criteria: Export/erasure workflows complete within policy timelines (e.g., GDPR export/erasure within 30 days
-where applicable); region flags are enforced for storage and processing.
-Verification method: Legal/compliance testing and automated verification of storage location metadata for sample
-accounts.
-Req-12 — Security — Encryption & Access Control (Non‑functional, Must)
-Statement: The system SHALL encrypt user data at rest and in transit and SHALL enforce role-based access controls for
-production secrets and sensitive operations.
-Acceptance criteria: All storage endpoints use encryption; TLS enforced for network traffic; access logs show role-based
-access enforcement.
-Verification method: Security scans, config checks, and privileged-access audit logs.
-Req-13 — Auditing & Explainability Metadata (Non‑functional, Should)
-Statement: The system SHALL record an auditable log for each scheduling decision including inputs, timestamp,
-model/pipeline version, and whether personalization was applied; the user SHALL be able to view their recent decision
-log (last 90 days).
-Acceptance criteria: Decision logs exist for 100% of decisions and user UI exposes last 90 days; exportable JSON is
-available.
-Verification method: Integration tests for log creation and UI retrieval; spot audits of log completeness.
-Req-14 — Availability & Degraded Mode (Non‑functional, Should)
-Statement: The system SHALL provide a best-effort degraded recommendation when external dependencies (e.g., routing
-provider) are unavailable and SHALL present the user with a clear indication of reduced confidence.
-Acceptance criteria: When an external dependency fails in test, system returns a best-effort recommendation or
-explicit "unknown/uncertain" and provides degraded-confidence indicator.
-Verification method: Chaos/failure tests that simulate dependency outages and validate outputs and UI indicators.
+
+- Functional requirements
+  - Req-01 — Authentication & Authorization (Functional, Must)
+    - Statement: The system SHALL authenticate and authorize a user before reading or writing that user's calendar data.
+    - Acceptance criteria: Any request to read or write calendar data without a valid authenticated session is rejected with an HTTP 401/403-equivalent error; login flow completes successfully for supported providers.
+    - Verification method: Automated integration tests that attempt calendar access with and without valid credentials; penetration test to confirm unauthorized access is denied.
+  - Req-02 — Calendar Fetch & Normalization (Functional, Must)
+    - Statement: The system SHALL fetch a user's calendar events (start time, end time, title, attendees, timezone, and location if present) and normalize them into a local minimal index for scheduling decisions.
+    - Acceptance criteria: For a representative test calendar set (1 year, up to 10k events), normalization succeeds within a defined processing window (e.g., initial sync ≤ 30s for 10k events) and at least 99% of events include parsable start/end/timezone fields.
+    - Verification method: End-to-end integration tests using synthetic provider data and a perf test to measure sync time and parsing success rate.
+  - Req-03 — Travel-Time Estimation (Functional, Must)
+    - Statement: The system SHALL compute an estimated travel time between two event locations (or between a user location and an event) given a user-selected transport mode and scheduled departure time.
+    - Acceptance criteria: For 95% of test routes in the evaluation set, estimated travel time is within ±15% of the baseline route-provider estimate or within ±10 minutes (whichever is larger); when location is missing, result is flagged as "unknown."
+    - Verification method: Automated route test harness comparing system estimates to a ground-truth route provider across representative city/route samples.
+  - Req-04 — Fit/Tight/Does-not-fit Recommendation (Functional, Must)
+    - Statement: On user request with a proposed event (time, duration, optional location), the system SHALL return one of three recommendations: "Fits", "Tight", or "Does not fit", and include a confidence score.
+    - Acceptance criteria: Recommendation produced for 100% of valid queries within SLA; labels follow configured thresholds and confidence ∈ [0,1] is returned.
+    - Verification method: Functional tests with representative scenarios verifying expected label output and confidence presence; unit tests for threshold logic.
+  - Req-05 — Short Human-Readable Explanation (Functional, Should)
+    - Statement: For each scheduling recommendation, the system SHALL provide a concise (1–3 sentence) human-readable explanation listing the primary factors that led to the recommendation (conflicting events, travel time, user preferences).
+    - Acceptance criteria: Explanations are returned for 100% of recommendations and include at least the top two contributing factors; user study (pilot sample) shows ≥80% of users find explanation sufficient to act.
+    - Verification method: Automated checks ensure explanation field is non-empty and contains expected keys; small user trial for subjective acceptance.
+  - Req-06 — Write Safety for Calendar Changes (Functional, Should)
+    - Statement: When the system writes (creates/updates/deletes) calendar events, the system SHALL require explicit user confirmation and present the exact calendar and change details before performing the write; an undo action SHALL be available for at least 10 minutes.
+    - Acceptance criteria: Any write request without prior explicit confirmation is rejected; undo restore succeeds in tests for standard cases within 10 minutes.
+    - Verification method: Integration tests validating confirmation flow and undo behavior; instrumentation logs verifying UI prompts.
+- Non‑functional requirements
+  - Req-07 — Decision Accuracy (Non‑functional, Must)
+    - Statement: The system SHALL achieve at least 95% decision accuracy against a specified evaluation dataset for determining whether a proposed event "fits" under normal conditions.
+    - Acceptance criteria: Continuous evaluation shows ≥95% accuracy on the approved evaluation dataset; rolling 7‑day accuracy does not fall below 92% without triggering alerts.
+    - Verification method: Offline evaluation pipeline that scores decisions against labeled dataset and a monitoring alert if rolling accuracy drops below threshold.
+  - Req-08 — Latency (Non‑functional, Should)
+    - Statement: The system SHALL respond to scheduling queries (excluding heavy external route calculations) within 3 seconds for 90% of requests and within 5 seconds for 99% of requests under expected load.
+    - Acceptance criteria: Load testing demonstrates the stated latency percentiles for the projected per-user load.
+    - Verification method: Performance tests (load/perf harness) and production telemetry measuring p90 and p99 latencies.
+  - Req-09 — Privacy & Data Minimization (Non‑functional, Must)
+    - Statement: The system SHALL store only the minimal data required for operation (event metadata, preferences, and any opt‑in personalization vectors), provide user controls to opt out of personalization, and redact sensitive event content (notes) by default unless explicitly permitted by the user.
+    - Acceptance criteria: UI provides explicit opt-out toggle and delete/export options; storage audits verify no plaintext retention of redacted fields; data deletion completes within 24 hours for user-initiated delete requests.
+    - Verification method: Security audit, periodic storage scans, and functional tests for opt-out and deletion flows.
+  - Req-10 — Training & Personalization Opt‑In/Exclusion Controls (Non‑functional, Must)
+    - Statement: The system SHALL allow the user to opt‑in to personalization and to mark calendars or date ranges as excluded from personalization/training; excluded data SHALL not be used for model training or personalization.
+    - Acceptance criteria: Exclusion flags are persisted and honored by training/personalization pipelines verified by unit tests and a training-data audit.
+    - Verification method: Test pipeline filters that assert excluded samples are not present in training batches; audit log demonstrating filter enforcement.
+  - Req-11 — Data Residency and Compliance (Non‑functional, Must)
+    - Statement: The system SHALL support region-specific data handling including export and erasure workflows that meet applicable regulations (e.g., GDPR, CCPA) for the regions the customer requests support for.
+    - Acceptance criteria: Export/erasure workflows complete within policy timelines (e.g., GDPR export/erasure within 30 days where applicable); region flags are enforced for storage and processing.
+    - Verification method: Legal/compliance testing and automated verification of storage location metadata for sample accounts.
+  - Req-12 — Security — Encryption & Access Control (Non‑functional, Must)
+    - Statement: The system SHALL encrypt user data at rest and in transit and SHALL enforce role-based access controls for production secrets and sensitive operations.
+    - Acceptance criteria: All storage endpoints use encryption; TLS enforced for network traffic; access logs show role-based access enforcement.
+    - Verification method: Security scans, config checks, and privileged-access audit logs.
+  - Req-13 — Auditing & Explainability Metadata (Non‑functional, Should)
+    - Statement: The system SHALL record an auditable log for each scheduling decision including inputs, timestamp, model/pipeline version, and whether personalization was applied; the user SHALL be able to view their recent decision log (last 90 days).
+    - Acceptance criteria: Decision logs exist for 100% of decisions and user UI exposes last 90 days; exportable JSON is available.
+    - Verification method: Integration tests for log creation and UI retrieval; spot audits of log completeness.
+  - Req-14 — Availability & Degraded Mode (Non‑functional, Should)
+    - Statement: The system SHALL provide a best-effort degraded recommendation when external dependencies (e.g., routing provider) are unavailable and SHALL present the user with a clear indication of reduced confidence.
+    - Acceptance criteria: When an external dependency fails in test, system returns a best-effort recommendation or explicit "unknown/uncertain" and provides degraded-confidence indicator.
+    - Verification method: Chaos/failure tests that simulate dependency outages and validate outputs and UI indicators.
 
 ##### Result:
+
+1. Abstraction: Set 2 wins
+- The first set fails at abstraction by often specifying implementation details (e.g. "OAuth 2.0)
+- The second set simply states "authenticate and authorize" without implementation details
+
+2. Atomicity: Neither is perfect, both have several 'ands' in their requirements
+
+3. Consistency: Both sets are highly consistent. No obvious contradictions
+
+4. Correctness: Set 1 wins 
+- The first set includes rationale, making it easy to verify the requirement reflects user-intended behavior.
+
+5. Unambiguity: Set 2 wins
+- Specifying a verification method under each requirement makes it clear what a requirement must fulfill
+
+6. Understandability: written for different audiences
+- The rationale section in set 1 makes it easier to understand for stakeholders
+- The formality of set 2 makes it easier to understand for engineers and QA testers
+
+7. Feasibility: Both sets are sketchy
+- Both sets include 100% requirements, which are dangerous.
+
+Overall, the main difference between these requirements is the audience they are written for.
+- Set 1 is better for stakeholder communication
+- Set 2 is more useful for engineers and QA testers
 
 ---
 
@@ -927,4 +858,3 @@ GPT-3.5,” in 2024 ASU International Conference in Emerging Technologies for Su
 ICETSIS), Jan. 2024, pp. 1746–1755. doi: 10.1109/ICETSIS61505.2024.10459458.
 
 ---
-
