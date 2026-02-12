@@ -56,7 +56,8 @@
 
 **Description:**
 
-Create a compact, high-information "job brief" that tells the LLM its role in a requirements engineering task, the artifact you expect, and the constraints to follow before asking it to generate requirements or questions.
+Create a compact, high-information "job brief" that tells the LLM its role in a requirements engineering task, the
+artifact you expect, and the constraints to follow before asking it to generate requirements or questions.
 Provide sufficient and relevant context to the LLM to constrain the problem space it is working in.
 
 **Reasoning:**
@@ -235,7 +236,7 @@ classification error [3, 7].
 
 **Example:**
 
-Preprocess input transcript as follows before giving it as context:
+Preprocess input transcript as follows before giving it as context to an LLM:
 
 _Before_
 
@@ -263,7 +264,7 @@ classification compared to making the LLM act as an RE expert [11].
 
 **Example:**
 
-Pattern 1: "Cognitive Verifier"
+Pattern 1: "Cognitive Verifier" (good for classification)
 
 "Classify the given list of requirements into functional (labelled as F) and non-functional requirements (labelled as
 NF). Ask me questions if needed to break the given task into smaller subtasks. All the outputs to the smaller subtasks
@@ -289,11 +290,9 @@ have had trouble distinguishing between terms like "can" and "cannot" in text [8
 
 **Example:**
 
-Express as "remember to do X" rather than "don't forget to do X".
+Bad: *Don't forget to include an example of what the output format should look like*
 
-Or
-
-"Express each idea on a separate line" instead of "Don't combine all the ideas"
+Good: *Remember to include an example of what the output format should look like*
 
 ---
 
@@ -310,7 +309,9 @@ you may receive a result based on broken logic, but you can no longer verify the
 
 **Example:**
 
-"Classify these samples into category A or category B. For each categorization, explain your reasoning"
+Bad: *Classify these samples into category A or category B.*
+
+Good: *Classify these samples into category A or category B. For each categorization, explain your reasoning*
 
 ---
 
@@ -318,22 +319,23 @@ you may receive a result based on broken logic, but you can no longer verify the
 
 **Description:**
 
-First elicit and validate stakeholder goals, needs, success metrics, constraints, and assumptions. Delay design/implementation discussion until the problem space is well understood and agreed.
+First elicit and validate stakeholder goals, needs, success metrics, constraints, and assumptions. Delay
+design/implementation discussion until the problem space is well understood and agreed.
 
 **Reasoning:**
 
 LLMs tend to jump to solutions; separating spaces prevents premature design decisions and keeps requirements focused on
 needs.
-This prevents premature commitment to architectures or features that don't meet real needs, produces verifiable acceptance criteria and traceability from goals → requirements → design, and reduces rework, scope creep, and hidden assumptions that lead to failed deliveries.
+This prevents premature commitment to architectures or features that don't meet real needs, produces verifiable
+acceptance criteria and traceability from goals → requirements → design, and reduces rework, scope creep, and hidden
+assumptions that lead to failed deliveries.
 
 **Example:**
 
-“ask clarifying questions only. Do NOT propose architecture or tools yet.”
+Bad: *For this task, give me a set of requirements that must be completed.*
 
-Good (problem-focused): "What outcome should this deliver for your team? How will you measure success?"
-Good (analysis): "Describe the job to be done in one sentence"
-Bad (solution-focused): "Should we add a dashboard showing X charts?"
-Follow-ups: "Why is that outcome important?" / "What prevents achieving it today?" / "What would fail our success metric?"
+Good: *For this task, give me a set of requirements that must be completed. Do NOT propose implementation details such
+as architecture or tools yet.*
 
 **Suggested by:**
 
@@ -353,8 +355,10 @@ Vague language cannot be verified, causing weak requirements and disputes later.
 
 **Example:**
 
-Bad: “System shall be fast.”
-Good: “System SHALL respond within 2 seconds for 95% of requests.”
+Bad: “Give me a bunch of requirements for this task.”
+
+Good: "Give me a set of requirements for this task, do not use terms like 'fast', 'robust' or 'user-friendly'. All
+requirements should be measurable, verifiable and testable."
 
 **Suggested by:**
 
@@ -375,7 +379,10 @@ Standard modality reduces ambiguity and helps prioritize and test requirements.
 
 **Example:**
 
-“If a requirement cannot be written as SHALL, rewrite it or mark it ambiguous.”
+Bad: “Write me a set of requirements.”
+
+Good: “Write me a set of requirements. If a requirement cannot be written as SHALL, it is not a true requirement.
+Rewrite it using shall or mark it ambiguous at your discretion.”
 
 **Suggested by:**
 
@@ -387,7 +394,8 @@ ChatGPT
 
 **Description:**
 
-To prioritize key requirements above desirable features label each user story or requirement with how necessary it is so the LLMfocuses on creating the MVP before adding extra features.
+To prioritize key requirements above desirable features label each user story or requirement with how necessary it is so
+the LLMfocuses on creating the MVP before adding extra features.
 To proritize key requirements above desirable features label each user story or requirement with how necessary it is so
 the LLM focuses on creating the MVP before adding extra features.
 
@@ -415,37 +423,19 @@ Categorization Rules:
 
 ---
 
-### Guideline 14: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+### Guideline 14: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
 
 **Description:**
 
-Ask the LLM to assume the system failed, then work backward to identify missing requirements. This also works for threat
-modeling in adversarial scenarios.
+Treat any LLM-generated requirements text as a starting draft that must be reviewed, validated, and approved by humans
+before becoming part of the requirements baseline.
 
 **Reasoning:**
 
-Pre-mortems and misuse cases create realistic, safety/security-focused requirements tied to real failure modes.
-
-**Example:**
-
-“Assume a data breach occurred. What privacy/security requirement was missing?”
-
-**Suggested by:**
-
-Copilot, Gemini
-
----
-
-### Guideline 15: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
-
-**Description:**
-
-Treat any LLM-generated requirements text as a starting draft that must be reviewed, validated, and approved by humans before becoming part of the requirements baseline.
-
-**Reasoning:**
-
-LLMs can surface useful wording and structure but may introduce ambiguity, incorrect domain assumptions, missing constraints, or implementation bias.
-Accepting LLM output unreviewed creates traceability, accountability, and compliance risks and can hide unstated assumptions that break downstream design, testing, and delivery.
+LLMs can surface useful wording and structure but may introduce ambiguity, incorrect domain assumptions, missing
+constraints, or implementation bias.
+Accepting LLM output unreviewed creates traceability, accountability, and compliance risks and can hide unstated
+assumptions that break downstream design, testing, and delivery.
 
 **Example:**
 
@@ -457,7 +447,7 @@ The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke
 
 ---
 
-### Guideline 16: DO NOT perform all steps of the RE process in a single context window
+### Guideline 15: DO NOT perform all steps of the RE process in a single context window
 
 **Description:**
 
