@@ -28,6 +28,9 @@
   about prompt formatting — [arXiv](https://arxiv.org/abs/2310.11324) [7]
 - Negated and Misprimed Probes for Pretrained Language Models: Birds Can Talk, But Cannot
   Fly — [arXiv](https://arxiv.org/abs/1911.03343) [8]
+- Lost in the Middle: How Language Models Use Long
+  Contexts — [arXiv](https://arxiv.org/abs/2307.03172) [22]
+- LLMs Get Lost In Multi-Turn Conversation — [arXiv](https://arxiv.org/abs/2505.06120) [23]
 
 **Additional (non-academic) sources explored beyond assigned readings**
 
@@ -375,26 +378,32 @@ ChatGPT
 
 **Description:**
 
-To proritize key requirements above desirable features label each user story or requirement with how necessary it is so the LLMfocuses on creating the MVP before adding extra features.
+To proritize key requirements above desirable features label each user story or requirement with how necessary it is so
+the LLM focuses on creating the MVP before adding extra features.
 
 **Reasoning:**
 
-The Requirements Engineering process tends to be a non-linear, waterfall-like process. Client needs, available resources, and domain specific factors change, get misinterpreted, and are clarified. Thus, it is important to synchronize the software development teams' perception of the Minimum Viable Product with the client.
+The Requirements Engineering process tends to be a non-linear, waterfall-like process. Client needs, available
+resources, and domain specific factors change, get misinterpreted, and are clarified. Thus, it is important to
+synchronize the software development teams' perception of the Minimum Viable Product with the client.
 
 **Example:**
 
-You are an experienced Software Requirement Engineer determining the Minimum Viable Product (MVP) for {Project Name/Description}. To ensure full alignment between the development team and stakeholders and to avoid an expectation gap at delivery, I need to categorize our User Stories using the MoSCoW method.
-Please analyze the following requirements and generate a structured list. For every item, assign a priority label (M, S, C, or W) and provide a brief 'Reasoning' to justify its placement based on {Time/Budget/Technical} constraints.
+You are an experienced Software Requirement Engineer determining the Minimum Viable Product (MVP) for {Project
+Name/Description}. To ensure full alignment between the development team and stakeholders and to avoid an expectation
+gap at delivery, I need to categorize our User Stories using the MoSCoW method.
+Please analyze the following requirements and generate a structured list. For every item, assign a priority label (M, S,
+C, or W) and provide a brief 'Reasoning' to justify its placement based on {Time/Budget/Technical} constraints.
 Categorization Rules:
+
 - M (Must Have): Non-negotiable core functionality. Without these, the product is not viable.
 - S (Should Have): Important but not vital for the initial launch.
 - C (Could Have): Desirable 'bonus' features that will be included only if resources permit.
 - W (Won't Have): Explicitly excluded from this release to protect the project scope.
-Input Requirements / User Stories:
-{user stories}
+  Input Requirements / User Stories:
+  {user stories}
 
 ---
-
 
 ### Guideline 14: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
 
@@ -441,6 +450,38 @@ The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke
 
 ---
 
+### Guideline 16: DO NOT perform all steps of the RE process in a single context window
+
+**Description:**
+
+Do not do requirement brainstorming, stakeholder analysis, refinement and more in a single conversation with an LLM.
+Instead, summarize the output artifacts of each step and make those the inputs for a fresh conversation.
+
+**Rationale:**
+
+It may be tempting to think that, since you just had a conversation with your LLM about all the context related to your
+project, the LLM is better suited to subsequent problems. Unfortunately, LLMs have "attention span" problems.
+
+More specifically, when you stretch an LLM's context across several prompts in the same chat window, it pays less
+attention to any specific instruction, and is very likely to forget or ignore instructions from previous
+prompts [22, 23].
+
+In contrast, starting a fresh prompt allows the LLM to focus all of its considerable computational resources on the
+single task you want done.
+
+**Example:**
+
+After applying Guideline 2 to analyze user goals and high-level requirements, you have a summary of user goals and
+high-level requirements brainstormed using ChatGPT.
+
+In a _new_ chat window:
+
+"Here is a summary of user goals and high level requirements for a Web Application I am building, <summary>. Based on
+these, please generate a comprehensive set of user stories using the following format:
+
+As a [type of user], I want [some goal] so that [some reason]."
+
+---
 
 ### Problem A: Requirement Analysis
 
@@ -588,6 +629,11 @@ for Comments RFC 2119, Mar. 1997. doi: 10.17487/RFC2119. Available: https://data
 
 [21] Zhang v Chen. Accessed: Jan. 26, 2026. [Online]. Available: https://canlii.ca/t/k314g
 
+[22] N. F. Liu et al., “Lost in the Middle: How Language Models Use Long Contexts,” Nov. 20, 2023, arXiv: arXiv:
+2307.03172. doi: 10.48550/arXiv.2307.03172.
+
+[23]] P. Laban, H. Hayashi, Y. Zhou, and J. Neville, “LLMs Get Lost In Multi-Turn Conversation,” May 09, 2025, arXiv:
+arXiv:2505.06120. doi: 10.48550/arXiv.2505.06120.
 
 ---
 
