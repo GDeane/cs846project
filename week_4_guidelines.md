@@ -52,7 +52,61 @@
 
 ## 1. Guidelines
 
-### Guideline 1: Design a structured context prompt [1, 6, 10, 11, 17]
+### Mindset
+
+#### Guideline 1: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
+
+**Description:**
+
+Treat any LLM-generated requirements text as a starting draft that must be reviewed, validated, and approved by humans
+before becoming part of the requirements baseline.
+
+**Reasoning:**
+
+LLMs can surface useful wording and structure but may introduce ambiguity, incorrect domain assumptions, missing
+constraints, or implementation bias. Accepting LLM output unreviewed creates traceability, accountability, and
+compliance risks and can hide unstated assumptions that break downstream design, testing, and delivery.
+
+**Example:**
+
+There is a famous case of a Lawyer in the Supreme Court of British Columbia attempting to cite two non-existent cases as
+support for her argument. The cases were discovered by the opposition to be non-existent and hallucinated by
+ChatGPT [21].
+
+The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke" [21].
+
+---
+
+#### Guideline 2: Separate Problem Space from Solution Space
+
+**Description:**
+
+First elicit and validate stakeholder goals, needs, success metrics, constraints, and assumptions. Delay
+design/implementation discussion until the problem space is well understood and agreed.
+
+**Reasoning:**
+
+LLMs tend to jump to solutions; separating spaces prevents premature design decisions and keeps requirements focused on
+needs. This prevents premature commitment to architectures or features that don't meet real needs, produces verifiable
+acceptance criteria and traceability from goals → requirements → design, and reduces rework, scope creep, and hidden
+assumptions that lead to failed deliveries.
+
+**Example:**
+
+Bad: _For this task, give me a set of requirements that must be completed._
+
+Good: _For this task, give me a set of requirements that must be completed. Do NOT propose implementation details such
+as architecture or tools yet._
+
+**Suggested by:**
+
+ChatGPT
+
+---
+
+### Prompt Design
+
+#### Guideline 3: Design a structured context prompt for the RE stage [1, 6, 10, 11, 17]
 
 **Description:**
 
@@ -93,7 +147,154 @@ Finally, critique the requirements for ambiguity and testability and revise as n
 
 ---
 
-### Guideline 2: Converse with the LLM to analyze the problem [2, 9, 14, 15, 16]
+#### Guideline 4: Assign a stakeholder or expert role/persona to the LLM [2, 3, 4, 10, 17]
+
+**Description:**
+
+Tell the model what it is (e.g. "senior requirements engineer", "technical interviewer for Google", "end-user") before
+asking it to do something. You can also create separate chats with separate personas for differing viewpoints.
+
+**Reasoning:**
+
+The language used and professionalism of the LLM will vary based on the role it has to play [2, 4, 17]. Explicitly
+defined roles will also give additional context about the problem domain [2].
+
+**Example:**
+
+Bad: _Review these user stories and suggest improvements._
+
+Good: _You are a senior product manager with 10+ years of experience in enterprise software development and familiarity
+with ISO/IEC/IEEE standards. Review the following user stories and suggest improvements._
+
+---
+
+#### Guideline 5: Provide few-shot examples of good requirements or user stories [2, 3, 10, 16]
+
+**Description:**
+
+When attempting to describe desired behavior of a program or system, give 1-3 examples of desired output.
+
+**Reasoning:**
+
+Few-shot examples have been shown to reliably improve adherence to format and improve performance in LLMs [5]. These
+examples also double as tests for your requirements, increasing verifiability. In addition, examples are one of the
+strongest methods of enforcing structure in output, making it more likely to follow that structure and read output [16].
+
+**Example:**
+
+Bad: _Generate user stories for the system._
+
+Good: _Generate user stories of exact format "As a [type of user], I want [an action] so that [a result]."
+(i.e. "As a store owner, I want a way of hearing when customers enter my store, so that I know when to come to the
+front.")_
+
+---
+
+#### Guideline 6: Maximise prompt information density [17]
+
+**Description:**
+
+Provide sufficient and relevant context to the LLM to fully constrain the problem space. The prompt should explicitly
+state assumptions, scope, constraints, and expected output format, while avoiding unnecessary or unrelated information.
+This minimizes ambiguity and prevents the model from making implicit assumptions.
+
+**Reasoning:**
+
+High information density prompts guide the LLM toward producing precise, domain-appropriate outputs. By clearly
+specifying context and constraints, the model avoids defaulting to generic or boilerplate responses and instead
+generates results that are aligned with stakeholder intent, system boundaries, and verification needs. This leads to
+higher quality, consistent, and more testable requirements artifacts.
+
+**Example:**
+
+_As an expert in software testing, review the following requirements and identify any gaps, along with their potential
+impact, providing actionable pointers for improvement in tabular format._
+
+Bad: _Explain the login requirement and generate acceptance criteria_
+
+Good as an intermediary data: _As a registered user, I want to be able to log in to my account so that I can access
+personalized content and features_
+
+Good: _You are assisting with requirements engineering for a consumer-facing web application based on the following user
+story: ""As a registered user, I want to be able to log in to my account so that I can access personalized content and
+features"". Generate clear, testable acceptance criteria using Given When Then format._
+
+_Assumptions and constraints:_
+
+- _Users authenticate using email and password_
+- _The system must comply with basic security best practices (password hashing, failed login handling)_
+- _Login is performed via a web browser_
+- _Include both successful and unsuccessful login scenarios_
+- _Do not invent features beyond authentication and session access_
+
+> NOTE: look at [19] for information on Given-When-Then test case format
+
+---
+
+#### Guideline 7: Use explicit task-tag structured prompting
+
+**Description**
+
+For structured evaluation or grading tasks, isolate the core objective inside `<task> … </task>` tags and enforce an
+explicit output template.
+
+**Reasoning**
+
+Task-tag prompting improves:
+
+- format consistency
+- reproducibility
+- comparability across runs
+
+Our experiments in Problems C1–C3 showed that task-tag isolation reduces output drift (e.g., progress logs, narration)
+and makes results easier to grade and compare. However, it mainly improves output control and evaluation stability, not
+necessarily reasoning quality.
+
+This guideline is especially recommended for:
+
+- grading exercises
+- structured comparisons
+- reproducible evaluation workflows
+
+**Example**
+
+<task>
+Classify R1–R6 as FR or NFR and justify each in one sentence.
+Then explain why AI-assisted classification needs human review.
+</task>
+
+---
+
+#### Guideline 8: Base your prompting pattern on the RE task being performed [11, 12]
+
+**Description:**
+
+Select your LLM prompting pattern based on the task.
+
+**Reasoning:**
+
+Different methods of prompting LLMs ('prompt patterns') have been shown to be effective in different parts of the RE
+process [11]. For instance, making the LLM ask the user questions as needed created better performance on binary
+classification compared to making the LLM act as an RE expert [11].
+
+**Example:**
+
+Pattern 1: "Cognitive Verifier" (good for classification)
+
+"Classify the given list of requirements into functional (labelled as F) and non-functional requirements (labelled as
+NF). Ask me questions if needed to break the given task into smaller subtasks. All the outputs to the smaller subtasks
+must be combined before you generate the final output." [11]
+
+Pattern 2: "Persona"
+
+"Act as a requirements engineering domain expert and classify the given list of requirements into functional (labelled
+as F) and non-functional requirements (labelled as NF)." [11]
+
+---
+
+### Elicitation and Interaction
+
+#### Guideline 9: Converse with the LLM to analyze the problem [2, 9, 14, 15, 16]
 
 **Description:**
 
@@ -137,91 +338,7 @@ Ask individual questions in a back-and-forth manner to refine.
 
 ---
 
-### Guideline 3: Assign a stakeholder or expert role/persona to the LLM [2, 3, 4, 10, 17]
-
-**Description:**
-
-Tell the model what it is (e.g. "senior requirements engineer", "technical interviewer for Google", "end-user") before
-asking it to do something. You can also create separate chats with separate personas for differing viewpoints.
-
-**Reasoning:**
-
-The language used and professionalism of the LLM will vary based on the role it has to play [2, 4, 17]. Explicitly
-defined roles will also give additional context about the problem domain [2].
-
-**Example:**
-
-Bad: _Review these user stories and suggest improvements._
-
-Good: _You are a senior product manager with 10+ years of experience in enterprise software development and familiarity
-with ISO/IEC/IEEE standards. Review the following user stories and suggest improvements._
-
----
-
-### Guideline 4: Provide few-shot examples of good requirements or user stories [2, 3, 10, 16]
-
-**Description:**
-
-When attempting to describe desired behavior of a program or system, give 1-3 examples of desired output.
-
-**Reasoning:**
-
-Few-shot examples have been shown to reliably improve adherence to format and improve performance in LLMs [5]. These
-examples also double as tests for your requirements, increasing verifiability. In addition, examples are one of the
-strongest methods of enforcing structure in output, making it more likely to follow that structure and read output [16].
-
-**Example:**
-
-Bad: _Generate user stories for the system._
-
-Good: _Generate user stories of exact format "As a [type of user], I want [an action] so that [a result]."
-(i.e. "As a store owner, I want a way of hearing when customers enter my store, so that I know when to come to the
-front.")_
-
----
-
-### Guideline 5: Maximise prompt information density [17]
-
-**Description:**
-
-Provide sufficient and relevant context to the LLM to fully constrain the problem space. The prompt should explicitly
-state assumptions, scope, constraints, and expected output format, while avoiding unnecessary or unrelated information.
-This minimizes ambiguity and prevents the model from making implicit assumptions.
-
-**Reasoning:**
-
-High information density prompts guide the LLM toward producing precise, domain-appropriate outputs. By clearly
-specifying context and constraints, the model avoids defaulting to generic or boilerplate responses and instead
-generates results that are aligned with stakeholder intent, system boundaries, and verification needs. This leads to
-higher quality, consistent, and more testable requirements artifacts.
-
-**Example:**
-
-_As an expert in software testing, review the following requirements and identify any gaps, along with their potential
-impact, providing actionable pointers for improvement in tabular format._
-
-Bad: _Explain the login requirement and generate acceptance criteria_
-
-Good as an intermediary data: _As a registered user, I want to be able to log in to my account so that I can access
-personalized content and features_
-
-Good: _You are assisting with requirements engineering for a consumer-facing web application based on the following user
-story: ""As a registered user, I want to be able to log in to my account so that I can access personalized content and
-features". Generate clear, testable acceptance criteria using Given When Then format._
-
-_Assumptions and constraints:_
-
-- _Users authenticate using email and password_
-- _The system must comply with basic security best practices (password hashing, failed login handling)_
-- _Login is performed via a web browser_
-- _Include both successful and unsuccessful login scenarios_
-- _Do not invent features beyond authentication and session access_
-
-> NOTE: look at [19] for information on Given-When-Then test case format
-
----
-
-### Guideline 6: Capitalize role identifiers in transcripts and interviews [3, 7]
+#### Guideline 10: Capitalize role identifiers in transcripts and interviews [3, 7]
 
 **Description**
 
@@ -258,53 +375,7 @@ _After_
 
 ---
 
-### Guideline 7: Base your prompting pattern on the RE task being performed [11, 12]
-
-**Description:**
-
-Select your LLM prompting pattern based on the task.
-
-**Reasoning:**
-
-Different methods of prompting LLMs ('prompt patterns') have been shown to be effective in different parts of the RE
-process [11]. For instance, making the LLM ask the user questions as needed created better performance on binary
-classification compared to making the LLM act as an RE expert [11].
-
-**Example:**
-
-Pattern 1: "Cognitive Verifier" (good for classification)
-
-"Classify the given list of requirements into functional (labelled as F) and non-functional requirements (labelled as
-NF). Ask me questions if needed to break the given task into smaller subtasks. All the outputs to the smaller subtasks
-must be combined before you generate the final output." [11]
-
-Pattern 2: "Persona"
-
-"Act as a requirements engineering domain expert and classify the given list of requirements into functional (labelled
-as F) and non-functional requirements (labelled as NF)." [11]
-
----
-
-### Guideline 8: Reduce usage of Negation when providing requirements [3, 8]
-
-**Description:**
-
-Avoid the use of negation or double-negatives when expressing ideas in prompts.
-
-**Reasoning:**
-
-LLM performance has been shown to be poor in the presence of negation [8]. That is, pretrained language models
-have had trouble distinguishing between terms like "can" and "cannot" in text [8].
-
-**Example:**
-
-Bad: _Don't forget to include an example of what the output format should look like_
-
-Good: _Remember to include an example of what the output format should look like_
-
----
-
-### Guideline 9: Avoid classification classification or yes/no answers without explanation [12]
+#### Guideline 11: Avoid classification or yes/no answers without explanation [12]
 
 **Description:**
 
@@ -323,35 +394,9 @@ Good: _Classify these samples into category A or category B. For each categoriza
 
 ---
 
-### Guideline 10: Separate Problem Space from Solution Space
+### Requirements Language
 
-**Description:**
-
-First elicit and validate stakeholder goals, needs, success metrics, constraints, and assumptions. Delay
-design/implementation discussion until the problem space is well understood and agreed.
-
-**Reasoning:**
-
-LLMs tend to jump to solutions; separating spaces prevents premature design decisions and keeps requirements focused on
-needs.
-This prevents premature commitment to architectures or features that don't meet real needs, produces verifiable
-acceptance criteria and traceability from goals → requirements → design, and reduces rework, scope creep, and hidden
-assumptions that lead to failed deliveries.
-
-**Example:**
-
-Bad: _For this task, give me a set of requirements that must be completed._
-
-Good: _For this task, give me a set of requirements that must be completed. Do NOT propose implementation details such
-as architecture or tools yet._
-
-**Suggested by:**
-
-ChatGPT
-
----
-
-### Guideline 11: Ban Vague Words Unless Quantified
+#### Guideline 12: Ban Vague Words Unless Quantified
 
 **Description**
 
@@ -387,7 +432,7 @@ Good: System SHALL respond within 2 seconds for 95% of requests.
 
 ---
 
-### Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) [20]
+#### Guideline 13: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) [20]
 
 **Description**
 
@@ -404,13 +449,65 @@ The system SHALL encrypt all patient data.
 
 ---
 
-### Guideline 13: Assign priorities to user stories and requirements using the MoSCoW method or following the RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) standard before giving them to the LLM.
+#### Guideline 14: Reduce usage of Negation when providing requirements [3, 8]
+
+**Description:**
+
+Avoid the use of negation or double-negatives when expressing ideas in prompts.
+
+**Reasoning:**
+
+LLM performance has been shown to be poor in the presence of negation [8]. That is, pretrained language models
+have had trouble distinguishing between terms like "can" and "cannot" in text [8].
+
+**Example:**
+
+Bad: _Don't forget to include an example of what the output format should look like_
+
+Good: _Remember to include an example of what the output format should look like_
+
+---
+
+### Task Scope
+
+#### Guideline 15: DO NOT perform all steps of the RE process in a single context window
+
+**Description:**
+
+Do not do requirement brainstorming, stakeholder analysis, refinement and more in a single conversation with an LLM.
+Instead, summarize the output artifacts of each step and make those the inputs for a fresh conversation.
+
+**Rationale:**
+
+It may be tempting to think that, since you just had a conversation with your LLM about all the context related to your
+project, the LLM is better suited to subsequent problems. Unfortunately, LLMs have "attention span" problems.
+
+More specifically, when you stretch an LLM's context across several prompts in the same chat window, it pays less
+attention to any specific instruction, and is very likely to forget or ignore instructions from previous
+prompts [22, 23].
+
+In contrast, starting a fresh prompt allows the LLM to focus all of its considerable computational resources on the
+single task you want done.
+
+**Example:**
+
+After applying Guideline 9 to analyze user goals and high-level requirements, you have a summary of user goals and
+high-level requirements brainstormed using ChatGPT.
+
+In a _new_ chat window:
+
+"Here is a summary of user goals and high level requirements for a Web Application I am building, <summary>. Based on
+these, please generate a comprehensive set of user stories using the following format:
+
+As a [type of user], I want [some goal] so that [some reason]."
+
+---
+
+#### Guideline 16: Assign priorities to user stories and requirements using the MoSCoW method or following the RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) standard before giving them to the LLM.
 
 **Description:**
 
 To prioritize key requirements above desirable features label each user story or requirement with how necessary it is so
-the LLMfocuses on creating the MVP before adding extra features.
-To proritize key requirements above desirable features label each user story or requirement with how necessary it is so
 the LLM focuses on creating the MVP before adding extra features.
 
 **Reasoning:**
@@ -437,96 +534,7 @@ Categorization Rules:
 
 ---
 
-### Guideline 14: Treat LLM output as a draft, not as a final product [10, 11, 12, 13]
-
-**Description:**
-
-Treat any LLM-generated requirements text as a starting draft that must be reviewed, validated, and approved by humans
-before becoming part of the requirements baseline.
-
-**Reasoning:**
-
-LLMs can surface useful wording and structure but may introduce ambiguity, incorrect domain assumptions, missing
-constraints, or implementation bias.
-Accepting LLM output unreviewed creates traceability, accountability, and compliance risks and can hide unstated
-assumptions that break downstream design, testing, and delivery.
-
-**Example:**
-
-There is a famous case of a Lawyer in the Supreme Court of British Columbia attempting to cite two non-existent cases as
-support for her argument. The cases were discovered by the opposition to be non-existent and hallucinated by
-ChatGPT [21].
-
-The Lawyer's conduct was determined to be "reprehensible and deserving of rebuke" [21].
-
----
-
-### Guideline 15: DO NOT perform all steps of the RE process in a single context window
-
-**Description:**
-
-Do not do requirement brainstorming, stakeholder analysis, refinement and more in a single conversation with an LLM.
-Instead, summarize the output artifacts of each step and make those the inputs for a fresh conversation.
-
-**Rationale:**
-
-It may be tempting to think that, since you just had a conversation with your LLM about all the context related to your
-project, the LLM is better suited to subsequent problems. Unfortunately, LLMs have "attention span" problems.
-
-More specifically, when you stretch an LLM's context across several prompts in the same chat window, it pays less
-attention to any specific instruction, and is very likely to forget or ignore instructions from previous
-prompts [22, 23].
-
-In contrast, starting a fresh prompt allows the LLM to focus all of its considerable computational resources on the
-single task you want done.
-
-**Example:**
-
-After applying Guideline 2 to analyze user goals and high-level requirements, you have a summary of user goals and
-high-level requirements brainstormed using ChatGPT.
-
-In a _new_ chat window:
-
-"Here is a summary of user goals and high level requirements for a Web Application I am building, \<summary\>. Based on
-these, please generate a comprehensive set of user stories using the following format:
-
-As a [type of user], I want [some goal] so that [some reason]."
-
----
-
-### Guideline 16: Use explicit task-tag structured prompting
-
-**Description**
-
-For structured evaluation or grading tasks, isolate the core objective inside `<task> … </task>` tags and enforce an
-explicit output template.
-
-**Reasoning**
-
-Task-tag prompting improves:
-
-- format consistency
-- reproducibility
-- comparability across runs
-
-Our experiments in Problems C1–C3 showed that task-tag isolation reduces output drift (e.g., progress logs, narration)
-and makes results easier to grade and compare. However, it mainly improves output control and evaluation stability, not
-necessarily reasoning quality.
-
-This guideline is especially recommended for:
-
-- grading exercises
-- structured comparisons
-- reproducible evaluation workflows
-
-**Example**
-
-<task>
-Classify R1–R6 as FR or NFR and justify each in one sentence.
-Then explain why AI-assisted classification needs human review.
-</task>
-
----
+## 2. Task-Specific Guidelines
 
 ### Problem A: Requirement Analysis
 
@@ -535,36 +543,36 @@ simultaneously but due to the open-ended nature of the problem there are multipl
 
 #### Problem 1:
 
-- Guideline 6: Treat LLM output as a draft, not as a final product
-- Guideline 7: Capitalize role identifiers
-- Guideline 11: Separate Problem Space from Solution Space
+- Guideline 1: Treat LLM output as a draft, not as a final product
+- Guideline 10: Capitalize role identifiers in transcripts and interviews
+- Guideline 2: Separate Problem Space from Solution Space
 - Guideline 13: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 
 #### Problem 2:
 
-- Guideline 1: Design a structured context prompt
-- Guideline 2: Converse with the LLM to analyze the problem
-- Guideline 4: Provide few-shot examples
-- Guideline 11: Separate Problem Space from Solution Space
+- Guideline 3: Design a structured context prompt for the RE stage
+- Guideline 9: Converse with the LLM to analyze the problem
+- Guideline 5: Provide few-shot examples of good requirements or user stories
+- Guideline 2: Separate Problem Space from Solution Space
 - Guideline 13: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 
 #### Problem 3:
 
-- Guideline 1: Design a structured context prompt
-- Guideline 2: Converse with the LLM to analyze the problem
-- Guideline 3: Assign a role/persona to the LLM
-- Guideline 5: Maximise prompt information density
-- Guideline 6: Treat LLM output as a draft, not as a final product
-- Guideline 11: Separate Problem Space from Solution Space
+- Guideline 3: Design a structured context prompt for the RE stage
+- Guideline 9: Converse with the LLM to analyze the problem
+- Guideline 4: Assign a role/persona to the LLM
+- Guideline 6: Maximise prompt information density
+- Guideline 1: Treat LLM output as a draft, not as a final product
+- Guideline 2: Separate Problem Space from Solution Space
 
 #### Problem 4:
 
-- Guideline 1: Design a structured context prompt
-- Guideline 2: Converse with the LLM to analyze the problem
-- Guideline 3: Assign a role/persona to the LLM
-- Guideline 5: Maximise prompt information density
-- Guideline 6: Treat LLM output as a draft, not as a final product
-- Guideline 14: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+- Guideline 3: Design a structured context prompt for the RE stage
+- Guideline 9: Converse with the LLM to analyze the problem
+- Guideline 4: Assign a role/persona to the LLM
+- Guideline 6: Maximise prompt information density
+- Guideline 1: Treat LLM output as a draft, not as a final product
+- Optional: Ask for concrete cases when things go wrong (pre-mortem prompting)
 
 ### Problem B: Elicitation of Requirements from Problem Domain
 
@@ -573,38 +581,36 @@ problem and the desire for clear and unambiguous requirements, I would recommend
 
 First:
 
-- Guideline 2: Converse with the LLM to analyze the problem
+- Guideline 9: Converse with the LLM to analyze the problem
 
 Then:
 
-- Guideline 3: Assign a role/persona to the LLM
-- Guideline 1: Design a structured context prompt
-- Guideline 10: Separate Problem Space from Solution Space
-- Guideline 11: Ban Vague Words Unless Quantified
-- Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
-- Guideline 14: Treat LLM output as a draft, not as a final product
+- Guideline 4: Assign a role/persona to the LLM
+- Guideline 3: Design a structured context prompt
+- Guideline 2: Separate Problem Space from Solution Space
+- Guideline 12: Ban Vague Words Unless Quantified
+- Guideline 13: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
+- Guideline 1: Treat LLM output as a draft, not as a final product
 
-### Problem C:
+### Problem C: Requirement Classification
 
-## Problem C: Requirement Classification
+- Guideline 3: Design a structured context prompt
+- Guideline 8: Base prompting pattern on the RE task being performed
+- Guideline 11: Avoid classification or yes/no answers without explanation
+- Guideline 7: Use explicit task-tag structured prompting
 
-- Guideline 1: Design a structured context prompt
-- Guideline 7: Base prompting pattern on the RE task being performed
-- Guideline 9: Avoid classification or yes/no answers without explanation
-- Guideline 16: Use explicit task-tag structured prompting
+### Problem D: Requirement Satisfiability Evaluation
 
-## Problem 2: Requirement Satisfiability Evaluation
+- Guideline 3: Design a structured context prompt
+- Guideline 11: Avoid classification or yes/no answers without explanation
+- Guideline 7: Use explicit task-tag structured prompting
 
-- Guideline 1: Design a structured context prompt
-- Guideline 9: Avoid classification or yes/no answers without explanation
-- Guideline 16: Use explicit task-tag structured prompting
+### Problem E: Requirements Elicitation Question Generation
 
-## Problem 3: Requirements Elicitation Question Generation
-
-- Guideline 1: Design a structured context prompt
-- Guideline 2: Converse with the LLM to analyze the problem
-- Guideline 16: Use explicit task-tag structured prompting
-- Guideline 14: Treat LLM output as a draft, not as a final product
+- Guideline 3: Design a structured context prompt
+- Guideline 9: Converse with the LLM to analyze the problem
+- Guideline 7: Use explicit task-tag structured prompting
+- Guideline 1: Treat LLM output as a draft, not as a final product
 - Guideline 15: DO NOT perform all steps of the RE process in a single context window
 
 ---
