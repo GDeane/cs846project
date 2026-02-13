@@ -17,43 +17,43 @@ Criteria vary depending on the specific problem. Each problem's evaluation crite
 #### Example Good Solution"
 
 1. **Customer Support Representative**
-    - **Concern**: The chatbot is forgetting context from earlier in the chat.
-    - **Request**: Improve context retention and response generation speed.
-    - **Implication**: Enhancing user experience and satisfaction is critical for customer retention.
+   - **Concern**: The chatbot is forgetting context from earlier in the chat.
+   - **Request**: Improve context retention and response generation speed.
+   - **Implication**: Enhancing user experience and satisfaction is critical for customer retention.
 
 2. **Financial Stakeholder**
-    - **Concern**: High costs associated with the OpenAI API tokens.
-    - **Request**: Transition to a more economical solution, potentially using a cheaper model.
-    - **Implication**: Budget constraints must be considered, impacting the overall project feasibility.
+   - **Concern**: High costs associated with the OpenAI API tokens.
+   - **Request**: Transition to a more economical solution, potentially using a cheaper model.
+   - **Implication**: Budget constraints must be considered, impacting the overall project feasibility.
 
 3. **Software Engineer**
-    - **Concern**: Preference for the Claude API due to its perceived technical advantages.
-    - **Request**: Advocate for the adoption of the Claude API over other models.
-    - **Implication**: Technical feasibility and future-proofing the solution are essential for long-term success.
+   - **Concern**: Preference for the Claude API due to its perceived technical advantages.
+   - **Request**: Advocate for the adoption of the Claude API over other models.
+   - **Implication**: Technical feasibility and future-proofing the solution are essential for long-term success.
 
 #### Example Bad Solution
 
 1. **Customer Support** (Lack of details)
-    - **Concern**: Customers are unsatisfied with the current chatbot
-    - **Request**: Improve chatbot
-    - **Implication**: A better chatbot will make customers happy
+   - **Concern**: Customers are unsatisfied with the current chatbot
+   - **Request**: Improve chatbot
+   - **Implication**: A better chatbot will make customers happy
 
 2. **Financial Stakeholder** (Excessive details prevent broad implications from being drawn)
-    - **Concern**: API/token spend is material; target ~40% cost reduction in 3–6 months; migration cap ~$60k if
-      justified.
-    - **Request**: Demonstrable cost reductions, phased progress, and ROI for any migration spend.
-    - **Implication**: (Irrelevant information here)
+   - **Concern**: API/token spend is material; target ~40% cost reduction in 3–6 months; migration cap ~$60k if
+     justified.
+   - **Request**: Demonstrable cost reductions, phased progress, and ROI for any migration spend.
+   - **Implication**: (Irrelevant information here)
 
 3. **Software Engineer** (Excessive technical jargon & creation of a solution when only analysis is requestedx)
-    - **Concern**: High session context volatility — the agent exhibits poor stateful retention and low contextual
-      coherence across turns, causing frequent conversational resets and generic, low-utility outputs; also perceptible
-      latency spikes affecting UX.
-    - **Request**: Implement robust session-state management (e.g., turn-level embeddings, incremental summarization, or
-      context-window orchestration), optimize inference latency (caching, batching, and model selection), and add
-      telemetry for turn-wise relevance and intent drift.
-    - **Implication**: Requires a stateful session store or vector DB, summarization pipeline and context-truncation
-      strategy, additional engineering for caching/throughput and instrumentation, and trade-offs against token budget
-      and API spend that must be managed to avoid increased support ticket volume.
+   - **Concern**: High session context volatility — the agent exhibits poor stateful retention and low contextual
+     coherence across turns, causing frequent conversational resets and generic, low-utility outputs; also perceptible
+     latency spikes affecting UX.
+   - **Request**: Implement robust session-state management (e.g., turn-level embeddings, incremental summarization, or
+     context-window orchestration), optimize inference latency (caching, batching, and model selection), and add
+     telemetry for turn-wise relevance and intent drift.
+   - **Implication**: Requires a stateful session store or vector DB, summarization pipeline and context-truncation
+     strategy, additional engineering for caching/throughput and instrumentation, and trade-offs against token budget
+     and API spend that must be managed to avoid increased support ticket volume.
 
 **Evaluation**
 
@@ -150,24 +150,24 @@ Non‑functional
 ### Problem A_4: Proposed Solutions (non-exhaustive list of examples)
 
 1. **Balancing Context Retention and Cost**
-    - Implement a hybrid approach where the chatbot uses a cheaper model for general inquiries but switches to a more
-      advanced model (like Claude) for complex interactions requiring context retention.
-    - This solution addresses the financial stakeholder's concerns while still meeting the customer support
-      representative's need for improved context handling.
+   - Implement a hybrid approach where the chatbot uses a cheaper model for general inquiries but switches to a more
+     advanced model (like Claude) for complex interactions requiring context retention.
+   - This solution addresses the financial stakeholder's concerns while still meeting the customer support
+     representative's need for improved context handling.
 
 2. **Optimizing API Usage**
-    - Introduce caching mechanisms to store frequently accessed data, reducing the number of API calls and thus lowering
-      costs.
-    - Rolling summaries stored as short embeddings to reduce token costs while keeping long context.
-    - Caching common Q&A and retrieval augmented generation (RAG) to reduce token usage.
-    - Using token conservation techniques such as prompt engineering, context pruning, compression/summarization between
-      the user prompt and what is sent to the chatbot server.
-    - This approach can help mitigate the financial stakeholder's concerns while enhancing the chatbot's performance.
+   - Introduce caching mechanisms to store frequently accessed data, reducing the number of API calls and thus lowering
+     costs.
+   - Rolling summaries stored as short embeddings to reduce token costs while keeping long context.
+   - Caching common Q&A and retrieval augmented generation (RAG) to reduce token usage.
+   - Using token conservation techniques such as prompt engineering, context pruning, compression/summarization between
+     the user prompt and what is sent to the chatbot server.
+   - This approach can help mitigate the financial stakeholder's concerns while enhancing the chatbot's performance.
 
 3. **Phased Implementation**
-    - Propose a phased rollout of the chatbot enhancements, starting with cost-effective solutions and gradually
-      integrating more advanced features as budget allows.
-    - This strategy allows for immediate improvements in user experience while keeping financial constraints in check.
+   - Propose a phased rollout of the chatbot enhancements, starting with cost-effective solutions and gradually
+     integrating more advanced features as budget allows.
+   - This strategy allows for immediate improvements in user experience while keeping financial constraints in check.
 
 **Evaluation**
 
@@ -181,6 +181,7 @@ Non‑functional
 
 > A note on GenAI contribution: Problem B evaluation was written by me (Gavin), with
 > contribution from GPT-5.2 as follows:
+>
 > - Good and bad examples were written by GPT-5.2 for evaluation criteria, with edits when the context didn't make sense
 
 There are many possible criteria for evaluating requirements as good or bad.
@@ -603,6 +604,7 @@ Requirements (IDs Req-01 .. Req-14)
 ##### Result:
 
 1. Abstraction: Set 2 wins
+
 - The first set fails at abstraction by often specifying implementation details (e.g. "OAuth 2.0)
 - The second set simply states "authenticate and authorize" without implementation details
 
@@ -610,20 +612,25 @@ Requirements (IDs Req-01 .. Req-14)
 
 3. Consistency: Both sets are highly consistent. No obvious contradictions
 
-4. Correctness: Set 1 wins 
+4. Correctness: Set 1 wins
+
 - The first set includes rationale, making it easy to verify the requirement reflects user-intended behavior.
 
 5. Unambiguity: Set 2 wins
+
 - Specifying a verification method under each requirement makes it clear what a requirement must fulfill
 
 6. Understandability: written for different audiences
+
 - The rationale section in set 1 makes it easier to understand for stakeholders
 - The formality of set 2 makes it easier to understand for engineers and QA testers
 
 7. Feasibility: Both sets are sketchy
+
 - Both sets include 100% requirements, which are dangerous.
 
 Overall, the main difference between these requirements is the audience they are written for.
+
 - Set 1 is better for stakeholder communication
 - Set 2 is more useful for engineers and QA testers
 
@@ -631,208 +638,673 @@ Overall, the main difference between these requirements is the audience they are
 
 ### Problem C_1: Functional vs Non-Functional Requirement Classification with AI Awareness
 
-The following criteria apply to this question:
+---
 
-- Correct identification of Functional Requirements (FR) versus Non-Functional Requirements (NFR)
-- Clear and logical reasoning
-- Recognition of the limitations of AI and the need for human oversight.
+> A Note on GenAI Contribution, problem_C1 solutions was written by me using GitHub Copilot (GPT-5-Mini) with the following prompt:,
+> This evaluation compares baseline prompting versus guideline-based prompting and analyzes their effect on correctness, reasoning quality, and reproducibility.
 
-**Evaluation Description:**  
-This problem is evaluated across two tasks.
+This problem takes inspiration from a study conducted by Ronaki et al. (2023).
 
-Task 1 – Manual Requirement Classification
+## 1. Evaluation Criteria
 
-Good Solution:
+This problem is evaluated on three dimensions:
 
-- Correctly classifies:
-    - FR:
-        - appointment booking - (describes an action the user can do with the system),
-        - reminders - (describes a behavior the system performs for the users)
-    - NFR:
-        - encryption - (not something the user can do with the system. Not an action or behavior),
-        - 2 seconds - (this is a performance constraint on how something is done, not an action or behavior),
-        - compliance - (regulatory compliance is a constraint. Not an action or behavior),
-        - usability - (this is a quality constraint, not an action or behavior).
-- Demonstrates understanding of the difference between:
-    - what the system does (FR) and
-    - how well or under what constraints it operates (NFR)
+1. Correct classification of Functional vs Non-Functional requirements
+2. Clarity and reasoning of justification
+3. Ability to produce stable, structured outputs using improved prompting
 
-Bad Solution:
+Students must demonstrate both conceptual understanding and effective use of prompting strategies.
 
-- Random or inconsistent classification
-- Misclassifies security, performance, usability, or compliance requirements as FR
-- Shows no clear reasoning or conceptual understanding
+---
 
-Task 2 – Human Oversight Reflection
+### Task 1 — Requirement Classification
 
-Good Solution:
+#### Expected Correct Classification
 
-- Clearly explains at least one valid reason why human review is required, such as:
-    - AI may misinterpret requirements
-    - AI lacks full domain context
-    - AI can produce inconsistent or incorrect classifications
-    - AI cannot be held responsible for harm caused
+A correct solution must classify:
 
-Bad Solution:
+**Functional Requirements (FR)**
 
-- Assumes AI output is always correct
-- States that human review is unnecessary
-- Provides overly brief or unsupported responses
+- Appointment booking
+- Appointment reminders
+
+These describe **what the system does**.
+
+**Non-Functional Requirements (NFR)**
+
+- Encryption
+- Response time (2 seconds)
+- Regulatory compliance
+- Usability
+
+These describe how well or under what constraintsthe system operates.
+
+A good solution must clearly distinguish between system behavior and quality constraints.
+
+---
+
+### Evaluation Levels
+
+#### Good Solution
+
+A good solution:
+
+- Correctly classifies all requirements
+- Provides clear one-sentence justifications
+- Shows understanding of FR vs NFR distinction
+- Uses a consistent structured format
+- Produces stable output when evaluated with improved guidelines
+
+#### Satisfactory Solution
+
+A satisfactory solution:
+
+- Classifies most requirements correctly
+- Provides partial or unclear reasoning
+- Shows basic understanding but lacks precision
+- Format may be inconsistent
+
+#### Bad Solution
+
+A bad solution:
+
+- Misclassifies multiple requirements
+- Shows no conceptual understanding
+- Provides weak or missing justification
+- Produces unstable or unstructured output
+
+---
+
+### Task 2 — Human Oversight Reflection
+
+#### Good Solution
+
+A good solution must explain why AI requires human review, such as:
+
+- AI may misinterpret ambiguous wording
+- AI lacks domain or stakeholder context
+- AI can produce inconsistent results
+- Human judgment is required for accountability
+
+The explanation should connect to **real risks in requirements engineering**.
+
+#### Bad Solution
+
+A bad solution:
+
+- Claims AI is always correct
+- Says human review is unnecessary
+- Provides vague or unsupported reasoning
+
+---
+
+### Reproducibility and Output Stability
+
+This evaluation also considers whether prompting techniques improve formatting consistency and reproducibility.
+
+---
+
+## 2. Example Solution Set
+
+### Context Prompt (No Guidelines)
+
+**Baseline prompt:**
+
+> Classify each requirement as Functional Requirement (FR) or Non-Functional Requirement (NFR) and justify briefly. Then explain why AI-assisted classification requires human review.
+
+#### Observed Output Characteristics
+
+- Correct classification
+- Reasonable justifications
+- Extra narration and progress messages
+- Inconsistent formatting
+
+---
+
+#### GitHub Copilot Output
+
+> Progress: Extracted 6 requirements from C1_problem_test.txt; now classifying them.
+
+- R1: Functional Requirement (FR): Enables a specific system capability—patients booking appointments is a core function.
+- R2: Non-Functional Requirement (NFR): Describes a security property (data encryption) that constrains how data is handled, not a user-facing function.
+- R3: Functional Requirement (FR): Specifies an action the system must perform (sending reminders) — a concrete service.
+- R4: Non-Functional Requirement (NFR): A performance requirement (response time ≤ 2s), which defines quality of service.
+- R5: Non-Functional Requirement (NFR): Compliance is a regulatory/constraint requirement governing behavior and processes, not a feature.
+- R6: Non-Functional Requirement (NFR): Usability/accessibility requirement (interface quality for elderly users), a quality attribute.
+
+**Human review explanation:**  
+I classification can misinterpret stakeholder intent, ambiguous wording, or domain-specific constraints; humans provide context, prioritize trade-offs, and validate legal/regulatory implications. Final decisions often need stakeholder judgment and acceptance criteria that only people can supply.
+
+---
+
+### Context Prompt (With Guidelines)
+
+Structured prompt using task-tag isolation:
+<task>
+Classify R1–R6 as FR or NFR and justify each in one sentence.
+Then explain why AI-assisted classification needs human review.
+</task>
+Observed Output Characteristics
+
+- Correct classification
+- Clear, concise justifications
+- Strict adherence to required format
+- No extraneous narration
+
+---
+
+#### GitHub Copilot Output
+
+- R1:1: FR — Allows patients to perform a concrete user-facing action (booking appointments), which defines a system capability.
+- R2: NFR — Specifies a security/quality constraint (encryption of stored patient data) rather than a user-visible function.
+- R3: FR — Requires the system to perform a specific service (sending reminders via email and SMS), which is a functional behavior.
+- R4: NFR — Defines a performance/quality target (response time ≤ 2 seconds), describing how the system must behave under conditions.
+- R5: NFR — Imposes regulatory/compliance constraints on data handling and processes, not a standalone feature.
+- R6: NFR — Describes a usability/accessibility quality (interface suitability for elderly patients), which is a non-functional attribute.
+
+**Human oversight:**  
+AI can misinterpret ambiguous wording, stakeholder intent, or domain-specific/legal nuances and may overlook priority or trade-off considerations; human reviewers add contextual judgment, validate acceptance criteria, and resolve ambiguities before requirements are finalized.
+
+---
+
+## 3. Comparison and Analysis
+
+Both prompts produced correct classifications and similar reasoning quality.
+
+The primary difference lies in formatting stability:
+
+- Baseline prompting introduced variability and conversational text
+- Structured prompting produced consistent, reproducible outputs
+
+This improvement is primarily due to Guideline 12 (task-tag structured prompting).
+
+Guideline relevance:
+
+- G12 improves evaluation reproducibility
+- G11 is not applicable to classification tasks
+- G6 is irrelevant outside transcript analysis
+
+Structured prompting improves evaluation reliability without significantly changing reasoning performance.
+
+---
+
+## 4. Integration into Updated Guidelines
+
+This experiment supports the adoption of structured task-tag prompting as part of our updated requirements engineering guidelines.
+
+Specifically:
+
+- Task-tag prompting (Guideline 12) should be required for structured classification and evaluation exercises to enforce consistent output format and reduce output drift.
+- Prompts should include explicit output templates to improve reproducibility and comparability across runs.
+  -Guidelines should clearly document when they are task-specific to prevent inappropriate overuse.
+
+This experiment also clarifies scope boundaries:
+
+- Guideline 11 applies only to measurable requirement writing tasks and is not relevant to classification exercises.
+- Guideline 6 applies only to transcript analysis and multi-speaker contexts.
+
+These refinements promote selective and context-aware guideline application while improving evaluation clarity and reproducibility.
+
+---
+
+## Result Summary
+
+**Correctness:** Tie  
+Both baseline and guided outputs classify R1–R6 correctly (FR vs NFR).
+
+**Reasoning Quality:** Tie  
+Both provide clear 1-sentence explanations that correctly justify FR (“what the system does”) vs NFR (“constraints/quality”).
+
+**Output Stability / Reproducibility:** **Set 2 wins (Guided Prompt)**  
+The baseline output includes extra narration (e.g., “Progress: … extracted requirements…”), which makes comparison harder.
+The guided output follows the required template exactly and has no extra text
+
+**Human Oversight Reflection:** Tie  
+Both explain why humans must review AI outputs (ambiguity, domain context, legal nuance).
+
+### Overall Conclusion
+
+Set 2 wins mainly because it is more reproducible and easier to grade, not because it is “more correct.”
 
 ---
 
 ### Problem C_2: Requirements Satisfiability Reasoning
 
-The following criteria apply to this question:
+> A Note on GenAI Contribution, problem_C1 solutions was written by me using GitHub Copilot (GPT-5-Mini) with and without structured prompting guidelines.
+
+> This evaluation compares baseline prompting and guideline-based prompting to analyze their impact on reasoning quality, correctness, and reproducibility.
+
+This problem takes inspiration from a study conducted by Santos et al. (2024) [3].
+
+---
+
+## **_1. Evaluation Criteria_**
+
+This problem evaluates the student’s ability to reason about whether a system design satisfies a stated requirement. The emphasis is on logical reasoning and practical improvement suggestions, not formatting style.
+
+The following criteria apply:
 
 - Correct reasoning about requirements satisfiability
-- Clear justification based on the provided design
-- Ability to propose a practical design improvement
+- Clear justification grounded in the provided design
+- Ability to propose a practical and relevant design improvement
 - Awareness of the role of human judgment in evaluating system designs
 
-**Evaluation Description:**  
 This problem is evaluated across three tasks.
 
-Task 1 – Satisfiability Decision
+---
 
-Good Solution:
+### **_Task 1 — Satisfiability Decision_**
 
-- Correctly answers No, recognizing that username/password authentication alone does not fully ensure that only
-  authorized users can access sensitive records.
+#### **_Good solution_**
 
-Bad Solution:
+- Correctly answers No, recognizing that username/password authentication alone is insufficient to guarantee that only authorized users access sensitive patient records.
+- Demonstrates understanding that authentication strength directly affects requirement satisfiability.
 
-- Answers Yes without qualification
-- Assumes basic authentication is sufficient without considering security risks
+#### **_Satisfactory solution_**
 
-Task 2 – Reasoning
+- Provides the correct decision but with limited or partially developed reasoning.
 
-Good Solution:
+#### **_Bad solution_**
 
-- Clearly explains why the design is insufficient (e.g., weak authentication, lack of additional verification, higher
-  risk of unauthorized access).
-- Reasoning is directly tied to the stated requirement.
+- Answers Yes without qualification.
+- Assumes basic authentication is sufficient without considering security risks.
+- Shows misunderstanding of the requirement or the design.
 
-Bad Solution:
+---
 
-- Provides vague or generic security statements
-- Does not connect the explanation to the requirement or design details
+### **_Task 2 — Reasoning_**
 
-Task 3 – Design Improvement
+#### **_Good solution_**
 
-Good Solution:
+- Clearly explains why the design fails to satisfy the requirement (e.g., weak authentication, lack of additional verification, increased risk of unauthorized access).
+- Reasoning is explicitly tied to the requirement and the given design.
+- Avoids inventing features not present in the design.
 
-- Proposes a reasonable improvement, such as:
-    - multi-factor authentication
-    - role-based access control
-    - stronger authentication mechanisms
-    - Explains how the change improves satisfiability.
+#### **_Satisfactory solution_**
 
-Bad Solution:
+- Provides a partially correct explanation but lacks clarity or depth.
 
-- Suggests unrelated changes
-- Proposes improvements without explanation
-- Provides no actionable design modification
+#### **_Bad solution_**
+
+- Provides vague or generic security statements.
+- Does not connect the explanation to the requirement or design details.
+- Introduces invented system features not stated in the problem.
+
+---
+
+### **_Task 3 — Design Improvement_**
+
+#### **_Good solution_**
+
+- Proposes a realistic and relevant improvement, such as:
+  - multi-factor authentication
+  - role-based access control
+  - stronger authentication mechanisms
+- Clearly explains how the improvement increases requirement satisfiability.
+
+#### **_Satisfactory solution_**
+
+- Suggests a relevant improvement but provides limited explanation.
+
+#### **_Bad solution_**
+
+- Suggests unrelated or impractical changes.
+- Proposes improvements without explanation.
+- Provides no actionable design modification.
+
+---
+
+## **_2. Example Solution Set_**
+
+### **_Context Prompt (No Guidelines)_**
+
+**Baseline prompt:**
+
+Read the problem C2 and complete the student tasks.  
+Does the design satisfy the requirement? Explain your reasoning. Suggest one improvement.
+
+#### **_Observed output characteristics_**
+
+- Correct satisfiability decision
+- Clear reasoning
+- Appropriate design improvement
+- Minor formatting variation
+- Extra conversational narration
+
+---
+
+### **_GitHub Copilot output_**
+
+**User:** Read the problem C2 and complete the student tasks.  
+Does the design satisfy the requirement?  
+Explain your reasoning in 2–3 sentences.  
+Suggest one design improvement.
+
+**GitHub Copilot:**
+
+**Satisfiability Decision:** No.
+
+**Reasoning:** The design relies solely on username/password authentication, which can be compromised and does not provide sufficient assurance that only authorized users access patient records. It also lacks additional controls (e.g., MFA, RBAC, or auditing) needed to reliably enforce and verify authorization.
+
+**Design improvement:** Require multi-factor authentication (MFA) for all user logins to substantially reduce unauthorized access risk.
+
+---
+
+### **_Context Prompt (With Guidelines)_**
+
+Structured prompt using task-tag isolation:
+
+```
+<task>
+1. Decide if the design satisfies the requirement (Yes/No).
+2. Explain why in 2–3 sentences using ONLY the given design.
+3. Suggest ONE design improvement in 1 sentence.
+</task>
+```
+
+#### **_Observed output characteristics_**
+
+- Correct satisfiability decision
+- Comparable reasoning quality
+- Identical improvement suggestion
+- Strict adherence to format
+- No extraneous narration
+
+---
+
+### **_GitHub Copilot output_**
+
+**Satisfies:** No  
+**Reasoning:** The current design only includes username and password for authentication, which makes it susceptible to compromise since it lacks multi-factor authentication (MFA). It is constrained to this design framework, and therefore, it cannot incorporate additional features such as RBAC or auditing, as they are not specified.  
+**Improvement:** Implementing multi-factor authentication would enhance security significantly.
+
+**Satisfies:** No  
+**Reasoning:** The design relies solely on username and password, making it vulnerable to compromise and unable to ensure that only authorized users can access records. Additionally, it explicitly lacks multi-factor authentication (MFA), which diminishes user authorization assurance. It's important to stick to the given design elements without adding new features.  
+**Improvement:** Multi-factor authentication should be required for all logins to enhance security.
+
+**Satisfies:** No  
+**Reasoning:** The design relies solely on username and password authentication, which can be compromised and does not guarantee that only authorized users access patient records. It explicitly lacks multi-factor authentication, reducing assurance of user identity.  
+**Improvement:** Add multi-factor authentication (MFA) for all user logins.
+
+---
+
+## **_3. Comparison and Analysis_**
+
+Both prompting approaches produced correct reasoning and appropriate design improvements.
+
+The structured prompt improved format consistency but did not significantly change reasoning quality or correctness.
+
+This experiment shows:
+
+- Structured prompting improves reproducibility
+- Reasoning performance remains similar
+- Differences are primarily cosmetic and formatting-related
+
+Relevant guideline impact:
+
+- Guideline 12 (task-tag prompting) improves formatting stability
+- Guidelines related to measurable requirements or transcript formatting are not applicable to this reasoning task
+
+Structured prompting is therefore useful for grading workflows but does not inherently improve reasoning depth in satisfiability analysis.
+
+---
+
+## **_4. Integration into Updated Guidelines_**
+
+This experiment reinforces that structured task-tag prompting improves formatting consistency and evaluation reproducibility but does not inherently improve reasoning quality in satisfiability analysis tasks.
+
+Based on these observations:
+
+- Task-tag structured prompting should be recommended primarily for grading and structured evaluation workflows where output consistency is important.
+- Our guidelines should explicitly distinguish between formatting-level improvements and reasoning-level improvements.
+- Task-specific applicability of guidelines should be documented to encourage selective and appropriate use.
+
+These refinements help future users match prompting strategies to task requirements rather than assuming universal effectiveness.
+
+---
+
+## **_Result Summary_**
+
+**Satisfiability Decision:** Tie  
+Both sets correctly answer No (username/password alone does not ensure only authorized users access records).
+
+**Reasoning Quality:** Tie  
+Both connect the decision to the design and stay consistent with the requirement.
+
+**Improvement Suggestion:** Tie  
+Both suggest MFA as the improvement.
+
+**Output Stability / Reproducibility:** Set 2 wins (Guided Prompt)  
+Guided output is easier to compare across runs.
+
+### **_Overall conclusion_**
+
+Set 2 wins slightly due to format consistency, but the thinking quality is basically the same in both.
 
 ---
 
 ### Problem C_3: Requirements Elicitation Question Generation with AI Assistance
 
-> A note on GenAI contribution:
-> - Example solutions were written by GPT-5.2, with edits when the context didn't make sense
+> A Note on GenAI Contribution, problem_C1 solutions was written by me using GitHub Copilot (GPT-5-Mini) with the following prompt:,
+> This evaluation compares baseline prompting and guideline-based prompting to analyze their effect on elicitation quality, structure, and reproducibility.
 
-The following criteria apply to requirements elicitation problems in this question:
+This problem takes inspiration from a study conducted by Yeow et al. (2024) [4].
 
-- Ability to design relevant and well-scoped elicitation questions
-- Clear distinction between survey and interview questions
-- Awareness of question quality attributes (clarity, specificity, relevance)
-- Ability to critically review and improve AI-assisted outputs
-- Recognition of the need for human judgment in requirements elicitation
+---
 
-**Evaluation Description:**  
+## **_1. Evaluation Criteria_**
+
+This problem evaluates the student’s ability to:
+
+- Design relevant and well-scoped elicitation questions
+- Clearly distinguish between survey and interview questions
+- Demonstrate awareness of question quality attributes (clarity, specificity, relevance)
+- Critically review and improve AI-assisted outputs
+- Recognize the need for human judgment in requirements elicitation
+
 This problem is evaluated across four tasks.
 
-Task 1 – Survey Question Design
+---
 
-Good Solution:
+### **_Task 1 — Survey Question Design_**
 
-- Provides three survey questions appropriate for general users (drivers).
-- Questions are concise and easy to answer.
-- Questions relate to usage patterns, feature importance, performance, or satisfaction.
+#### **_Good Solution_**
 
-Example:
+A good solution provides exactly three survey questions appropriate for general users (drivers). The questions should be concise, easy to answer in a structured format (e.g., Likert scale or multiple choice), and focused on usage behavior, satisfaction, or feature importance. Questions should be understandable to non-technical users and directly relevant to the parking system context.
 
-1) "How often do you use parking apps per week?"
-2) "How important is knowing space availability in real-time when choosing parking?" (scale: extremely important - not
-   important at all)
-3) "How satisfied are you with the current time it takes you to find parking downtown?" (scale: extremely satisfied -
-   not satisfied at all)
+#### **_Bad Solution_**
 
-Bad Solution:
+A bad solution provides fewer than three questions, includes vague or overly technical wording, or asks open-ended interview-style questions unsuitable for surveys. Questions that are irrelevant to drivers’ experience or system usage are also considered poor.
 
-- Provides fewer than three questions.
-- Questions are vague, overly technical, or irrelevant to end users.
-- Questions are written as interview-style open discussions instead of surveys.
+---
 
-Task 2 – Interview Question Design
+### **_Task 2 — Interview Question Design_**
 
-Good Solution:
+#### **_Good Solution_**
 
-- Provides three interview questions suitable for a city transportation administrator.
-- Questions address system management, constraints, policy, security, or scalability.
-- Questions are open-ended and encourage detailed responses.
+A good solution provides exactly three open-ended interview questions suitable for a city transportation administrator. Questions should address organizational goals, system constraints, privacy/security policies, scalability, or operational management. They should encourage detailed discussion rather than yes/no responses.
 
-Example:
+#### **_Bad Solution_**
 
-1) "What policies or constraints govern data sharing and privacy for parking usage analytics?"
-2) "How do you prioritize enforcement, revenue, and congestion goals when managing parking zones?"
-3) "What scalability or uptime requirements do you have for a citywide parking system during the busiest times?"
+A bad solution includes generic or user-focused questions, ignores administrative concerns, or uses closed yes/no questions that limit stakeholder insight.
 
-Bad Solution:
+---
 
-- Questions are too generic or user-focused.
-- Questions lack relevance to administrative or organizational concerns.
-- Questions are phrased as simple yes/no questions.
+### **_Task 3 — Question Quality Review_**
 
-Task 3 – Question Quality Review
+#### **_Good Solution_**
 
-Good Solution:
+A good solution identifies at least one meaningful weakness in the elicitation questions, such as ambiguity, lack of scope, or missing non-functional considerations. The explanation should clearly connect the weakness to established requirement quality attributes (e.g., clarity, completeness, verifiability).
 
-- Correctly identifies a meaningful weakness, such as:
-    - ambiguity
-    - lack of scope
-    - missing non-functional considerations
-    - Demonstrates awareness of requirement quality attributes.
+#### **_Bad Solution_**
 
-Example:
-"The initial survey questions might miss non-functional aspects, like acceptable false positive (app says parking when
-no parking) or false negative (app says no parking when there is parking)"
+A bad solution identifies a trivial or unrelated issue, fails to explain why it is problematic, or claims that no improvement is necessary.
 
-Bad Solution:
+---
 
-- Identifies a trivial or unrelated issue.
-- Fails to explain why the issue is a weakness.
-- States that no improvement is needed.
+### **_Task 4 — Question Improvement_**
 
-Task 4 – Question Improvement
+#### **_Good Solution_**
 
-Good Solution:
+A good solution rewrites one question to directly address the identified weakness. The revised question should demonstrate improved clarity, specificity, or scope and should be measurably better than the original.
 
-- Rewrites one question to improve clarity, scope, or specificity.
-- The revised question clearly addresses the identified weakness.
+#### **_Bad Solution_**
 
-Example:
-(replace question 2)
-"Which one would bother you more?
+A bad solution makes only superficial wording changes, fails to address the identified weakness, or produces a less clear question than before.
 
-- An app saying there is no available parking when really there is, or
-- an app saying there is available parking when really there isn't?"
+---
 
-Bad Solution:
+### **_Human Oversight Requirement_**
 
-- Makes minimal or no meaningful changes.
-- Does not address the identified weakness.
-- Produces a less clear question than the original.
+Even when AI generates plausible elicitation questions, human review is essential. AI systems may overlook stakeholder context, domain-specific priorities, or implicit assumptions. Human judgment is required to validate relevance, resolve ambiguities, and ensure that elicitation questions align with real stakeholder needs and organizational goals.
+
+---
+
+## **_2. Example Solution Set_**
+
+### **_Context Prompt (No Guidelines)_**
+
+**Baseline prompt:**
+
+Read problem C3 and complete the listed elicitation tasks.
+
+#### **_Observed output characteristics_**
+
+- Generated relevant survey and interview questions
+- Identified a reasonable weakness
+- Produced a meaningful improvement
+- Included extra planning narration (TODO lists and progress messages)
+- Output formatting varied across runs
+
+---
+
+### **_Github Copilot Output_**
+
+**1. Survey Questions (drivers)**
+
+- **Survey Q1:** How often do you use a mobile app or digital signage to find parking in the city?
+- **Survey Q2:** Which factors influence your parking choice most? (select up to 3: price, distance to destination, time to find a spot, safety, EV charging, payment method)
+- **Survey Q3:** How willing are you to share real-time location data to receive accurate parking availability? (Very willing / Somewhat willing / Neutral / Somewhat unwilling / Very unwilling)
+
+**2. Interview Questions (city transportation administrator)**
+
+- **Interview Q1:** What are the city's top objectives for a smart parking system (e.g., reduce congestion, increase turnover, raise revenue, improve accessibility)?
+- **Interview Q2:** Which specific data sources and vendor systems must the parking system integrate with (e.g., on-street sensors, parking meters, payment gateways, traffic management), and are there existing APIs or formats we must support?
+- **Interview Q3:** What legal, privacy, retention, and public-data-sharing constraints must the system comply with (e.g., retention periods, anonymization, data-sharing agreements)?
+
+**3. Weakness**
+
+- **Weakness:** The questions emphasize functional and usability concerns but lack explicit coverage of non-functional requirements (privacy/security, scalability, reliability, maintenance costs, accessibility and equity).
+
+**4. Rewritten / Improved Question**
+
+- **Improved Interview Q2:** Which exact data sources (for example: on-street sensor feeds, parking-meter transaction logs, mobile app telemetry, CCTV-derived occupancy) and vendor systems must we integrate with, what data formats/APIs do they expose, and which integrations are required within the first 12 months?
+
+---
+
+### **_Context Prompt (With Guidelines)_**
+
+Structured prompt using task-tag isolation and formatting constraints:
+
+```
+<task>
+Generate elicitation questions and improvements only.
+</task>
+```
+
+#### **_Observed output characteristics_**
+
+- Similar question quality to baseline
+- Clean and structured output
+- No extra narration
+- Strict adherence to requested format
+
+---
+
+### **_Github Copilot Output_**
+
+Satisfies: No  
+Reasoning: The provided design only states the high-level intent—to help drivers find available parking and assist city administrators—but includes no concrete functional or non-functional specifications, integration details, or acceptance criteria that would demonstrate the requirement is met. Without those concrete design elements and verifiable success metrics, the requirement cannot be confirmed as satisfied.  
+Improvement: Add concrete, verifiable specifications including required data sources and integrations, privacy and retention constraints, performance targets, and acceptance criteria.
+
+---
+
+## **_3. Comparison and Analysis_**
+
+Both prompting approaches produced useful elicitation questions and improvements.
+
+The structured prompt improved:
+
+- formatting consistency
+- reproducibility
+- evaluation clarity
+
+However, it did not significantly change the substantive quality of the elicitation questions.
+
+This experiment shows:
+
+- Structured prompting stabilizes output format
+- Reasoning and creativity remain comparable
+- Improvements are primarily organizational rather than conceptual
+
+Relevant guideline impact:
+
+- Guideline 12 (task-tag prompting) improves formatting stability
+- Group 2 improvements reduce invented assumptions
+- Group 1 improvements enforce structured output templates
+
+---
+
+## **_4. Integration into Updated Guidelines_**
+
+Based on these findings:
+
+- Task-tag prompting should be recommended for structured elicitation workflows
+- Prompts should explicitly forbid invented assumptions
+- Output templates should be required for evaluation tasks
+- Guidelines should distinguish formatting improvements from reasoning improvements
+
+These updates support more reproducible and testable elicitation processes.
+
+---
+
+## **_Result Summary_**
+
+### **_Task Matching / Correct Task Type: Set 1 wins (Baseline Prompt)_**
+
+The baseline prompt directly matches the C3 problem tasks by generating:
+
+- 3 survey questions
+- 3 interview questions
+- 1 identified weakness
+- 1 improved question
+
+This makes the baseline output usable for requirements elicitation evaluation.
+
+The guided prompt initially used a design-satisfiability template, which is structurally clean but mismatched to the C3 elicitation task. Therefore, for task alignment, Set 1 performs better.
+
+---
+
+### **_Output Stability / Reproducibility: Set 2 wins (Guided Prompt)_**
+
+The baseline output contains extra narration such as planning messages and file-reading notes. This introduces variability and makes the output harder to compare across runs.
+
+The guided prompt enforces strict formatting through task-tag isolation, resulting in stable, reproducible output without extraneous text.
+
+---
+
+### **_Content Quality: Tie_**
+
+Both prompts generate relevant and well-scoped elicitation questions. The improvement is not in question correctness but in output control and reproducibility.
+
+---
+
+## **_Overall Result_**
+
+- For task correctness and assignment alignment: Set 1 wins
+- For formatting stability and reproducibility: Set 2 wins
+
+Because answering the correct elicitation task is more important than formatting alone, the baseline prompt produces the more usable submission. However, combining the baseline task structure with guided formatting would yield the best overall result.
 
 ---
 
