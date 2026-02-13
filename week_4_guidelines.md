@@ -54,19 +54,19 @@
 
 ### Guideline 1: Design a structured context prompt [1, 6, 10, 11, 17]
 
-#### **_Description_**
+**Description**
 
 Create a compact, high-information “job brief” that tells the LLM its role in a requirements engineering task, the artifact expected, and the constraints to follow.
 
 For structured evaluation or classification tasks, isolate the core objective inside `<task> … </task>` tags and explicitly specify the required output format.
 
-#### **_Reasoning_**
+**Reasoning**
 
 Structured prompts reduce ambiguity and prevent output drift [1, 6]. Experiments in Problem C showed that task-tag isolation improves formatting stability and reproducibility, especially for grading and comparison tasks.
 
 However, structured prompting mainly improves output control, not necessarily reasoning quality.
 
-#### **_Example_**
+**Example**
 
 ```
 <task>
@@ -211,11 +211,11 @@ _Assumptions and constraints:_
 
 ### Guideline 6: Capitalize role identifiers in transcripts and interviews [3, 7]
 
-### **_Description_**
+**Description**
 
 When analyzing transcripts or multi-speaker interviews, capitalize role identifiers (e.g., INTERVIEWER, CLIENT).
 
-#### **_Important scope clarification_**
+**Important scope clarification**
 
 This guideline applies only to transcript analysis or multi-speaker conversations.
 
@@ -225,7 +225,7 @@ It is not relevant for:
 - reasoning tasks
 - structured requirement writing
 
-#### **_Reasoning_**
+**Reasoning**
 
 Capitalization helps prevent speaker misattribution in transcripts [3, 7] but provides no benefit outside transcript contexts.
 
@@ -340,7 +340,7 @@ ChatGPT
 
 ### Guideline 11: Ban Vague Words Unless Quantified
 
-#### **_Description_**
+**Description**
 
 Avoid vague terms such as fast, robust, secure, or user-friendly unless they are supported by realistic and meaningful measurements.
 
@@ -350,7 +350,7 @@ Measurements should be:
 - stakeholder-understandable
 - relevant to the domain
 
-#### **_Important scope clarification_**
+**Important scope clarification**
 
 This guideline applies only when writing measurable requirements.
 
@@ -360,11 +360,11 @@ It is not applicable to:
 - satisfiability reasoning
 - question generation tasks
 
-#### **_Reasoning_**
+  **Reasoning**
 
 Over-quantification can produce unrealistic or overly technical requirements [10, 11]. The goal is clarity and verifiability, not artificial precision.
 
-#### **_Example_**
+**Example**
 
 Bad: System shall be fast.
 
@@ -374,13 +374,13 @@ Good: System SHALL respond within 2 seconds for 95% of requests.
 
 ### Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) [20]
 
-#### **_Description_**
+**Description**
 
 Use RFC-2119 modal verbs (SHALL / SHOULD / MAY) when writing requirements.
 
 For structured evaluation or grading tasks, isolate the core objective using `<task> … </task>` tags and enforce an explicit output template.
 
-#### **_Reasoning_**
+**Reasoning**
 
 RFC-2119 modality reduces ambiguity and clarifies priority levels.
 
@@ -398,7 +398,7 @@ Therefore, this guideline is primarily recommended for:
 - structured comparisons
 - reproducible evaluation workflows
 
-#### **_Example_**
+**Example**
 
 ```
 <task>
@@ -560,25 +560,27 @@ Then:
 - Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 - Guideline 14: Treat LLM output as a draft, not as a final product
 
-### Problem C:
+### Problem C: Requirement Classification
 
 ## Problem 1:
 
 - Guideline 1: Design a structured context prompt
-- Guideline 7: Base your prompting pattern on the RE task being performed
+- Guideline 7: Base prompting pattern on the RE task
 - Guideline 9: Avoid yes/no without explanation
+- Guideline 12: Enforce structured task-tag prompting
 
-## Problem 2:
+## Problem 2: Requirement Satisfiability Evaluation
 
+- Guideline 1: Design a structured context prompt
 - Guideline 9: Avoid yes/no without explanation
-- Guideline 13: Try asking for concrete cases when things go wrong (Pre-Mortem Prompting)
+- Guideline 12: Enforce structured task-tag prompting
 
-## Problem 3:
+## Problem 3: Requirements Elicitation Question Generation
 
 - Guideline 1: Design a structured context prompt
 - Guideline 2: Converse with the LLM to analyze the problem
-- Guideline 6: Capitalize role identifiers
-- Guideline 14: Treat LLM output as a draft, not as a final product
+- Guideline 12: Enforce structured task-tag prompting
+- Guideline 15: Treat LLM output as a draft
 
 ## 3. References
 

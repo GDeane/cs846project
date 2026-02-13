@@ -643,7 +643,7 @@ Overall, the main difference between these requirements is the audience they are
 > A Note on GenAI Contribution, problem_C1 solutions was written by me using GitHub Copilot (GPT-5-Mini) with the following prompt:,
 > This evaluation compares baseline prompting versus guideline-based prompting and analyzes their effect on correctness, reasoning quality, and reproducibility.
 
-This problem takes inspiration from a study conducted by Ronaki et al. (2023).
+> This problem takes inspiration from a study conducted by Ronaki et al. (2023).
 
 ## 1. Evaluation Criteria
 
@@ -654,8 +654,6 @@ This problem is evaluated on three dimensions:
 3. Ability to produce stable, structured outputs using improved prompting
 
 Students must demonstrate both conceptual understanding and effective use of prompting strategies.
-
----
 
 ### Task 1 — Requirement Classification
 
@@ -681,11 +679,9 @@ These describe how well or under what constraintsthe system operates.
 
 A good solution must clearly distinguish between system behavior and quality constraints.
 
----
-
 ### Evaluation Levels
 
-#### Good Solution
+**Good Solution**
 
 A good solution:
 
@@ -695,7 +691,7 @@ A good solution:
 - Uses a consistent structured format
 - Produces stable output when evaluated with improved guidelines
 
-#### Satisfactory Solution
+**Satisfactory Solution **
 
 A satisfactory solution:
 
@@ -704,7 +700,7 @@ A satisfactory solution:
 - Shows basic understanding but lacks precision
 - Format may be inconsistent
 
-#### Bad Solution
+**Bad Solution**
 
 A bad solution:
 
@@ -713,11 +709,9 @@ A bad solution:
 - Provides weak or missing justification
 - Produces unstable or unstructured output
 
----
-
 ### Task 2 — Human Oversight Reflection
 
-#### Good Solution
+**Good Solution**
 
 A good solution must explain why AI requires human review, such as:
 
@@ -726,9 +720,9 @@ A good solution must explain why AI requires human review, such as:
 - AI can produce inconsistent results
 - Human judgment is required for accountability
 
-The explanation should connect to **real risks in requirements engineering**.
+The explanation should connect to real risks in requirements engineering.
 
-#### Bad Solution
+**Bad Solution**
 
 A bad solution:
 
@@ -736,23 +730,19 @@ A bad solution:
 - Says human review is unnecessary
 - Provides vague or unsupported reasoning
 
----
-
-### Reproducibility and Output Stability
+**Reproducibility and Output Stability**
 
 This evaluation also considers whether prompting techniques improve formatting consistency and reproducibility.
 
----
-
 ## 2. Example Solution Set
 
-### Context Prompt (No Guidelines)
+**Context Prompt (No Guidelines)**
 
 **Baseline prompt:**
 
 > Classify each requirement as Functional Requirement (FR) or Non-Functional Requirement (NFR) and justify briefly. Then explain why AI-assisted classification requires human review.
 
-#### Observed Output Characteristics
+**Observed Output Characteristics**
 
 - Correct classification
 - Reasonable justifications
@@ -761,7 +751,7 @@ This evaluation also considers whether prompting techniques improve formatting c
 
 ---
 
-#### GitHub Copilot Output
+**GitHub Copilot Output**
 
 > Progress: Extracted 6 requirements from C1_problem_test.txt; now classifying them.
 
@@ -775,9 +765,7 @@ This evaluation also considers whether prompting techniques improve formatting c
 **Human review explanation:**  
 I classification can misinterpret stakeholder intent, ambiguous wording, or domain-specific constraints; humans provide context, prioritize trade-offs, and validate legal/regulatory implications. Final decisions often need stakeholder judgment and acceptance criteria that only people can supply.
 
----
-
-### Context Prompt (With Guidelines)
+**Context Prompt (With Guidelines)**
 
 Structured prompt using task-tag isolation:
 <task>
@@ -791,9 +779,7 @@ Observed Output Characteristics
 - Strict adherence to required format
 - No extraneous narration
 
----
-
-#### GitHub Copilot Output
+**GitHub Copilot Output**
 
 - R1:1: FR — Allows patients to perform a concrete user-facing action (booking appointments), which defines a system capability.
 - R2: NFR — Specifies a security/quality constraint (encryption of stored patient data) rather than a user-visible function.
@@ -804,8 +790,6 @@ Observed Output Characteristics
 
 **Human oversight:**  
 AI can misinterpret ambiguous wording, stakeholder intent, or domain-specific/legal nuances and may overlook priority or trade-off considerations; human reviewers add contextual judgment, validate acceptance criteria, and resolve ambiguities before requirements are finalized.
-
----
 
 ## 3. Comparison and Analysis
 
@@ -826,8 +810,6 @@ Guideline relevance:
 
 Structured prompting improves evaluation reliability without significantly changing reasoning performance.
 
----
-
 ## 4. Integration into Updated Guidelines
 
 This experiment supports the adoption of structured task-tag prompting as part of our updated requirements engineering guidelines.
@@ -844,8 +826,6 @@ This experiment also clarifies scope boundaries:
 - Guideline 6 applies only to transcript analysis and multi-speaker contexts.
 
 These refinements promote selective and context-aware guideline application while improving evaluation clarity and reproducibility.
-
----
 
 ## Result Summary
 
@@ -874,11 +854,11 @@ Set 2 wins mainly because it is more reproducible and easier to grade, not becau
 
 > This evaluation compares baseline prompting and guideline-based prompting to analyze their impact on reasoning quality, correctness, and reproducibility.
 
-This problem takes inspiration from a study conducted by Santos et al. (2024) [3].
+> This problem takes inspiration from a study conducted by Santos et al. (2024) [3].
 
 ---
 
-## **_1. Evaluation Criteria_**
+## 1. Evaluation Criteria
 
 This problem evaluates the student’s ability to reason about whether a system design satisfies a stated requirement. The emphasis is on logical reasoning and practical improvement suggestions, not formatting style.
 
@@ -891,50 +871,44 @@ The following criteria apply:
 
 This problem is evaluated across three tasks.
 
----
+### Task 1 — Satisfiability Decision
 
-### **_Task 1 — Satisfiability Decision_**
-
-#### **_Good solution_**
+**Good solution\_**
 
 - Correctly answers No, recognizing that username/password authentication alone is insufficient to guarantee that only authorized users access sensitive patient records.
 - Demonstrates understanding that authentication strength directly affects requirement satisfiability.
 
-#### **_Satisfactory solution_**
+**Satisfactory solution**
 
 - Provides the correct decision but with limited or partially developed reasoning.
 
-#### **_Bad solution_**
+**Bad solution**
 
 - Answers Yes without qualification.
 - Assumes basic authentication is sufficient without considering security risks.
 - Shows misunderstanding of the requirement or the design.
 
----
+### Task 2 — Reasoning
 
-### **_Task 2 — Reasoning_**
-
-#### **_Good solution_**
+**Good solution**
 
 - Clearly explains why the design fails to satisfy the requirement (e.g., weak authentication, lack of additional verification, increased risk of unauthorized access).
 - Reasoning is explicitly tied to the requirement and the given design.
 - Avoids inventing features not present in the design.
 
-#### **_Satisfactory solution_**
+**Satisfactory solution**
 
 - Provides a partially correct explanation but lacks clarity or depth.
 
-#### **_Bad solution_**
+**Bad solution**
 
 - Provides vague or generic security statements.
 - Does not connect the explanation to the requirement or design details.
 - Introduces invented system features not stated in the problem.
 
----
+### Task 3 — Design Improvement
 
-### **_Task 3 — Design Improvement_**
-
-#### **_Good solution_**
+**_Good solution _**
 
 - Proposes a realistic and relevant improvement, such as:
   - multi-factor authentication
@@ -942,28 +916,26 @@ This problem is evaluated across three tasks.
   - stronger authentication mechanisms
 - Clearly explains how the improvement increases requirement satisfiability.
 
-#### **_Satisfactory solution_**
+  **Satisfactory solution**
 
 - Suggests a relevant improvement but provides limited explanation.
 
-#### **_Bad solution_**
+  **Bad solution**
 
 - Suggests unrelated or impractical changes.
 - Proposes improvements without explanation.
 - Provides no actionable design modification.
 
----
+**_2. Example Solution Set_**
 
-## **_2. Example Solution Set_**
-
-### **_Context Prompt (No Guidelines)_**
+**Context Prompt (No Guidelines)**
 
 **Baseline prompt:**
 
 Read the problem C2 and complete the student tasks.  
 Does the design satisfy the requirement? Explain your reasoning. Suggest one improvement.
 
-#### **_Observed output characteristics_**
+**Observed output characteristics**
 
 - Correct satisfiability decision
 - Clear reasoning
@@ -971,9 +943,7 @@ Does the design satisfy the requirement? Explain your reasoning. Suggest one imp
 - Minor formatting variation
 - Extra conversational narration
 
----
-
-### **_GitHub Copilot output_**
+  **GitHub Copilot output**
 
 **User:** Read the problem C2 and complete the student tasks.  
 Does the design satisfy the requirement?  
@@ -988,8 +958,6 @@ Suggest one design improvement.
 
 **Design improvement:** Require multi-factor authentication (MFA) for all user logins to substantially reduce unauthorized access risk.
 
----
-
 ### **_Context Prompt (With Guidelines)_**
 
 Structured prompt using task-tag isolation:
@@ -1002,7 +970,7 @@ Structured prompt using task-tag isolation:
 </task>
 ```
 
-#### **_Observed output characteristics_**
+**Observed output characteristics**
 
 - Correct satisfiability decision
 - Comparable reasoning quality
@@ -1010,9 +978,7 @@ Structured prompt using task-tag isolation:
 - Strict adherence to format
 - No extraneous narration
 
----
-
-### **_GitHub Copilot output_**
+**GitHub Copilot output**
 
 **Satisfies:** No  
 **Reasoning:** The current design only includes username and password for authentication, which makes it susceptible to compromise since it lacks multi-factor authentication (MFA). It is constrained to this design framework, and therefore, it cannot incorporate additional features such as RBAC or auditing, as they are not specified.  
@@ -1026,9 +992,7 @@ Structured prompt using task-tag isolation:
 **Reasoning:** The design relies solely on username and password authentication, which can be compromised and does not guarantee that only authorized users access patient records. It explicitly lacks multi-factor authentication, reducing assurance of user identity.  
 **Improvement:** Add multi-factor authentication (MFA) for all user logins.
 
----
-
-## **_3. Comparison and Analysis_**
+## 3. Comparison and Analysis
 
 Both prompting approaches produced correct reasoning and appropriate design improvements.
 
@@ -1047,9 +1011,7 @@ Relevant guideline impact:
 
 Structured prompting is therefore useful for grading workflows but does not inherently improve reasoning depth in satisfiability analysis.
 
----
-
-## **_4. Integration into Updated Guidelines_**
+## 4. Integration into Updated Guidelines
 
 This experiment reinforces that structured task-tag prompting improves formatting consistency and evaluation reproducibility but does not inherently improve reasoning quality in satisfiability analysis tasks.
 
@@ -1061,9 +1023,7 @@ Based on these observations:
 
 These refinements help future users match prompting strategies to task requirements rather than assuming universal effectiveness.
 
----
-
-## **_Result Summary_**
+## Result Summary
 
 **Satisfiability Decision:** Tie  
 Both sets correctly answer No (username/password alone does not ensure only authorized users access records).
@@ -1077,7 +1037,7 @@ Both suggest MFA as the improvement.
 **Output Stability / Reproducibility:** Set 2 wins (Guided Prompt)  
 Guided output is easier to compare across runs.
 
-### **_Overall conclusion_**
+### Overall conclusion
 
 Set 2 wins slightly due to format consistency, but the thinking quality is basically the same in both.
 
@@ -1088,11 +1048,9 @@ Set 2 wins slightly due to format consistency, but the thinking quality is basic
 > A Note on GenAI Contribution, problem_C1 solutions was written by me using GitHub Copilot (GPT-5-Mini) with the following prompt:,
 > This evaluation compares baseline prompting and guideline-based prompting to analyze their effect on elicitation quality, structure, and reproducibility.
 
-This problem takes inspiration from a study conducted by Yeow et al. (2024) [4].
+> This problem takes inspiration from a study conducted by Yeow et al. (2024) [4].
 
----
-
-## **_1. Evaluation Criteria_**
+## 1. Evaluation Criteria
 
 This problem evaluates the student’s ability to:
 
@@ -1106,69 +1064,59 @@ This problem is evaluated across four tasks.
 
 ---
 
-### **_Task 1 — Survey Question Design_**
+### Task 1 — Survey Question Design
 
-#### **_Good Solution_**
+**Good Solution**
 
 A good solution provides exactly three survey questions appropriate for general users (drivers). The questions should be concise, easy to answer in a structured format (e.g., Likert scale or multiple choice), and focused on usage behavior, satisfaction, or feature importance. Questions should be understandable to non-technical users and directly relevant to the parking system context.
 
-#### **_Bad Solution_**
+**Bad Solution**
 
 A bad solution provides fewer than three questions, includes vague or overly technical wording, or asks open-ended interview-style questions unsuitable for surveys. Questions that are irrelevant to drivers’ experience or system usage are also considered poor.
 
----
+### Task 2 — Interview Question Design
 
-### **_Task 2 — Interview Question Design_**
-
-#### **_Good Solution_**
+**Good Solution**
 
 A good solution provides exactly three open-ended interview questions suitable for a city transportation administrator. Questions should address organizational goals, system constraints, privacy/security policies, scalability, or operational management. They should encourage detailed discussion rather than yes/no responses.
 
-#### **_Bad Solution_**
+**Bad Solution**
 
 A bad solution includes generic or user-focused questions, ignores administrative concerns, or uses closed yes/no questions that limit stakeholder insight.
 
----
+### Task 3 — Question Quality Review
 
-### **_Task 3 — Question Quality Review_**
-
-#### **_Good Solution_**
+**Good Solution**
 
 A good solution identifies at least one meaningful weakness in the elicitation questions, such as ambiguity, lack of scope, or missing non-functional considerations. The explanation should clearly connect the weakness to established requirement quality attributes (e.g., clarity, completeness, verifiability).
 
-#### **_Bad Solution_**
+**Bad Solution**
 
 A bad solution identifies a trivial or unrelated issue, fails to explain why it is problematic, or claims that no improvement is necessary.
 
----
+### Task 4 — Question Improvement
 
-### **_Task 4 — Question Improvement_**
-
-#### **_Good Solution_**
+**Good Solution**
 
 A good solution rewrites one question to directly address the identified weakness. The revised question should demonstrate improved clarity, specificity, or scope and should be measurably better than the original.
 
-#### **_Bad Solution_**
+**Bad Solution**
 
 A bad solution makes only superficial wording changes, fails to address the identified weakness, or produces a less clear question than before.
 
----
-
-### **_Human Oversight Requirement_**
+### Human Oversight Requirement
 
 Even when AI generates plausible elicitation questions, human review is essential. AI systems may overlook stakeholder context, domain-specific priorities, or implicit assumptions. Human judgment is required to validate relevance, resolve ambiguities, and ensure that elicitation questions align with real stakeholder needs and organizational goals.
 
----
+## 2. Example Solution Set
 
-## **_2. Example Solution Set_**
-
-### **_Context Prompt (No Guidelines)_**
+### Context Prompt (No Guidelines)
 
 **Baseline prompt:**
 
 Read problem C3 and complete the listed elicitation tasks.
 
-#### **_Observed output characteristics_**
+#### Observed output characteristics
 
 - Generated relevant survey and interview questions
 - Identified a reasonable weakness
@@ -1176,9 +1124,7 @@ Read problem C3 and complete the listed elicitation tasks.
 - Included extra planning narration (TODO lists and progress messages)
 - Output formatting varied across runs
 
----
-
-### **_Github Copilot Output_**
+**Github Copilot Output**
 
 **1. Survey Questions (drivers)**
 
@@ -1200,9 +1146,7 @@ Read problem C3 and complete the listed elicitation tasks.
 
 - **Improved Interview Q2:** Which exact data sources (for example: on-street sensor feeds, parking-meter transaction logs, mobile app telemetry, CCTV-derived occupancy) and vendor systems must we integrate with, what data formats/APIs do they expose, and which integrations are required within the first 12 months?
 
----
-
-### **_Context Prompt (With Guidelines)_**
+### Context Prompt (With Guidelines)
 
 Structured prompt using task-tag isolation and formatting constraints:
 
@@ -1212,16 +1156,14 @@ Generate elicitation questions and improvements only.
 </task>
 ```
 
-#### **_Observed output characteristics_**
+#### Observed output characteristics
 
 - Similar question quality to baseline
 - Clean and structured output
 - No extra narration
 - Strict adherence to requested format
 
----
-
-### **_Github Copilot Output_**
+**Github Copilot Output**
 
 Satisfies: No  
 Reasoning: The provided design only states the high-level intent—to help drivers find available parking and assist city administrators—but includes no concrete functional or non-functional specifications, integration details, or acceptance criteria that would demonstrate the requirement is met. Without those concrete design elements and verifiable success metrics, the requirement cannot be confirmed as satisfied.  
@@ -1229,7 +1171,7 @@ Improvement: Add concrete, verifiable specifications including required data sou
 
 ---
 
-## **_3. Comparison and Analysis_**
+## 3. Comparison and Analysis
 
 Both prompting approaches produced useful elicitation questions and improvements.
 
@@ -1253,9 +1195,7 @@ Relevant guideline impact:
 - Group 2 improvements reduce invented assumptions
 - Group 1 improvements enforce structured output templates
 
----
-
-## **_4. Integration into Updated Guidelines_**
+## 4. Integration into Updated Guidelines
 
 Based on these findings:
 
@@ -1266,11 +1206,9 @@ Based on these findings:
 
 These updates support more reproducible and testable elicitation processes.
 
----
+## Result Summary
 
-## **_Result Summary_**
-
-### **_Task Matching / Correct Task Type: Set 1 wins (Baseline Prompt)_**
+### Task Matching / Correct Task Type: Set 1 wins (Baseline Prompt)
 
 The baseline prompt directly matches the C3 problem tasks by generating:
 
@@ -1283,23 +1221,17 @@ This makes the baseline output usable for requirements elicitation evaluation.
 
 The guided prompt initially used a design-satisfiability template, which is structurally clean but mismatched to the C3 elicitation task. Therefore, for task alignment, Set 1 performs better.
 
----
-
-### **_Output Stability / Reproducibility: Set 2 wins (Guided Prompt)_**
+### Output Stability / Reproducibility: Set 2 wins (Guided Prompt)
 
 The baseline output contains extra narration such as planning messages and file-reading notes. This introduces variability and makes the output harder to compare across runs.
 
 The guided prompt enforces strict formatting through task-tag isolation, resulting in stable, reproducible output without extraneous text.
 
----
-
-### **_Content Quality: Tie_**
+### Content Quality: Tie
 
 Both prompts generate relevant and well-scoped elicitation questions. The improvement is not in question correctness but in output control and reproducibility.
 
----
-
-## **_Overall Result_**
+## Overall Result
 
 - For task correctness and assignment alignment: Set 1 wins
 - For formatting stability and reproducibility: Set 2 wins
