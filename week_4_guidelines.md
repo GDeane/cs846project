@@ -54,30 +54,43 @@
 
 ### Guideline 1: Design a structured context prompt [1, 6, 10, 11, 17]
 
-#### **_Description_**
+**Description:**
 
-Create a compact, high-information “job brief” that tells the LLM its role in a requirements engineering task, the artifact expected, and the constraints to follow.
+Create a compact, high-information "job brief" that tells the LLM its role in a requirements engineering task, the
+artifact you expect, and the constraints to follow before asking it to generate requirements or questions.
+Provide sufficient and relevant context to the LLM to constrain the problem space it is working in.
 
-For structured evaluation or classification tasks, isolate the core objective inside `<task> … </task>` tags and explicitly specify the required output format.
+**Reasoning:**
 
-#### **_Reasoning_**
+This serves several purposes.
 
-Structured prompts reduce ambiguity and prevent output drift [1, 6]. Experiments in Problem C showed that task-tag isolation improves formatting stability and reproducibility, especially for grading and comparison tasks.
+- **First**, the process of designing this prompt forces you to think about the structure of the
+  output, the type of language you want used, the process you want followed, and the standards to which you want the job
+  done [1].
+- **Second**, You make the LLM consider all of these expectations before its work begins.
 
-However, structured prompting mainly improves output control, not necessarily reasoning quality.
+In addition, a structured high information-density prompt reportedly leads to fewer generic or boilerplate
+responses [17]. It also makes the outputs easier to evaluate when you expect a structured output.
 
-#### **_Example_**
+Also, previous prompt pattern research [6] has shown that structured prompts outperform free-text prompts in creating
+correct output.
 
-```
-<task>
-Classify requirements as FR or NFR and justify each in 1 sentence.
-</task>
-```
+**Example:**
 
-Rules:
+"Act as a senior systems engineer following IEEE 29148.
+First ask clarifying questions about goals, stakeholders, constraints, and risks.
+Do not propose solutions yet.
 
-- Only answer inside `<task>` tags
-- Use the exact output format provided
+Once clarified:
+
+- Produce functional and non-functional requirements using "The system SHALL..."
+- Each requirement must be atomic, testable, and free of design decisions
+- Include acceptance criteria and verification method
+- List assumptions and potential conflicts
+- Identify out-of-scope items
+- Provide a traceability matrix
+
+Finally, critique the requirements for ambiguity and testability and revise as needed."
 
 ---
 
@@ -87,11 +100,11 @@ Rules:
 
 Before creating requirements, talk to the LLM back and forth to refine the problem domain. This includes:
 
-- Analyzing the underlying business or user problem
-- Summarizing and synthesizing existing documentation
-- Identifying and fleshing out candidate requirements
-- Detecting contradictions or inconsistencies
-- Clarifying ambiguities, assumptions, and open questions
+* Analyzing the underlying business or user problem
+* Summarizing and synthesizing existing documentation
+* Identifying and fleshing out candidate requirements
+* Detecting contradictions or inconsistencies
+* Clarifying ambiguities, assumptions, and open questions
 
 **Reasoning:**
 
@@ -102,24 +115,24 @@ elicitation practices, making it easier to evaluate (familiar structure).
 
 **Example:**
 
-Bad: _Write user stories for the login feature._
+Bad: *Write user stories for the login feature.*
 
-- No analysis of the problem
+* No analysis of the problem
 
-Good: _You are a senior requirements engineer. Before writing any user stories, analyze the following project
-description:_
+Good: *You are a senior requirements engineer. Before writing any user stories, analyze the following project
+description:*
 
-- _Goal: Enable registered users to log in and access personalized content_
-- _Constraints: Web application, email/password authentication, must support 2FA in future_
-- _Known risks: Security and session management_
+* *Goal: Enable registered users to log in and access personalized content*
+* *Constraints: Web application, email/password authentication, must support 2FA in future*
+* *Known risks: Security and session management*
 
 Task:
 
-- _Identify the core problem and main user goals_
-- _Summarize existing documentation and assumptions_
-- _List ambiguities, contradictions, and open questions_
-- _Suggest a structured set of clarifying questions to resolve them_
-  _Do not write user stories or acceptance criteria yet._
+* *Identify the core problem and main user goals*
+* *Summarize existing documentation and assumptions*
+* *List ambiguities, contradictions, and open questions*
+* *Suggest a structured set of clarifying questions to resolve them*
+  *Do not write user stories or acceptance criteria yet.*
 
 Ask individual questions in a back-and-forth manner to refine.
 
@@ -139,10 +152,10 @@ defined roles will also give additional context about the problem domain [2].
 
 **Example:**
 
-Bad: _Review these user stories and suggest improvements._
+Bad: *Review these user stories and suggest improvements.*
 
-Good: _You are a senior product manager with 10+ years of experience in enterprise software development and familiarity
-with ISO/IEC/IEEE standards. Review the following user stories and suggest improvements._
+Good: *You are a senior product manager with 10+ years of experience in enterprise software development and familiarity
+with ISO/IEC/IEEE standards. Review the following user stories and suggest improvements.*
 
 ---
 
@@ -160,11 +173,11 @@ strongest methods of enforcing structure in output, making it more likely to fol
 
 **Example:**
 
-Bad: _Generate user stories for the system._
+Bad: *Generate user stories for the system.*
 
-Good: _Generate user stories of exact format "As a [type of user], I want [an action] so that [a result]."
+Good: *Generate user stories of exact format "As a [type of user], I want [an action] so that [a result]."
 (i.e. "As a store owner, I want a way of hearing when customers enter my store, so that I know when to come to the
-front.")_
+front.")*
 
 ---
 
@@ -185,25 +198,25 @@ higher quality, consistent, and more testable requirements artifacts.
 
 **Example:**
 
-_As an expert in software testing, review the following requirements and identify any gaps, along with their potential
-impact, providing actionable pointers for improvement in tabular format._
+*As an expert in software testing, review the following requirements and identify any gaps, along with their potential
+impact, providing actionable pointers for improvement in tabular format.*
 
-Bad: _Explain the login requirement and generate acceptance criteria_
+Bad: *Explain the login requirement and generate acceptance criteria*
 
-Good as an intermediary data: _As a registered user, I want to be able to log in to my account so that I can access
-personalized content and features_
+Good as an intermediary data: *As a registered user, I want to be able to log in to my account so that I can access
+personalized content and features*
 
-Good: _You are assisting with requirements engineering for a consumer-facing web application based on the following user
+Good: *You are assisting with requirements engineering for a consumer-facing web application based on the following user
 story: ""As a registered user, I want to be able to log in to my account so that I can access personalized content and
-features". Generate clear, testable acceptance criteria using Given When Then format._
+features". Generate clear, testable acceptance criteria using Given When Then format.*
 
-_Assumptions and constraints:_
+*Assumptions and constraints:*
 
-- _Users authenticate using email and password_
-- _The system must comply with basic security best practices (password hashing, failed login handling)_
-- _Login is performed via a web browser_
-- _Include both successful and unsuccessful login scenarios_
-- _Do not invent features beyond authentication and session access_
+* *Users authenticate using email and password*
+* *The system must comply with basic security best practices (password hashing, failed login handling)*
+* *Login is performed via a web browser*
+* *Include both successful and unsuccessful login scenarios*
+* *Do not invent features beyond authentication and session access*
 
 > NOTE: look at [19] for information on Given-When-Then test case format
 
@@ -211,23 +224,15 @@ _Assumptions and constraints:_
 
 ### Guideline 6: Capitalize role identifiers in transcripts and interviews [3, 7]
 
-### **_Description_**
+**Description:**
 
-When analyzing transcripts or multi-speaker interviews, capitalize role identifiers (e.g., INTERVIEWER, CLIENT).
+When providing context (such as a transcript), capitalize the role identifiers such as "INTERVIEWER" and "INTERVIEWEE".
 
-#### **_Important scope clarification_**
+**Reasoning:**
 
-This guideline applies only to transcript analysis or multi-speaker conversations.
-
-It is not relevant for:
-
-- classification tasks
-- reasoning tasks
-- structured requirement writing
-
-#### **_Reasoning_**
-
-Capitalization helps prevent speaker misattribution in transcripts [3, 7] but provides no benefit outside transcript contexts.
+When reading transcripts, LLMs can sometimes misclassify which person was responsible for saying what, which leads to
+all sorts of errors [3]. Luckily, capitalizing role identifiers has been found to significantly reduce this
+classification error [3, 7].
 
 **Example:**
 
@@ -235,13 +240,13 @@ Preprocess input transcript as follows before giving it as context to an LLM:
 
 _Before_
 
-- Interviewer: Why do users avoid using the system?
-- Client: They find it confusing.
+- Interviewer: ...
+- Interviewee: ...
 
 _After_
 
-- INTERVIEWER: Why do users avoid using the system?
-- CLIENT: They find it confusing.
+- INTERVIEWER: ...
+- INTERVIEWEE: ...
 
 ---
 
@@ -285,9 +290,9 @@ have had trouble distinguishing between terms like "can" and "cannot" in text [8
 
 **Example:**
 
-Bad: _Don't forget to include an example of what the output format should look like_
+Bad: *Don't forget to include an example of what the output format should look like*
 
-Good: _Remember to include an example of what the output format should look like_
+Good: *Remember to include an example of what the output format should look like*
 
 ---
 
@@ -304,9 +309,9 @@ you may receive a result based on broken logic, but you can no longer verify the
 
 **Example:**
 
-Bad: _Classify these samples into category A or category B._
+Bad: *Classify these samples into category A or category B.*
 
-Good: _Classify these samples into category A or category B. For each categorization, explain your reasoning_
+Good: *Classify these samples into category A or category B. For each categorization, explain your reasoning*
 
 ---
 
@@ -327,10 +332,10 @@ assumptions that lead to failed deliveries.
 
 **Example:**
 
-Bad: _For this task, give me a set of requirements that must be completed._
+Bad: *For this task, give me a set of requirements that must be completed.*
 
-Good: _For this task, give me a set of requirements that must be completed. Do NOT propose implementation details such
-as architecture or tools yet._
+Good: *For this task, give me a set of requirements that must be completed. Do NOT propose implementation details such
+as architecture or tools yet.*
 
 **Suggested by:**
 
@@ -340,77 +345,48 @@ ChatGPT
 
 ### Guideline 11: Ban Vague Words Unless Quantified
 
-#### **_Description_**
+**Description:**
 
-Avoid vague terms such as fast, robust, secure, or user-friendly unless they are supported by realistic and meaningful measurements.
+Forbid terms like “fast,” “robust,” “user-friendly,” “secure” unless measurable.
 
-Measurements should be:
+**Reasoning:**
 
-- achievable
-- stakeholder-understandable
-- relevant to the domain
+Vague language cannot be verified, causing weak requirements and disputes later.
 
-#### **_Important scope clarification_**
+**Example:**
 
-This guideline applies only when writing measurable requirements.
+Bad: “Give me a bunch of requirements for this task.”
 
-It is not applicable to:
+Good: "Give me a set of requirements for this task, do not use terms like 'fast', 'robust' or 'user-friendly'. All
+requirements should be measurable, verifiable and testable."
 
-- requirement classification
-- satisfiability reasoning
-- question generation tasks
+**Suggested by:**
 
-#### **_Reasoning_**
-
-Over-quantification can produce unrealistic or overly technical requirements [10, 11]. The goal is clarity and verifiability, not artificial precision.
-
-#### **_Example_**
-
-Bad: System shall be fast.
-
-Good: System SHALL respond within 2 seconds for 95% of requests.
+ChatGPT, Claude
 
 ---
 
 ### Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY) [20]
 
-#### **_Description_**
+**Description:**
 
-Use RFC-2119 modal verbs (SHALL / SHOULD / MAY) when writing requirements.
+Require SHALL for mandatory requirements; SHOULD for recommended; MAY for optional—and flag anything that can’t be
+stated clearly [20].
 
-For structured evaluation or grading tasks, isolate the core objective using `<task> … </task>` tags and enforce an explicit output template.
+**Reasoning:**
 
-#### **_Reasoning_**
+Standard modality reduces ambiguity and helps prioritize and test requirements.
 
-RFC-2119 modality reduces ambiguity and clarifies priority levels.
+**Example:**
 
-Task-tag prompting improves:
+Bad: “Write me a set of requirements.”
 
-- format consistency
-- reproducibility
-- comparability across runs[1, 6]
+Good: “Write me a set of requirements. If a requirement cannot be written as SHALL, it is not a true requirement.
+Rewrite it using shall or mark it ambiguous at your discretion.”
 
-Experiments in Problems C1–C3 showed that this improves evaluation stability but does not necessarily improve reasoning quality.
+**Suggested by:**
 
-Therefore, this guideline is primarily recommended for:
-
-- grading exercises
-- structured comparisons
-- reproducible evaluation workflows
-
-#### **_Example_**
-
-```
-<task>
-Decide if the design satisfies the requirement.
-</task>
-```
-
-Output format:
-
-Satisfies: Yes/No  
-Reasoning: ...  
-Improvement: ...
+ChatGPT
 
 ---
 
@@ -657,3 +633,8 @@ for Comments RFC 2119, Mar. 1997. doi: 10.17487/RFC2119. Available: https://data
 arXiv:2505.06120. doi: 10.48550/arXiv.2505.06120.
 
 ---
+
+
+
+
+
