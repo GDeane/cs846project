@@ -54,23 +54,42 @@
 
 ### Guideline 1: Design a structured context prompt [1, 6, 10, 11, 17]
 
-**Description**
+**Description:**
 
-Create a compact, high-information “job brief” that tells the LLM its role in a requirements engineering task, the artifact expected, and the constraints to follow.
+Design a prompt that gives the "job description" to the LLM before asking it to generate requirements or questions.
+Provide sufficient and relevant context to the LLM to constrain the problem space it is working in.
 
-Focus on clearly specifying:
+**Reasoning:**
 
-- the role of the model
-- the task objective
-- expected deliverables
-- relevant constraints
+This serves several purposes.
 
-**Reasoning**
+- **First**, the process of designing this prompt forces you to think about the structure of the
+  output, the type of language you want used, the process you want followed, and the standards to which you want the job
+  done [1].
+- **Second**, You make the LLM consider all of these expectations before its work begins.
 
-Structured context prompts reduce ambiguity and guide the model toward task-relevant outputs [1, 6]. They improve task alignment and reduce misunderstanding of stakeholder intent.
+In addition, a structured high information-density prompt reportedly leads to fewer generic or boilerplate
+responses [17]. It also makes the outputs easier to evaluate when you expect a structured output.
 
-**Example**
-You are a requirements engineer evaluating a healthcare system design. Provide a structured analysis of the security requirement and its satisfaction.
+Also, previous prompt pattern research [6] has shown that structured prompts outperform free-text prompts in creating
+correct output.
+
+**Example:**
+
+"Act as a senior systems engineer following IEEE 29148.
+First ask clarifying questions about goals, stakeholders, constraints, and risks.
+Do not propose solutions yet.
+
+Once clarified:
+
+- Produce functional and non-functional requirements using "The system SHALL..."
+- Each requirement must be atomic, testable, and free of design decisions
+- Include acceptance criteria and verification method
+- List assumptions and potential conflicts
+- Identify out-of-scope items
+- Provide a traceability matrix
+
+Finally, critique the requirements for ambiguity and testability and revise as needed."
 
 ---
 
@@ -220,7 +239,8 @@ It is not relevant for:
 
 **Reasoning**
 
-Capitalization helps prevent speaker misattribution in transcripts [3, 7] but provides no benefit outside transcript contexts.
+Capitalization helps prevent speaker misattribution in transcripts [3, 7] but provides no benefit outside transcript
+contexts.
 
 **Example:**
 
@@ -335,7 +355,8 @@ ChatGPT
 
 **Description**
 
-Avoid vague terms such as fast, robust, secure, or user-friendly unless they are supported by realistic and meaningful measurements.
+Avoid vague terms such as fast, robust, secure, or user-friendly unless they are supported by realistic and meaningful
+measurements.
 
 Measurements should be:
 
@@ -353,9 +374,10 @@ It is not applicable to:
 - satisfiability reasoning
 - question generation tasks
 
-  **Reasoning**
+**Reasoning**
 
-Vague language reduces testability and may cause disputes during verification. Over-quantification can produce unrealistic or artificial requirements[10, 11]. The goal is clarity and verifiability, not unnecessary precision.
+Vague language reduces testability and may cause disputes during verification. Over-quantification can produce
+unrealistic or artificial requirements [10, 11]. The goal is clarity and verifiability, not unnecessary precision.
 
 **Example**
 
@@ -372,9 +394,12 @@ Good: System SHALL respond within 2 seconds for 95% of requests.
 Use RFC-2119 modal verbs (SHALL / SHOULD / MAY) when writing requirements.
 
 **Reasoning**
-RFC-2119 modality reduces ambiguity and clarifies priority levels. It supports consistent interpretation across stakeholders and improves requirement precision.
+
+RFC-2119 modality reduces ambiguity and clarifies priority levels. It supports consistent interpretation across
+stakeholders and improves requirement precision.
 
 **Example**
+
 The system SHALL encrypt all patient data.
 
 ---
@@ -462,7 +487,7 @@ high-level requirements brainstormed using ChatGPT.
 
 In a _new_ chat window:
 
-"Here is a summary of user goals and high level requirements for a Web Application I am building, <summary>. Based on
+"Here is a summary of user goals and high level requirements for a Web Application I am building, \<summary\>. Based on
 these, please generate a comprehensive set of user stories using the following format:
 
 As a [type of user], I want [some goal] so that [some reason]."
@@ -473,7 +498,8 @@ As a [type of user], I want [some goal] so that [some reason]."
 
 **Description**
 
-For structured evaluation or grading tasks, isolate the core objective inside `<task> … </task>` tags and enforce an explicit output template.
+For structured evaluation or grading tasks, isolate the core objective inside `<task> … </task>` tags and enforce an
+explicit output template.
 
 **Reasoning**
 
@@ -483,7 +509,9 @@ Task-tag prompting improves:
 - reproducibility
 - comparability across runs
 
-Our experiments in Problems C1–C3 showed that task-tag isolation reduces output drift (e.g., progress logs, narration) and makes results easier to grade and compare. However, it mainly improves output control and evaluation stability, not necessarily reasoning quality.
+Our experiments in Problems C1–C3 showed that task-tag isolation reduces output drift (e.g., progress logs, narration)
+and makes results easier to grade and compare. However, it mainly improves output control and evaluation stability, not
+necessarily reasoning quality.
 
 This guideline is especially recommended for:
 
@@ -492,6 +520,7 @@ This guideline is especially recommended for:
 - reproducible evaluation workflows
 
 **Example**
+
 <task>
 Classify R1–R6 as FR or NFR and justify each in one sentence.
 Then explain why AI-assisted classification needs human review.
