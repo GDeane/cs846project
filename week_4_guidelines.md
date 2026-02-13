@@ -58,26 +58,19 @@
 
 Create a compact, high-information “job brief” that tells the LLM its role in a requirements engineering task, the artifact expected, and the constraints to follow.
 
-For structured evaluation or classification tasks, isolate the core objective inside `<task> … </task>` tags and explicitly specify the required output format.
+Focus on clearly specifying:
+
+- the role of the model
+- the task objective
+- expected deliverables
+- relevant constraints
 
 **Reasoning**
 
-Structured prompts reduce ambiguity and prevent output drift [1, 6]. Experiments in Problem C showed that task-tag isolation improves formatting stability and reproducibility, especially for grading and comparison tasks.
-
-However, structured prompting mainly improves output control, not necessarily reasoning quality.
+Structured context prompts reduce ambiguity and guide the model toward task-relevant outputs [1, 6]. They improve task alignment and reduce misunderstanding of stakeholder intent.
 
 **Example**
-
-```
-<task>
-Classify requirements as FR or NFR and justify each in 1 sentence.
-</task>
-```
-
-Rules:
-
-- Only answer inside `<task>` tags
-- Use the exact output format provided
+You are a requirements engineer evaluating a healthcare system design. Provide a structured analysis of the security requirement and its satisfaction.
 
 ---
 
@@ -213,7 +206,7 @@ _Assumptions and constraints:_
 
 **Description**
 
-When analyzing transcripts or multi-speaker interviews, capitalize role identifiers (e.g., INTERVIEWER, CLIENT).
+When analyzing transcripts or multi-speaker interviews, capitalize role identifiers (e.g., **INTERVIEWER**, **CLIENT**).
 
 **Important scope clarification**
 
@@ -362,7 +355,7 @@ It is not applicable to:
 
   **Reasoning**
 
-Over-quantification can produce unrealistic or overly technical requirements [10, 11]. The goal is clarity and verifiability, not artificial precision.
+Vague language reduces testability and may cause disputes during verification. Over-quantification can produce unrealistic or artificial requirements[10, 11]. The goal is clarity and verifiability, not unnecessary precision.
 
 **Example**
 
@@ -378,39 +371,11 @@ Good: System SHALL respond within 2 seconds for 95% of requests.
 
 Use RFC-2119 modal verbs (SHALL / SHOULD / MAY) when writing requirements.
 
-For structured evaluation or grading tasks, isolate the core objective using `<task> … </task>` tags and enforce an explicit output template.
-
 **Reasoning**
-
-RFC-2119 modality reduces ambiguity and clarifies priority levels.
-
-Task-tag prompting improves:
-
-- format consistency
-- reproducibility
-- comparability across runs[1, 6]
-
-Experiments in Problems C1–C3 showed that this improves evaluation stability but does not necessarily improve reasoning quality.
-
-Therefore, this guideline is primarily recommended for:
-
-- grading exercises
-- structured comparisons
-- reproducible evaluation workflows
+RFC-2119 modality reduces ambiguity and clarifies priority levels. It supports consistent interpretation across stakeholders and improves requirement precision.
 
 **Example**
-
-```
-<task>
-Decide if the design satisfies the requirement.
-</task>
-```
-
-Output format:
-
-Satisfies: Yes/No  
-Reasoning: ...  
-Improvement: ...
+The system SHALL encrypt all patient data.
 
 ---
 
@@ -504,6 +469,36 @@ As a [type of user], I want [some goal] so that [some reason]."
 
 ---
 
+### Guideline 16: Use explicit task-tag structured prompting
+
+**Description**
+
+For structured evaluation or grading tasks, isolate the core objective inside `<task> … </task>` tags and enforce an explicit output template.
+
+**Reasoning**
+
+Task-tag prompting improves:
+
+- format consistency
+- reproducibility
+- comparability across runs
+
+Our experiments in Problems C1–C3 showed that task-tag isolation reduces output drift (e.g., progress logs, narration) and makes results easier to grade and compare. However, it mainly improves output control and evaluation stability, not necessarily reasoning quality.
+
+This guideline is especially recommended for:
+
+- grading exercises
+- structured comparisons
+- reproducible evaluation workflows
+
+**Example**
+<task>
+Classify R1–R6 as FR or NFR and justify each in one sentence.
+Then explain why AI-assisted classification needs human review.
+</task>
+
+---
+
 ### Problem A: Requirement Analysis
 
 You may find the following guidelines more useful for each problem of exercise A. Not all of them should be used
@@ -560,27 +555,30 @@ Then:
 - Guideline 12: Enforce RFC-2119 Modal Verbs (SHALL/SHOULD/MAY)
 - Guideline 14: Treat LLM output as a draft, not as a final product
 
-### Problem C: Requirement Classification
+### Problem C:
 
-## Problem 1:
+## Problem C: Requirement Classification
 
 - Guideline 1: Design a structured context prompt
-- Guideline 7: Base prompting pattern on the RE task
-- Guideline 9: Avoid yes/no without explanation
-- Guideline 12: Enforce structured task-tag prompting
+- Guideline 7: Base prompting pattern on the RE task being performed
+- Guideline 9: Avoid classification or yes/no answers without explanation
+- Guideline 16: Use explicit task-tag structured prompting
 
 ## Problem 2: Requirement Satisfiability Evaluation
 
 - Guideline 1: Design a structured context prompt
-- Guideline 9: Avoid yes/no without explanation
-- Guideline 12: Enforce structured task-tag prompting
+- Guideline 9: Avoid classification or yes/no answers without explanation
+- Guideline 16: Use explicit task-tag structured prompting
 
 ## Problem 3: Requirements Elicitation Question Generation
 
 - Guideline 1: Design a structured context prompt
 - Guideline 2: Converse with the LLM to analyze the problem
-- Guideline 12: Enforce structured task-tag prompting
-- Guideline 15: Treat LLM output as a draft
+- Guideline 16: Use explicit task-tag structured prompting
+- Guideline 14: Treat LLM output as a draft, not as a final product
+- Guideline 15: DO NOT perform all steps of the RE process in a single context window
+
+---
 
 ## 3. References
 
